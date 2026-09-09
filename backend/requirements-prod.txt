@@ -1,0 +1,34 @@
+# VazhiAPI — Production Requirements (slim, no heavy ML libs)
+# USE_MOCK_MODELS=True means TensorFlow/PyTorch are NOT needed at runtime.
+# This keeps the Docker image small (<500MB) and builds fast on Railway free tier.
+
+# ── API Framework ────────────────────────────────────────────────
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+pydantic==2.10.3
+pydantic-settings==2.6.1
+python-multipart==0.0.20
+
+# ── Auth & Security ──────────────────────────────────────────────
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# ── Database ─────────────────────────────────────────────────────
+sqlalchemy==2.0.36
+aiosqlite==0.20.0
+
+# ── Session Cache (fake, no Redis server needed) ─────────────────
+fakeredis==2.26.1
+redis==5.2.1
+
+# ── Numeric (used by mock models) ────────────────────────────────
+numpy==1.26.4
+
+# ── NLP (lightweight) ────────────────────────────────────────────
+nltk==3.9.1
+vaderSentiment==3.3.2
+
+# ── Utilities ────────────────────────────────────────────────────
+httpx==0.28.1
+python-dotenv==1.0.1
+loguru==0.7.3
