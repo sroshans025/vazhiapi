@@ -30,59 +30,6 @@ vazhiapi/
 
 ---
 
-## Quick Start — Local Development
-
-### 1. Backend
-
-```bash
-cd backend
-pip install -r requirements.txt
-python -m uvicorn api.main:app --reload --port 8000
-# Swagger UI → http://localhost:8000/docs
-```
-
-### 2. Frontend
-
-```bash
-cd frontend
-cp ../.env.example .env.local   # then edit with your backend URL
-npm install
-npm run dev
-# App → http://localhost:3000
-```
-
-### Docker Compose (full stack)
-
-```bash
-docker compose up --build
-# Frontend: http://localhost:3000
-# Backend:  http://localhost:8000
-```
-
----
-
-## Environment Variables
-
-| Variable | Required | Description |
-|---|---|---|
-| `NEXT_PUBLIC_API_URL` | ✅ | URL of the deployed FastAPI backend. Defaults to `http://localhost:8000` in development. |
-
-Copy `.env.example` to `frontend/.env.local` for local development.
-
----
-
-## Deploy to Vercel
-
-1. Push this repo to GitHub.
-2. Go to [vercel.com/new](https://vercel.com/new) → Import the `vazhiapi` repo.
-3. Vercel auto-reads `vercel.json` and sets **Root Directory → `frontend`** automatically.
-4. Add the environment variable **`NEXT_PUBLIC_API_URL`** pointing to your deployed backend.
-5. Click **Deploy**.
-
-> The backend (FastAPI) must be deployed separately (Railway, Render, Fly.io, or your own VPS) and its public URL set as `NEXT_PUBLIC_API_URL` on Vercel.
-
----
-
 ## Frontend Routes
 
 | Route | Description |
@@ -94,19 +41,6 @@ Copy `.env.example` to `frontend/.env.local` for local development.
 | `/dashboard` | Wellness trends + matched government schemes |
 | `/schemes` | Tamil Nadu scheme explorer with category filters |
 | `/admin` | Counsellor analytics (admin only) |
-
----
-
-## The 6-Layer Deep Learning Pipeline
-
-| Layer | Model | Task |
-|---|---|---|
-| L1 | FFNN (TensorFlow/Keras) | Stress Scoring 0–100 |
-| L2 | 1D TextCNN (TensorFlow/Keras) | TN Debt Category Classification |
-| L3 | BiLSTM (PyTorch) | Session Crisis Trajectory |
-| L4 | Seq2Seq + Bahdanau Attention (PyTorch) | Wellness Response Generation |
-| L5 | PPO/DQN (Stable-Baselines3) | Intervention Strategy Optimization |
-| L6 | Behaviour Cloning (PyTorch) | Counsellor Tone Refinement |
 
 ---
 
