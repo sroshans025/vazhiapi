@@ -1,0 +1,157 @@
+{
+  "schemes": [
+    {
+      "id": "kalaignar_magalir_urimai",
+      "name": "Kalaignar Magalir Urimai Thogai",
+      "name_ta": "கலைஞர் மகளிர் உரிமைத் தொகை",
+      "authority": "Government of Tamil Nadu",
+      "type": "Direct Benefit Transfer",
+      "benefit": "₹1,000 per month to female household heads",
+      "eligibility": [
+        "Female head of household",
+        "Tamil Nadu resident",
+        "Annual family income below ₹2.5 lakh",
+        "No government job in family"
+      ],
+      "applicable_categories": ["blade_finance", "wedding_debt", "festival_credit", "agricultural_debt"],
+      "application_url": "https://mathi.tn.gov.in",
+      "helpline": "1800-425-9199",
+      "description": "Monthly financial support for women-led households to reduce dependency on informal moneylenders.",
+      "description_ta": "பெண் தலைமை குடும்பங்களுக்கு மாதம் ₹1,000 நேரடி நிதி உதவி — முறைசாரா கடனில் இருந்து விடுதலை பெற உதவும்.",
+      "priority": 1
+    },
+    {
+      "id": "tnscb_shg_zero_interest",
+      "name": "TNSCB Zero-Interest SHG Loan",
+      "name_ta": "தமிழ்நாடு குடியிருப்பு வாரியம் — பூஜ்ய வட்டி SHG கடன்",
+      "authority": "Tamil Nadu Slum Clearance Board (TNSCB)",
+      "type": "Zero-Interest Credit",
+      "benefit": "Up to ₹1,50,000 at 0% interest for SHG members",
+      "eligibility": [
+        "Member of a registered Self Help Group (SHG)",
+        "Urban slum resident",
+        "Good SHG savings record (min 6 months)"
+      ],
+      "applicable_categories": ["blade_finance", "festival_credit", "chit_fund_default"],
+      "application_url": "https://www.tnscb.org",
+      "helpline": "044-28592547",
+      "description": "Zero-interest loans channelled through SHGs to replace exploitative blade finance.",
+      "description_ta": "SHG உறுப்பினர்களுக்கு 0% வட்டியில் கடன் — blade finance-ல் இருந்து விடுதலை பெற சிறந்த வழி.",
+      "priority": 1
+    },
+    {
+      "id": "pm_svanidhi",
+      "name": "PM SVANidhi — Street Vendor Loan",
+      "name_ta": "PM SVANidhi — தெருவோர வியாபாரி கடன்",
+      "authority": "Ministry of Housing and Urban Affairs, Government of India",
+      "type": "Micro Credit",
+      "benefit": "₹10,000 → ₹20,000 → ₹50,000 collateral-free working capital",
+      "eligibility": [
+        "Street vendor / small trader",
+        "Urban local body area resident",
+        "Vending certificate or LoR from TLB"
+      ],
+      "applicable_categories": ["blade_finance", "festival_credit", "chit_fund_default"],
+      "application_url": "https://pmsvanidhi.mohua.gov.in",
+      "helpline": "1800-11-1979",
+      "description": "Collateral-free working capital for street vendors to become debt-free and build credit history.",
+      "description_ta": "தெருவோர வியாபாரிகளுக்கு பிணை இல்லாமல் கடன் — credit history கட்டமைக்க உதவும்.",
+      "priority": 2
+    },
+    {
+      "id": "mudra_shishu",
+      "name": "MUDRA Shishu Loan",
+      "name_ta": "முத்ரா சிசு கடன்",
+      "authority": "MUDRA Bank / Commercial Banks",
+      "type": "Micro Enterprise Loan",
+      "benefit": "Up to ₹50,000 at bank interest rates (~9-12% p.a.) — vs 730%+ for blade finance",
+      "eligibility": [
+        "Non-farm micro/small enterprise owner",
+        "No existing bank default",
+        "Valid identity proof"
+      ],
+      "applicable_categories": ["blade_finance", "gold_loan_overdue", "chit_fund_default"],
+      "application_url": "https://www.mudra.org.in",
+      "helpline": "1800-180-1111",
+      "description": "Formal bank credit for micro enterprises — replacing informal moneylenders at a fraction of the interest.",
+      "description_ta": "சிறு தொழில் நிறுவனங்களுக்கு முறையான வங்கி கடன் — blade finance-ஐ விட மிகவும் குறைவான வட்டியில்.",
+      "priority": 2
+    },
+    {
+      "id": "district_legal_aid",
+      "name": "District Legal Aid Services Authority (DLSA)",
+      "name_ta": "மாவட்ட சட்ட உதவி சேவை",
+      "authority": "Tamil Nadu State Legal Services Authority (TNSLSA)",
+      "type": "Free Legal Aid",
+      "benefit": "Free lawyer, free court filings, free notarial services for eligible persons",
+      "eligibility": [
+        "Annual income below ₹3 lakh",
+        "SC/ST communities (no income limit)",
+        "Women and children",
+        "Victims of disaster, violence, or exploitation"
+      ],
+      "applicable_categories": ["blade_finance", "chit_fund_default", "gold_loan_overdue", "agricultural_debt", "wedding_debt"],
+      "application_url": "https://tnslsa.tn.gov.in",
+      "helpline": "15100",
+      "description": "Free legal representation to fight illegal moneylenders, file consumer complaints, and assert rights.",
+      "description_ta": "முறைசாரா கடன் கொடுப்பவர்களை எதிர்த்து இலவச சட்ட உதவி — உரிமைகளை நிலை நிறுத்த.",
+      "priority": 1
+    },
+    {
+      "id": "rbi_moneylender_complaint",
+      "name": "RBI Ombudsman — Moneylender Complaint Portal",
+      "name_ta": "RBI நீதிபதி — கடன் கொடுப்பவர் புகார் தளம்",
+      "authority": "Reserve Bank of India",
+      "type": "Complaint / Regulatory Redressal",
+      "benefit": "Formal investigation + penalties against illegal lenders; possible loan cancellation",
+      "eligibility": [
+        "Any bank/NBFC borrower",
+        "Complainant must have first contacted lender"
+      ],
+      "applicable_categories": ["blade_finance", "gold_loan_overdue", "chit_fund_default"],
+      "application_url": "https://cms.rbi.org.in",
+      "helpline": "14440",
+      "description": "File formal complaints against NBFC/bank moneylenders engaging in harassment, illegal rates, or deceptive practices.",
+      "description_ta": "NBFC/வங்கி கடன் கொடுப்பவர்கள் தொல்லை கொடுத்தால் — RBI-ல் புகார் செய்யலாம். இது இலவசம்.",
+      "priority": 2
+    },
+    {
+      "id": "pm_kisan",
+      "name": "PM-KISAN Samman Nidhi",
+      "name_ta": "PM-KISAN சம்மான் நிதி",
+      "authority": "Government of India — Ministry of Agriculture",
+      "type": "Direct Benefit Transfer",
+      "benefit": "₹6,000/year (₹2,000 every 4 months) for farmer families",
+      "eligibility": [
+        "Farmer family with cultivable land",
+        "Not an income tax payer",
+        "Not a government employee or pensioner"
+      ],
+      "applicable_categories": ["agricultural_debt"],
+      "application_url": "https://pmkisan.gov.in",
+      "helpline": "155261",
+      "description": "Direct income support for farmers to reduce dependency on crop loan moneylenders.",
+      "description_ta": "விவசாயிகளுக்கு ஆண்டு ₹6,000 நேரடி உதவி — கடன் சுமையை குறைக்க உதவும்.",
+      "priority": 2
+    },
+    {
+      "id": "tn_cm_loan_waiver",
+      "name": "TN CM Agricultural Loan Waiver",
+      "name_ta": "தமிழ்நாடு முதலமைச்சர் விவசாய கடன் தள்ளுபடி",
+      "authority": "Government of Tamil Nadu",
+      "type": "Loan Waiver",
+      "benefit": "Waiver of agricultural crop loans up to ₹1,00,000 for small/marginal farmers",
+      "eligibility": [
+        "Small or marginal farmer (land holding < 5 acres)",
+        "Loans from cooperative banks",
+        "Tamil Nadu resident"
+      ],
+      "applicable_categories": ["agricultural_debt"],
+      "application_url": "https://www.tn.gov.in",
+      "helpline": "1800-425-9199",
+      "description": "State government scheme to waive crop loans from cooperative banks for small farmers.",
+      "description_ta": "சிறு விவசாயிகளுக்கு கூட்டுறவு வங்கி பயிர் கடன் தள்ளுபடி — ₹1 லட்சம் வரை.",
+      "priority": 1
+    }
+  ]
+}

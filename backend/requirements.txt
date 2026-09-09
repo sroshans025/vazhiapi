@@ -1,0 +1,53 @@
+# VazhiAPI Backend — Python Dependencies
+# Applied Deep Learning (AM4502) — FastAPI + 6-Layer DL Pipeline
+
+# ── API Framework ────────────────────────────────────────────────
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+pydantic==2.10.3
+pydantic-settings==2.6.1
+python-multipart==0.0.20
+
+# ── Auth & Security ──────────────────────────────────────────────
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# ── Database ─────────────────────────────────────────────────────
+sqlalchemy==2.0.36
+alembic==1.14.0
+# For local dev: SQLite (built-in); for production: psycopg2-binary
+aiosqlite==0.20.0
+
+# ── Session Cache ─────────────────────────────────────────────────
+fakeredis==2.26.1
+redis==5.2.1
+
+# ── Deep Learning — TensorFlow (L1 FFNN, L2 TextCNN) ────────────
+tensorflow==2.18.0
+keras==3.7.0
+scikit-learn==1.6.0
+numpy==1.26.4
+pandas==2.2.3
+
+# ── Deep Learning — PyTorch (L3 BiLSTM, L4 Seq2Seq, L6 Imitation)
+torch==2.5.1
+torchvision==0.20.1
+
+# ── Deep RL (L5 PPO/DQN) ─────────────────────────────────────────
+stable-baselines3==2.4.0
+gymnasium==1.0.0
+
+# ── NLP ──────────────────────────────────────────────────────────
+spacy==3.8.3
+nltk==3.9.1
+vaderSentiment==3.3.2
+
+# ── HTTP & Utilities ─────────────────────────────────────────────
+httpx==0.28.1
+python-dotenv==1.0.1
+loguru==0.7.3
+uuid==1.30
+
+# ── Testing ──────────────────────────────────────────────────────
+pytest==8.3.4
+pytest-asyncio==0.24.0

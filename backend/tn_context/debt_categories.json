@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "id": "blade_finance",
+      "label": "Blade Finance",
+      "label_ta": "பிளேட் ஃபைனான்ஸ்",
+      "description": "Informal moneylenders charging 2-10% interest per day (730-3650% per annum), collecting daily via physical collectors. Common in urban slums and small trader communities.",
+      "description_ta": "தினசரி 2-10% வட்டி வசூலிக்கும் முறைசாரா கடன் கொடுப்பவர்கள். நகர்ப்புற சேரிகளிலும் சிறு வணிகர்களிடமும் பரவலாக உள்ளது.",
+      "indicators": ["daily collection", "vatti", "blade", "100 to 120", "week-to-week"],
+      "legal_status": "Illegal under TN Money Lenders Act 1957 if unregistered",
+      "risk_level": "Critical",
+      "typical_amounts": "₹5,000 – ₹2,00,000",
+      "regions": ["Chennai slums", "Coimbatore industrial areas", "Tiruppur textile zones", "Salem"]
+    },
+    {
+      "id": "chit_fund_default",
+      "label": "Chit Fund Default",
+      "label_ta": "குறி நிறுவன தோல்வி",
+      "description": "Registered or unregistered chit funds collapsing or organizers absconding with pooled funds. Members lose both contributions and expected payout.",
+      "description_ta": "பதிவு செய்யப்பட்ட அல்லது பதிவு செய்யப்படாத குறி நிறுவனங்கள் சரிந்து, உறுப்பினர்கள் பணத்தை இழக்கின்றனர்.",
+      "indicators": ["chit", "kuri", "குறி", "foreman absconded", "company closed", "auctioneered"],
+      "legal_status": "Governed by Chit Funds Act 1982 — complaints to Registrar of Chits",
+      "risk_level": "High",
+      "typical_amounts": "₹10,000 – ₹5,00,000",
+      "regions": ["All Tamil Nadu districts", "Particularly Madurai, Tirunelveli, Chennai"]
+    },
+    {
+      "id": "gold_loan_overdue",
+      "label": "Gold Loan Overdue",
+      "label_ta": "தங்க அடமான கடன் நிலுவை",
+      "description": "Loans taken against gold jewellery from banks, NBFCs, or informal pawnbrokers becoming overdue with risk of auction.",
+      "description_ta": "தங்க நகைகளை அடமானம் வைத்து வாங்கிய கடன்கள் நிலுவையாகி ஏல முன்னறிவிப்பு வரும் நிலை.",
+      "indicators": ["gold", "thanga", "தங்க", "jewel", "pawned", "manikarai", "auction notice", "ஏலம்"],
+      "legal_status": "RBI guidelines mandate 30-day auction notice; NBFC Fair Practice Code applies",
+      "risk_level": "High",
+      "typical_amounts": "₹20,000 – ₹10,00,000",
+      "regions": ["All Tamil Nadu — especially Coimbatore, Salem, Namakkal"]
+    },
+    {
+      "id": "agricultural_debt",
+      "label": "Agricultural Debt",
+      "label_ta": "விவசாய கடன்",
+      "description": "Crop loans, input credit, and informal moneylender debt among farmers — often exacerbated by failed harvests, drought, or market price collapse.",
+      "description_ta": "விளை நில கடன்கள், முதல் கடன்கள் மற்றும் பருவமழை தோல்வியால் பாதிக்கப்பட்ட விவசாயிகளின் கடன்.",
+      "indicators": ["kirushi", "கிருஷி", "farm", "crop", "harvest", "விவசாய", "drought", "tractor loan", "கால்வாய்"],
+      "legal_status": "NABARD refinancing; PM Kisan; TN CM Loan Waiver schemes applicable",
+      "risk_level": "High",
+      "typical_amounts": "₹50,000 – ₹20,00,000",
+      "regions": ["Delta districts (Thanjavur, Tiruvarur, Nagapattinam)", "Erode", "Dharmapuri"]
+    },
+    {
+      "id": "wedding_debt",
+      "label": "Wedding Debt",
+      "label_ta": "திருமண கடன்",
+      "description": "Debt accumulated for wedding ceremonies — dowry pressure, hall bookings, catering, jewellery gifting — often from multiple moneylenders simultaneously.",
+      "description_ta": "திருமண செலவுகளுக்காக — வரதட்சணை, மண்டபம், கேட்டரிங், நகை — பல கடன் வாங்கி பாதிக்கப்படுதல்.",
+      "indicators": ["kalyanam", "கல்யாணம்", "marriage", "wedding", "ceremony", "hall", "dowry", "வரதட்சணை"],
+      "legal_status": "Dowry is illegal; Prohibition of Dowry Act 1961 — file complaint if demanded",
+      "risk_level": "Moderate",
+      "typical_amounts": "₹1,00,000 – ₹15,00,000",
+      "regions": ["All Tamil Nadu — particularly rural districts"]
+    },
+    {
+      "id": "festival_credit",
+      "label": "Festival Credit",
+      "label_ta": "திருவிழா கடன்",
+      "description": "Small informal credit taken before Pongal, Deepavali, or other festivals for clothing, gifts, and celebrations — often snowballing across multiple years.",
+      "description_ta": "பொங்கல், தீபாவளி போன்ற திருவிழாக்களுக்கு முன் எடுக்கும் சிறிய கடன்கள் வருடாவருடம் தேங்கும் நிலை.",
+      "indicators": ["festival", "pongal", "deepavali", "திருவிழா", "கொண்டாட்டம்", "new clothes", "bonus"],
+      "legal_status": "Informal — no specific regulation",
+      "risk_level": "Low",
+      "typical_amounts": "₹5,000 – ₹50,000",
+      "regions": ["All Tamil Nadu"]
+    }
+  ]
+}
