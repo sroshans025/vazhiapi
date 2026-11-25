@@ -16,6 +16,11 @@
   --color-crimson-dark: #b91c1c;
   --color-amber: #f59e0b;
 
+  /* Text */
+  --text: #f1f5f9;
+  --text-2: rgba(241, 245, 249, 0.75);
+  --muted: rgba(241, 245, 249, 0.5);
+
   /* Glass */
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -35,6 +40,7 @@
 
 html {
   scroll-behavior: smooth;
+  background: #0f0c29;
 }
 
 body {
@@ -93,6 +99,11 @@ body {
   transition: all 0.3s ease;
   font-size: 0.95rem;
   letter-spacing: 0.025em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-decoration: none;
 }
 .btn-primary:hover {
   background: linear-gradient(135deg, #fcd34d, #f59e0b);

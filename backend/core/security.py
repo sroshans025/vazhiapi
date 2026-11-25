@@ -1,11 +1,12 @@
 """
 JWT Auth Utilities — VazhiAPI Security Layer
+(PyJWT + bcrypt; python-jose/passlib are unmaintained and were dropped.)
 """
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
-from jose import JWTError, jwt
 import bcrypt
+import jwt
 
 from core.config import get_settings
 
@@ -14,14 +15,14 @@ settings = get_settings()
 
 def hash_password(password: str) -> str:
     pwd_bytes = password.encode("utf-8")[:72]  # bcrypt limit
-    salt = bcrypt.gensalt()
-    return bcrypt.hashpw(pwd_bytes, salt).decode("utf-8")
+    return bcrypt.hashpw(pwd_bytes, bcrypt.gensalt()).decode("utf-8")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    pwd_bytes = plain_password.encode("utf-8")[:72]
-    hash_bytes = hashed_password.encode("utf-8")
-    return bcrypt.checkpw(pwd_bytes, hash_bytes)
+    try:
+        return bcrypt.checkpw(plain_password.encode("utf-8")[:72], hashed_password.encode("utf-8"))
+    except ValueError:
+        return False
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
@@ -35,7 +36,6 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
 
 def decode_access_token(token: str) -> Optional[dict]:
     try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
-        return payload
-    except JWTError:
+        return jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+    except jwt.PyJWTError:
         return None

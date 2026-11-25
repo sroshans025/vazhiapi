@@ -2,64 +2,70 @@
 
 > **நம்ம பணம் நம்ம கையில் — Your Money, Your Wellness**
 
-An AI-powered Tamil Nadu Financial Wellness Platform. It reads a user's financial distress in their own words, scores stress in real time, classifies the exact type of debt trap, predicts crisis trajectory, generates culturally-aware responses, and matches them to the correct Tamil Nadu government scheme or legal aid path.
+An AI-powered Tamil Nadu financial wellness platform. It reads a user's financial distress in their own words (English, Tamil or Tanglish), scores stress in real time, classifies 12 Tamil Nadu debt traps, tracks the crisis trajectory, and counsels them through a multi-turn chat grounded in 24 government schemes, 14 laws and verified helplines.
 
----
-
-## Tech Stack
+## Tech stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | Next.js 16, TypeScript, Tailwind CSS v4 |
-| Backend | FastAPI, SQLite, Python 3.11 |
-| ML Pipeline | TensorFlow/Keras, PyTorch, Stable-Baselines3 |
-| Deployment | Vercel (frontend) + any Python host (backend) |
+| Frontend | Next.js 16, React 19, TypeScript, Tailwind v4, Recharts |
+| Backend | FastAPI, SQLAlchemy (async), SQLite / Postgres, Python 3.11+ |
+| ML (serving) | scikit-learn models trained on the VazhiAPI distress corpus, rules, knowledge base |
+| ML (deep track) | TensorFlow / PyTorch / Stable-Baselines3 architectures in `backend/models` |
+| Chat | Claude (`claude-opus-5-5`) when `ANTHROPIC_API_KEY` is set, otherwise the built-in bilingual counsellor |
 
----
+## Quick start
 
-## Project Structure
+```bash
+# Backend
+cd backend
+python -m venv .venv && .venv/Scripts/activate      # macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env                                  # set SECRET_KEY; optional ANTHROPIC_API_KEY, ADMIN_EMAIL/PASSWORD
+uvicorn api.main:app --reload --port 8000             # trains the lite models on first boot (~1 s)
+pytest                                                # 12 API tests on an isolated temp DB
 
+# Frontend
+cd frontend
+npm install
+echo NEXT_PUBLIC_API_URL=http://localhost:8000 > .env.local
+npm run dev                                           # http://localhost:3000
 ```
-vazhiapi/
-├── frontend/        # Next.js 16 + TypeScript app
-├── backend/         # FastAPI + 6-Layer Deep Learning Pipeline
-├── docs/            # Architecture & API reference
-├── vercel.json      # Vercel auto-config (rootDirectory: frontend)
-└── .env.example     # Environment variable template
-```
 
----
+Or run everything with `docker compose up --build` (Postgres + backend + frontend).
 
-## Frontend Routes
+## Frontend routes
 
 | Route | Description |
 |---|---|
-| `/` | Landing page |
-| `/register` | Create account (name + district required) |
-| `/login` | Sign in |
-| `/checkin` | Chat-style financial check-in with live stress gauge |
-| `/dashboard` | Wellness trends + matched government schemes |
-| `/schemes` | Tamil Nadu scheme explorer with category filters |
-| `/admin` | Counsellor analytics (admin only) |
+| `/` | Interactive landing: live AI demo (no sign-up), debt-trap calculator, 12-category explorer, 6-layer pipeline, schemes marquee |
+| `/checkin` | Counselling chat: streaming replies, conversation history, suggestion chips, voice input (Tamil/English), feedback, live analysis panel, crisis banner, human escalation |
+| `/dashboard` | Stress trend, debt types, next steps, recent check-ins, matched schemes |
+| `/schemes` | 24 TN + central schemes with search, filters and an eligibility **Scheme Finder** |
+| `/tools` | True-interest-rate converter, EMI calculator, avalanche/snowball payoff planner, budget planner |
+| `/rights` | Laws in plain language and free helplines |
+| `/profile` | Profile, language, password, delete account and all data |
+| `/admin` | Analytics and escalation queue management (admins only) |
 
----
+## API (highlights; full docs at `/docs`)
 
-## API Endpoints
+| Endpoint | Description |
+|---|---|
+| `POST /auth/register`, `POST /auth/login`, `GET/PATCH/DELETE /auth/me` | Auth, profile, delete account |
+| `POST /chat/stream` | Server-Sent Events chat: `meta`, `analysis`, `delta`…, `done` |
+| `POST /chat`, `GET/PATCH/DELETE /chat/conversations[/{id}]` | Non-streaming chat and conversation management |
+| `POST /analyse` | Full 6-layer pipeline (stored as a check-in) |
+| `POST /demo/analyse` | Public, rate-limited, nothing stored |
+| `GET /schemes`, `POST /schemes/match`, `GET /knowledge/{categories,laws,helplines,districts}` | Public knowledge base |
+| `POST /tools/{interest,emi,payoff}`, `POST /budget-plan` | Calculators |
+| `POST /feedback`, `POST /escalate/{user_id}` | RL reward signal, human handoff |
+| `GET /dashboard/summary/{id}`, `/history/{id}`, `/risk/{id}`, `/summary/{id}` | User data |
+| `GET /admin/analytics`, `PATCH /admin/escalations/{id}` | Counsellor console |
+| `GET /pipeline/debug/{request_id}`, `GET /health` | Observability |
 
-| Endpoint | Method | Description |
-|---|---|---|
-| `/auth/register` | POST | Register new user |
-| `/auth/login` | POST | JWT login |
-| `/analyse` | POST | Full 6-layer pipeline analysis |
-| `/chat` | POST | Multilingual wellness chat |
-| `/history/{user_id}` | GET | Stress history |
-| `/risk/{user_id}` | GET | Current risk score + trend |
-| `/schemes` | GET | TN scheme matches |
-| `/budget-plan` | POST | AI budget plan |
-| `/summary/{user_id}` | GET | Counsellor session summary |
-| `/feedback` | POST | RL reward signal |
-| `/escalate/{user_id}` | POST | Human handoff flag |
-| `/health` | GET | System health |
-| `/dashboard/summary/{user_id}` | GET | Aggregated dashboard data |
-| `/admin/analytics` | GET | Counsellor analytics |
-| `/pipeline/debug/{request_id}` | GET | Per-layer debug outputs |
+## Datasets
+
+* `backend/tn_context/*.json`: debt categories (12), government schemes (24), laws (14), helplines (14), all bilingual.
+* `backend/datasets/vazhi_distress_corpus.jsonl`: 1,440 labelled English/Tamil/Tanglish distress messages (category + stress). Regenerate with `python -m training.corpus`, retrain with `python -m training.train_lite`. Metrics are measured on held-out situation templates (currently ~48% category accuracy across 12 classes, stress MAE ~7); at serving time L2 blends the model with curated indicators.
+
+Scheme benefits change with government orders. The app tells users to confirm on official portals.

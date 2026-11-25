@@ -1,63 +1,67 @@
+"use client";
 import type { GovernmentScheme } from "@/types";
-
-interface SchemeCardProps {
-  scheme: GovernmentScheme;
-  expanded?: boolean;
-}
+import { useLang } from "@/lib/i18n";
 
 const TYPE_COLORS: Record<string, string> = {
   "Direct Benefit Transfer": "#10b981",
-  "Zero-Interest Credit": "#3b82f6",
+  "Low-Interest Credit": "#3b82f6",
   "Micro Credit": "#a855f7",
   "Micro Enterprise Loan": "#a855f7",
   "Free Legal Aid": "#f59e0b",
   "Complaint / Regulatory Redressal": "#ef4444",
-  "Loan Waiver": "#22c55e",
+  "Health Insurance": "#f43f5e",
+  Insurance: "#06b6d4",
+  Subsidy: "#22c55e",
 };
 
-export default function SchemeCard({ scheme, expanded = false }: SchemeCardProps) {
+export default function SchemeCard({ scheme, expanded = false }: { scheme: GovernmentScheme; expanded?: boolean }) {
+  const { lang } = useLang();
   const typeColor = TYPE_COLORS[scheme.type] || "#f59e0b";
-
   return (
     <div className="glass-card" style={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.875rem" }}>
-      {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.75rem" }}>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontWeight: 700, fontSize: "1rem", marginBottom: "0.2rem", lineHeight: 1.3 }}>
-            {scheme.name}
+            {lang === "ta" ? scheme.name_ta : scheme.name}
           </div>
-          <div style={{ fontFamily: "'Noto Sans Tamil', sans-serif", fontSize: "0.8rem", color: "rgba(241,245,249,0.5)" }}>
-            {scheme.name_ta}
+          <div className="font-tamil" style={{ fontSize: "0.8rem", color: "var(--muted)" }}>
+            {lang === "ta" ? scheme.name : scheme.name_ta}
           </div>
         </div>
-        <span className="badge" style={{ background: `${typeColor}22`, color: typeColor, border: `1px solid ${typeColor}44`, whiteSpace: "nowrap", flexShrink: 0 }}>
-          {scheme.type}
-        </span>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.35rem", flexShrink: 0 }}>
+          <span className="badge" style={{ background: `${typeColor}22`, color: typeColor, border: `1px solid ${typeColor}44` }}>{scheme.type}</span>
+          {scheme.level && <span style={{ fontSize: "0.68rem", color: "var(--muted)", textTransform: "uppercase" }}>{scheme.level === "state" ? "Tamil Nadu" : "Central"}</span>}
+        </div>
       </div>
 
-      {/* Benefit */}
-      <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)", borderRadius: "0.5rem", padding: "0.625rem 0.875rem" }}>
-        <div style={{ fontSize: "0.7rem", color: "#34d399", marginBottom: "0.125rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Benefit</div>
-        <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#f1f5f9" }}>{scheme.benefit}</div>
+      {typeof scheme.match_score === "number" && (
+        <div>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", marginBottom: "0.25rem" }}>
+            <span style={{ color: "var(--muted)" }}>Match</span><span style={{ color: "#34d399", fontWeight: 700 }}>{scheme.match_score}%</span>
+          </div>
+          <div className="bar"><div style={{ width: `${scheme.match_score}%`, background: "linear-gradient(90deg,#10b981,#34d399)" }} /></div>
+          {!!scheme.match_reasons?.length && (
+            <div style={{ fontSize: "0.75rem", color: "#a7f3d0", marginTop: "0.35rem" }}>✓ {scheme.match_reasons.join(" · ")}</div>
+          )}
+        </div>
+      )}
+
+      <div className="benefit-box">
+        <div className="benefit-label">Benefit</div>
+        <div style={{ fontSize: "0.875rem", fontWeight: 600 }}>{scheme.benefit}</div>
       </div>
 
-      {/* Authority */}
-      <div style={{ fontSize: "0.8rem", color: "rgba(241,245,249,0.5)" }}>
-        🏛️ {scheme.authority}
-      </div>
-
-      {/* Description */}
-      <p style={{ fontSize: "0.875rem", color: "rgba(241,245,249,0.7)", lineHeight: 1.6 }}>
-        {scheme.description}
+      <div style={{ fontSize: "0.8rem", color: "var(--muted)" }}>🏛️ {scheme.authority}</div>
+      <p className={lang === "ta" ? "font-tamil" : ""} style={{ fontSize: "0.875rem", color: "var(--text-2)", lineHeight: 1.6 }}>
+        {lang === "ta" ? scheme.description_ta : scheme.description}
       </p>
 
-      {/* Eligibility (expanded only) */}
       {expanded && (
         <div>
-          <div style={{ fontSize: "0.75rem", color: "rgba(241,245,249,0.4)", marginBottom: "0.5rem", textTransform: "uppercase" }}>Eligibility</div>
+          <div style={{ fontSize: "0.72rem", color: "var(--muted)", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Eligibility</div>
           <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
             {scheme.eligibility.map((e, i) => (
-              <li key={i} style={{ fontSize: "0.8rem", color: "rgba(241,245,249,0.7)", display: "flex", gap: "0.5rem" }}>
+              <li key={i} style={{ fontSize: "0.8rem", color: "var(--text-2)", display: "flex", gap: "0.5rem" }}>
                 <span style={{ color: "#34d399" }}>✓</span> {e}
               </li>
             ))}
@@ -65,16 +69,9 @@ export default function SchemeCard({ scheme, expanded = false }: SchemeCardProps
         </div>
       )}
 
-      {/* Actions */}
-      <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginTop: "0.25rem" }}>
-        <a href={scheme.application_url} target="_blank" rel="noopener noreferrer">
-          <button className="btn-primary" style={{ fontSize: "0.8rem", padding: "0.5rem 1rem" }}>
-            Apply →
-          </button>
-        </a>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.8rem", color: "rgba(241,245,249,0.5)" }}>
-          📞 {scheme.helpline}
-        </div>
+      <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", alignItems: "center", marginTop: "auto" }}>
+        <a href={scheme.application_url} target="_blank" rel="noopener noreferrer" className="btn-primary btn-sm">Official site →</a>
+        <a href={`tel:${scheme.helpline}`} style={{ fontSize: "0.8rem", color: "var(--text-2)" }}>📞 {scheme.helpline}</a>
       </div>
     </div>
   );

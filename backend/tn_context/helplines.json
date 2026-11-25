@@ -1,0 +1,19 @@
+{
+  "version": "2025.2",
+  "helplines": [
+    {"id": "emergency", "name": "Emergency (Police / Ambulance / Fire)", "name_ta": "அவசர உதவி", "number": "112", "kind": "emergency", "hours": "24×7", "for": ["crisis", "violence", "threat"]},
+    {"id": "police", "name": "Police", "name_ta": "காவல்துறை", "number": "100", "kind": "emergency", "hours": "24×7", "for": ["threat", "violence", "blade_finance"]},
+    {"id": "tele_manas", "name": "Tele-MANAS Mental Health Helpline", "name_ta": "டெலி-மனஸ் மனநல உதவி", "number": "14416", "kind": "mental_health", "hours": "24×7, Tamil available", "for": ["crisis", "stress"]},
+    {"id": "sneha", "name": "SNEHA Suicide Prevention (Chennai)", "name_ta": "ஸ்நேகா தற்கொலை தடுப்பு", "number": "044-24640050", "kind": "mental_health", "hours": "24×7", "for": ["crisis"]},
+    {"id": "icall", "name": "iCall Psychosocial Helpline", "name_ta": "iCall மனநல உதவி", "number": "9152987821", "kind": "mental_health", "hours": "Mon–Sat, 10 am–8 pm", "for": ["stress", "crisis"]},
+    {"id": "health_104", "name": "TN Health Helpline", "name_ta": "சுகாதார உதவி எண்", "number": "104", "kind": "health", "hours": "24×7", "for": ["medical_debt", "stress"]},
+    {"id": "legal_aid", "name": "NALSA / DLSA Free Legal Aid", "name_ta": "இலவச சட்ட உதவி", "number": "15100", "kind": "legal", "hours": "Office hours", "for": ["blade_finance", "chit_fund_default", "loan_app_harassment", "microfinance_debt", "gold_loan_overdue"]},
+    {"id": "cyber", "name": "Cyber Crime Helpline", "name_ta": "சைபர் குற்ற உதவி எண்", "number": "1930", "kind": "legal", "hours": "24×7", "for": ["loan_app_harassment"]},
+    {"id": "rbi_cms", "name": "RBI Complaint Management (Ombudsman)", "name_ta": "RBI புகார் மையம்", "number": "14448", "kind": "financial", "hours": "Office hours", "for": ["credit_card_debt", "gold_loan_overdue", "microfinance_debt", "loan_app_harassment"]},
+    {"id": "women", "name": "Women Helpline", "name_ta": "மகளிர் உதவி எண்", "number": "181", "kind": "emergency", "hours": "24×7", "for": ["wedding_debt", "violence"]},
+    {"id": "kisan", "name": "Kisan Call Centre", "name_ta": "விவசாயிகள் உதவி மையம்", "number": "1800-180-1551", "kind": "financial", "hours": "6 am–10 pm", "for": ["agricultural_debt"]},
+    {"id": "crop_insurance", "name": "Crop Insurance (PMFBY)", "name_ta": "பயிர் காப்பீடு", "number": "14447", "kind": "financial", "hours": "24×7", "for": ["agricultural_debt"]},
+    {"id": "cmchis", "name": "CM Health Insurance (CMCHIS)", "name_ta": "முதலமைச்சர் மருத்துவக் காப்பீடு", "number": "1800-425-3993", "kind": "health", "hours": "24×7", "for": ["medical_debt"]},
+    {"id": "cm_helpline", "name": "TN CM Helpline (grievances)", "name_ta": "முதல்வரின் உதவி மையம்", "number": "1100", "kind": "government", "hours": "24×7", "for": ["general_financial_stress"]}
+  ]
+}

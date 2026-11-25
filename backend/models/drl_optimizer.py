@@ -107,23 +107,29 @@ class DRLStrategyOptimizer:
     def load(self, model_path: str = None):
         if self._mock:
             return
-        from stable_baselines3 import PPO
-        if model_path:
-            self.model = PPO.load(model_path)
+        import os
+        model_path = model_path or os.path.join(settings.MODEL_WEIGHTS_DIR, "ppo_strategy.zip")
+        if os.path.exists(model_path):
+            try:
+                from stable_baselines3 import PPO
+                self.model = PPO.load(model_path)
+            except Exception:
+                self.model = None
 
     def predict(self, stress_score: float, debt_category: str, trajectory: str, session_count: int) -> dict:
-        if self._mock:
+        if self._mock or self.model is None:
             return self._mock_predict(stress_score, debt_category, trajectory, session_count)
 
         # Real PPO inference
         from models.cnn_classifier import DEBT_CATEGORIES
         cat_idx = DEBT_CATEGORIES.index(debt_category) if debt_category in DEBT_CATEGORIES else 0
+        cat_norm = max(len(DEBT_CATEGORIES) - 1, 1)
         traj_map = {"Rising": 2, "Stable": 1, "Declining": 0}
         traj_idx = traj_map.get(trajectory, 1)
 
         obs = np.array([
             stress_score / 100.0,
-            cat_idx / 5.0,
+            cat_idx / cat_norm,
             traj_idx / 2.0,
             min(session_count / 10.0, 1.0),
         ], dtype=np.float32)
@@ -136,9 +142,11 @@ class DRLStrategyOptimizer:
         Rule-based mock that mirrors what a trained PPO policy would learn:
         Higher stress + critical trajectory → stronger intervention.
         """
-        if stress_score >= 75 or trajectory == "Rising":
+        # v1 escalated on ANY rising trend (even 20 → 32). Escalation is now reserved for
+        # critical stress, or high stress that is still climbing.
+        if stress_score >= 80 or (stress_score >= 65 and trajectory == "Rising"):
             action_idx = 3  # escalate
-        elif stress_score >= 55:
+        elif stress_score >= 55 or debt_category in ("loan_app_harassment", "blade_finance") and stress_score >= 40:
             action_idx = 1  # legal rights
         elif stress_score >= 35:
             action_idx = 2  # SHG alternative
@@ -153,7 +161,8 @@ class DRLStrategyOptimizer:
         # Simulate Q-values / action probabilities
         base_probs = np.ones(4, dtype=np.float32) * 0.1
         base_probs[action_idx] = 0.7
-        noise = np.random.dirichlet(np.ones(4) * 2) * 0.2
+        rng = np.random.default_rng(int(stress_score * 10) + action_idx)
+        noise = rng.dirichlet(np.ones(4) * 2) * 0.2
         probs = base_probs + noise
         probs = probs / probs.sum()
 

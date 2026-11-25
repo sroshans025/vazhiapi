@@ -74,14 +74,20 @@ class BiLSTMTracker:
     def load(self, weights_path: str = None):
         if self._mock:
             return
-        import torch
-        self.model = build_bilstm_model()
-        if weights_path:
+        import os
+        weights_path = weights_path or os.path.join(settings.MODEL_WEIGHTS_DIR, "bilstm_tracker.pt")
+        if not os.path.exists(weights_path):
+            return
+        try:
+            import torch
+            self.model = build_bilstm_model()
             self.model.load_state_dict(torch.load(weights_path, map_location="cpu"))
-        self.model.eval()
+            self.model.eval()
+        except Exception:
+            self.model = None
 
     def predict(self, stress_history: List[float]) -> dict:
-        if self._mock:
+        if self._mock or self.model is None:
             return self._mock_predict(stress_history)
 
         import torch
@@ -102,11 +108,12 @@ class BiLSTMTracker:
             return self._format_output("Stable", history[-1] if history else 50.0, history)
 
         recent = history[-5:]
-        trend = recent[-1] - recent[0] if len(recent) >= 2 else 0
+        # Weighted slope: compare latest vs mean of the earlier window (less noisy than first-vs-last)
+        trend = recent[-1] - (sum(recent[:-1]) / len(recent[:-1]))
 
         if trend > 10:
             trajectory = "Rising"
-            peak = min(recent[-1] + trend * 2, 95)
+            peak = min(recent[-1] + trend, 99)
         elif trend < -10:
             trajectory = "Declining"
             peak = max(recent[-1], 20)

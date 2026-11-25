@@ -1,141 +1,109 @@
 """
-Layer 2 — 1D TextCNN Debt Category Classifier (Unit II)
-========================================================
-Architecture: Multi-filter 1D Convolutional Neural Network
-Input:  Integer token sequence (max_len=100)
-Output: 6-class probability distribution over TN debt categories
-
-Filter sizes: [2, 3, 4] (unigram/bigram/trigram patterns)
-Filters per size: 128
-Pooling: Global max-pooling per filter bank
-
-Framework: TensorFlow / Keras
-
-Training: See backend/training/train_cnn.py
-Datasets: Reddit r/personalfinanceindia + RBI Consumer Complaints
+Layer 2 — Debt Category Classifier (Unit II)
+============================================
+Deep track : multi-filter 1D TextCNN (TensorFlow/Keras).
+Serving    : hybrid of the TF-IDF logistic-regression model trained on the distress corpus
+             and the curated category indicators from tn_context/debt_categories.json.
+             Low-confidence inputs fall back to "general_financial_stress" instead of
+             (as in v1) silently defaulting to blade finance.
 """
 from __future__ import annotations
+
+import re
+
 import numpy as np
+
 from core.config import get_settings
+from models import lite
+from nlp.preprocessor import TAMIL_CHAR, normalize_text
+from tn_context import knowledge
 
 settings = get_settings()
 
 VOCAB_SIZE = 10000
 EMBED_DIM = 128
 MAX_LEN = 100
-NUM_CLASSES = 6
 FILTER_SIZES = [2, 3, 4]
 NUM_FILTERS = 128
 
-DEBT_CATEGORIES = [
-    "blade_finance",
-    "chit_fund_default",
-    "gold_loan_overdue",
-    "agricultural_debt",
-    "wedding_debt",
-    "festival_credit",
-]
-
-CATEGORY_LABELS = {
-    "blade_finance": "Blade Finance",
-    "chit_fund_default": "Chit Fund Default",
-    "gold_loan_overdue": "Gold Loan Overdue",
-    "agricultural_debt": "Agricultural Debt",
-    "wedding_debt": "Wedding Debt",
-    "festival_credit": "Festival Credit",
-}
-
-# Keywords used in mock classification
-CATEGORY_KEYWORDS = {
-    "blade_finance": ["blade", "vatti", "ரொம்ப வட்டி", "daily collection", "100 to 120"],
-    "chit_fund_default": ["chit", "kuri", "குறி", "chit fund", "company"],
-    "gold_loan_overdue": ["gold", "thanga", "தங்க", "jewel", "pawned", "மணிக்கடை"],
-    "agricultural_debt": ["kirushi", "கிருஷி", "farm", "crop", "harvest", "விவசாய"],
-    "wedding_debt": ["kalyanam", "கல்யாணம்", "marriage", "wedding", "ceremony"],
-    "festival_credit": ["festival", "pongal", "deepavali", "திருவிழா", "கொண்டாட்டம்"],
-}
+DEBT_CATEGORIES = [c["id"] for c in knowledge.categories()]
+NUM_CLASSES = len(DEBT_CATEGORIES)
+CATEGORY_LABELS = {c["id"]: c["label"] for c in knowledge.categories()}
+FALLBACK = "general_financial_stress"
 
 
 def build_textcnn_model():
-    """Build 1D TextCNN with multi-filter architecture."""
-    import tensorflow as tf
     from tensorflow import keras
 
     inputs = keras.Input(shape=(MAX_LEN,), dtype="int32", name="token_input")
     embedding = keras.layers.Embedding(VOCAB_SIZE, EMBED_DIM, name="embedding")(inputs)
-
-    # Parallel convolutional branches — one per filter size
-    conv_outputs = []
+    pools = []
     for fs in FILTER_SIZES:
         conv = keras.layers.Conv1D(NUM_FILTERS, fs, activation="relu", name=f"conv_{fs}")(embedding)
-        pool = keras.layers.GlobalMaxPooling1D(name=f"pool_{fs}")(conv)
-        conv_outputs.append(pool)
-
-    concatenated = keras.layers.Concatenate(name="concat")(conv_outputs)
-    dropout = keras.layers.Dropout(0.5, name="dropout")(concatenated)
-    outputs = keras.layers.Dense(NUM_CLASSES, activation="softmax", name="category_output")(dropout)
-
+        pools.append(keras.layers.GlobalMaxPooling1D(name=f"pool_{fs}")(conv))
+    x = keras.layers.Concatenate(name="concat")(pools)
+    x = keras.layers.Dropout(0.5, name="dropout")(x)
+    outputs = keras.layers.Dense(NUM_CLASSES, activation="softmax", name="category_output")(x)
     model = keras.Model(inputs=inputs, outputs=outputs, name="vazhiapi_textcnn")
-    model.compile(
-        optimizer="adam",
-        loss="categorical_crossentropy",
-        metrics=["accuracy"],
-    )
+    model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
     return model
 
 
-class TextCNNClassifier:
-    """
-    L2 — TN Debt Category Classifier.
-    Mock mode: keyword-matching heuristic.
-    Production: real CNN softmax probabilities.
-    """
+def _indicator_scores(text: str) -> np.ndarray:
+    norm = normalize_text(text)
+    scores = np.zeros(NUM_CLASSES, dtype=np.float32)
+    for i, cat in enumerate(knowledge.categories()):
+        for kw in cat.get("indicators", []):
+            k = normalize_text(kw)
+            if not k:
+                continue
+            hit = (k in norm) if TAMIL_CHAR.search(k) else \
+                re.search(rf"(?<![a-z0-9]){re.escape(k)}(?![a-z0-9])", norm) is not None
+            if hit:
+                scores[i] += 1.0 + 0.3 * (len(k.split()) - 1)   # multi-word phrases are stronger
+    return scores
 
+
+class TextCNNClassifier:
     def __init__(self):
         self.model = None
-        self._mock = settings.USE_MOCK_MODELS
+        self.backend = "keyword"
 
-    def load(self, weights_path: str = None):
-        if self._mock:
-            return
-        import tensorflow as tf
-        self.model = build_textcnn_model()
-        if weights_path:
-            self.model.load_weights(weights_path)
+    def load(self, weights_path: str | None = None):
+        if lite.get_bundle():
+            self.backend = "sklearn-logreg+indicators"
 
     def predict(self, token_sequence: list, preprocessed: dict) -> dict:
-        if self._mock:
-            return self._mock_predict(preprocessed)
+        text = preprocessed.get("original") or preprocessed.get("normalized", "")
+        ind = _indicator_scores(text)
+        ind_probs = (ind / ind.sum()) if ind.sum() > 0 else np.zeros(NUM_CLASSES)
 
-        x = np.array([token_sequence])
-        probs = self.model.predict(x, verbose=0)[0]
-        return self._format_output(probs)
+        learned = lite.predict_category_proba(text)
+        if learned:
+            lp = np.array([learned.get(c, 0.0) for c in DEBT_CATEGORIES], dtype=np.float32)
+            probs = 0.5 * lp + 0.5 * ind_probs if ind.sum() > 0 else lp
+        elif ind.sum() > 0:
+            probs = ind_probs
+        else:
+            probs = np.zeros(NUM_CLASSES, dtype=np.float32)
 
-    def _mock_predict(self, preprocessed: dict) -> dict:
-        """Heuristic classification using keyword matching."""
-        text = preprocessed.get("normalized", "")
-        scores = np.ones(NUM_CLASSES, dtype=np.float32) * 0.05  # base prior
+        top = int(np.argmax(probs)) if probs.sum() > 0 else DEBT_CATEGORIES.index(FALLBACK)
+        confidence = float(probs[top]) if probs.sum() > 0 else 0.0
+        # No indicator support and a weak model vote → don't guess a specific trap.
+        if ind.sum() == 0 and confidence < 0.35:
+            top = DEBT_CATEGORIES.index(FALLBACK)
+            probs = probs * 0.5
+            probs[top] += 0.5
+            confidence = float(probs[top])
 
-        for i, category in enumerate(DEBT_CATEGORIES):
-            kw_list = CATEGORY_KEYWORDS.get(category, [])
-            for kw in kw_list:
-                if kw.lower() in text:
-                    scores[i] += 0.3
-
-        # Normalize to probabilities
-        probs = scores / scores.sum()
-        return self._format_output(probs)
-
-    def _format_output(self, probs: np.ndarray) -> dict:
-        top_idx = int(np.argmax(probs))
-        category = DEBT_CATEGORIES[top_idx]
+        probs = probs / probs.sum()
+        category = DEBT_CATEGORIES[top]
+        ranked = sorted(range(NUM_CLASSES), key=lambda i: -probs[i])
         return {
             "debt_category": category,
             "debt_category_label": CATEGORY_LABELS[category],
-            "confidence": round(float(probs[top_idx]), 3),
-            "probabilities": {
-                DEBT_CATEGORIES[i]: round(float(p), 3)
-                for i, p in enumerate(probs)
-            },
-            "model": "TextCNN (Unit II)",
+            "confidence": round(float(probs[top]), 3),
+            "probabilities": {DEBT_CATEGORIES[i]: round(float(probs[i]), 3) for i in ranked},
+            "secondary_category": DEBT_CATEGORIES[ranked[1]] if probs[ranked[1]] > 0.2 else None,
+            "model": f"Debt Classifier — {self.backend} (Unit II)",
         }

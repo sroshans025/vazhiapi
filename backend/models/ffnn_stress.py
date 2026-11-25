@@ -1,32 +1,27 @@
 """
-Layer 1 — FFNN Stress Scorer (Unit I)
-===================================================
-Architecture: 4-layer Feed-Forward Neural Network
-Input:  64-dim feature vector (urgency, VADER, BoW)
-Output: Stress score 0–100 (continuous regression)
-
-Framework: TensorFlow / Keras
-
-Training: See backend/training/train_ffnn.py
-Dataset:  FinancialPhraseBank (Kaggle) + augmented TN distress texts
+Layer 1 — Stress Scorer (Unit I)
+================================
+Deep track : 4-layer FFNN (TensorFlow/Keras) over the 64-dim feature vector.
+Serving    : TF-IDF Ridge regressor trained on the VazhiAPI distress corpus, blended with
+             interpretable signals (urgency lexicon, VADER negativity, crisis flags).
 """
 from __future__ import annotations
+
+from pathlib import Path
+
 import numpy as np
+
 from core.config import get_settings
+from models import lite
 
 settings = get_settings()
 
 INPUT_DIM = 64
 HIDDEN_DIMS = [256, 128, 64]
-OUTPUT_DIM = 1  # stress score 0–100
 
 
 def build_ffnn_model():
-    """
-    Builds the FFNN architecture.
-    Returns a compiled Keras Sequential model.
-    """
-    import tensorflow as tf
+    """Keras FFNN used by training/train_ffnn.py (deep-learning track)."""
     from tensorflow import keras
 
     model = keras.Sequential([
@@ -39,83 +34,70 @@ def build_ffnn_model():
         keras.layers.Dropout(0.2),
         keras.layers.Dense(64, activation="relu", name="hidden_3"),
         keras.layers.Dropout(0.1),
-        keras.layers.Dense(1, activation="sigmoid", name="stress_output"),  # → *100
+        keras.layers.Dense(1, activation="sigmoid", name="stress_output"),
     ], name="vazhiapi_ffnn_stress_scorer")
-
-    model.compile(
-        optimizer=keras.optimizers.Adam(learning_rate=1e-3),
-        loss="mse",
-        metrics=["mae"],
-    )
+    model.compile(optimizer=keras.optimizers.Adam(learning_rate=1e-3), loss="mse", metrics=["mae"])
     return model
 
 
-class FFNNStressScorer:
-    """
-    L1 — FFNN Stress Scorer.
-    In USE_MOCK_MODELS mode: returns deterministic score from urgency features.
-    In production: loads saved Keras weights and runs real inference.
-    """
+def stress_label(score: float) -> str:
+    if score >= 75:
+        return "Critical"
+    if score >= 50:
+        return "High"
+    if score >= 25:
+        return "Moderate"
+    return "Low"
 
+
+class FFNNStressScorer:
     def __init__(self):
         self.model = None
-        self._mock = settings.USE_MOCK_MODELS
+        self.backend = "heuristic"
 
-    def load(self, weights_path: str = None):
-        if self._mock:
-            return
-        import tensorflow as tf
-        self.model = build_ffnn_model()
-        if weights_path:
-            self.model.load_weights(weights_path)
+    def load(self, weights_path: str | None = None):
+        weights_path = weights_path or str(Path(settings.MODEL_WEIGHTS_DIR) / "ffnn_stress.weights.h5")
+        if not settings.USE_MOCK_MODELS and Path(weights_path).exists():
+            try:
+                self.model = build_ffnn_model()
+                self.model.load_weights(weights_path)
+                self.backend = "keras-ffnn"
+                return
+            except Exception:
+                self.model = None
+        if lite.get_bundle():
+            self.backend = "sklearn-ridge"
 
     def predict(self, features: np.ndarray, preprocessed: dict) -> dict:
-        """
-        Returns:
-          score (float 0–100), label, top keywords
-        """
-        if self._mock:
-            return self._mock_predict(features, preprocessed)
-
-        # Real inference
-        x = features.reshape(1, -1)
-        raw = float(self.model.predict(x, verbose=0)[0][0])
-        score = raw * 100
-        return self._format_output(score, preprocessed)
-
-    def _mock_predict(self, features: np.ndarray, preprocessed: dict) -> dict:
-        """
-        Deterministic mock inference.
-        Uses urgency_score + VADER negative + keyword count to derive a
-        realistic stress score without GPU.
-        """
-        urgency = preprocessed.get("urgency_score", 0.0)
+        urgency = float(preprocessed.get("urgency_score", 0.0))
         vader_neg = float(features[4]) if len(features) > 4 else 0.0
-        kw_count = len(preprocessed.get("financial_keywords", []))
+        vader_compound = float(features[2]) if len(features) > 2 else 0.0
+        kw = len(preprocessed.get("financial_keywords", []))
 
-        # Composite formula mirroring what a trained FFNN would learn
-        base = (urgency * 50) + (vader_neg * 30) + (kw_count * 5)
-        # Add deterministic noise based on word hash
-        seed = sum(ord(c) for c in preprocessed.get("normalized", "")[:20]) % 20
-        score = min(max(base + seed, 5), 95)
-        return self._format_output(score, preprocessed)
+        # Interpretable rule signal (0-100)
+        rule = 12 + urgency * 55 + vader_neg * 35 + min(kw, 4) * 4 - max(vader_compound, 0) * 10
+        rule = float(np.clip(rule, 3, 97))
 
-    def _format_output(self, score: float, preprocessed: dict) -> dict:
-        if score >= 75:
-            label = "Critical"
-        elif score >= 50:
-            label = "High"
-        elif score >= 25:
-            label = "Moderate"
+        learned = None
+        if self.model is not None:
+            learned = float(self.model.predict(features.reshape(1, -1), verbose=0)[0][0]) * 100
         else:
-            label = "Low"
+            learned = lite.predict_stress(preprocessed.get("original") or preprocessed["normalized"])
 
-        # Return top keywords that contributed (for L1 observability panel)
-        top_kw = preprocessed.get("financial_keywords", [])[:5]
+        if learned is None:
+            score = rule
+        else:
+            score = 0.6 * float(np.clip(learned, 0, 100)) + 0.4 * rule
 
+        # Very short, non-financial small talk ("hi", "thanks") shouldn't read as distress.
+        if preprocessed.get("word_count", 0) <= 3 and kw == 0 and urgency == 0:
+            score = min(score, 15)
+
+        score = float(np.clip(score, 1, 99))
         return {
             "stress_score": round(score, 1),
-            "stress_label": label,
-            "top_keywords": top_kw,
-            "model": "FFNN (Unit I)",
+            "stress_label": stress_label(score),
+            "top_keywords": preprocessed.get("financial_keywords", [])[:5],
+            "components": {"learned": None if learned is None else round(learned, 1), "rule": round(rule, 1)},
+            "model": f"Stress Scorer — {self.backend} (Unit I)",
         }

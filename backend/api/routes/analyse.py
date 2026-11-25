@@ -1,9 +1,10 @@
 """POST /analyse — Full 6-Layer Pipeline Analysis"""
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+from fastapi.concurrency import run_in_threadpool
+from pydantic import BaseModel, Field
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.dependencies import get_db, get_current_user
+from core.dependencies import get_current_user, get_db
 from database import crud
 from pipeline.inference_pipeline import get_pipeline
 
@@ -11,43 +12,26 @@ router = APIRouter()
 
 
 class AnalyseRequest(BaseModel):
-    text: str
-    language: str = "auto"   # "en" | "ta" | "auto"
+    text: str = Field(min_length=1, max_length=5000)
+    language: str = "auto"
     include_debug: bool = False
 
 
-@router.post("/analyse")
-async def analyse(
-    payload: AnalyseRequest,
-    db: AsyncSession = Depends(get_db),
-    current_user=Depends(get_current_user),
-):
-    """
-    Run the full 6-layer deep learning pipeline on a user's financial distress text.
+async def run_and_store(db: AsyncSession, user, text: str, conversation_id: str | None = None) -> dict:
+    """Run the pipeline with the user's chronological stress history and persist the session."""
+    past = await crud.get_user_sessions(db, user.id, limit=10)          # newest first
+    history = [s.stress_score for s in reversed(past) if s.stress_score is not None]  # oldest → newest
+    result = await run_in_threadpool(get_pipeline().run, text, history, len(past) + 1)
 
-    Returns stress score, debt category, trajectory, wellness response,
-    RL intervention strategy, and (optionally) per-layer debug outputs.
-    """
-    # Fetch historical stress scores for BiLSTM context
-    past_sessions = await crud.get_user_sessions(db, current_user.id, limit=10)
-    stress_history = [s.stress_score for s in past_sessions if s.stress_score is not None]
-    session_count = len(past_sessions) + 1
-
-    pipeline = get_pipeline()
-    result = pipeline.run(
-        text=payload.text,
-        stress_history=stress_history,
-        session_count=session_count,
-    )
-
-    # Persist session to DB
-    await crud.create_session(
+    session = await crud.create_session(
         db,
-        user_id=current_user.id,
-        input_text=payload.text,
+        user_id=user.id,
+        conversation_id=conversation_id,
+        input_text=text,
         language=result["language"],
         stress_score=result["stress_score"],
         stress_label=result["stress_label"],
+        crisis_level=result["crisis"]["level"],
         debt_category=result["debt_category"],
         debt_category_probabilities=result["debt_category_probabilities"],
         crisis_trajectory=result["crisis_trajectory"],
@@ -57,12 +41,22 @@ async def analyse(
         rl_action=result["rl_action"],
         rl_action_probabilities=result["rl_action_probabilities"],
         refined_response=result["refined_response"],
+        pipeline_debug=result["pipeline_debug"],
         request_id=result["request_id"],
         processing_time_ms=result["processing_time_ms"],
     )
+    result["session_id"] = session.id
+    return result
 
-    # Optionally strip debug data for smaller payload
+
+@router.post("/analyse")
+async def analyse(payload: AnalyseRequest, db: AsyncSession = Depends(get_db),
+                  current_user=Depends(get_current_user)):
+    """
+    Run the full 6-layer pipeline on a user's financial distress text and save it as a check-in.
+    Returns stress score, debt category, trajectory, response, strategy, matched schemes and helplines.
+    """
+    result = await run_and_store(db, current_user, payload.text)
     if not payload.include_debug:
         result.pop("pipeline_debug", None)
-
     return result

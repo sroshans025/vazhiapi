@@ -1,37 +1,49 @@
 """
 VazhiAPI — FastAPI Application Entry Point
-==========================================
-14 REST endpoints covering the full 6-layer deep learning pipeline,
-auth, user sessions, admin analytics, and model observability.
 """
+import logging
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
+from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
+from api.routes import (
+    admin, analyse, auth, budget, chat, dashboard, demo, escalate, feedback, health, history,
+    knowledge_routes, pipeline_debug, risk, schemes, summary, tools,
+)
 from core.config import get_settings
-from database.session import create_all_tables
+from database import crud
+from database.session import async_session_maker, create_all_tables
 from pipeline.inference_pipeline import get_pipeline
 
-from api.routes import (
-    auth, analyse, chat, history, risk, schemes,
-    budget, summary, feedback, escalate, health,
-    dashboard, admin, pipeline_debug,
-)
-
 settings = get_settings()
+logging.basicConfig(level=logging.DEBUG if settings.DEBUG else logging.INFO,
+                    format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+log = logging.getLogger("vazhi")
+
+
+async def _bootstrap_admin():
+    if not (settings.ADMIN_EMAIL and settings.ADMIN_PASSWORD):
+        return
+    async with async_session_maker() as db:
+        user = await crud.get_user_by_email(db, settings.ADMIN_EMAIL)
+        if user is None:
+            await crud.create_user(db, settings.ADMIN_EMAIL, settings.ADMIN_PASSWORD,
+                                   full_name="VazhiAPI Admin", district="Chennai", is_admin=True)
+            log.info("bootstrap admin created: %s", settings.ADMIN_EMAIL)
+        elif not user.is_admin:
+            user.is_admin = True
+            await db.commit()
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Startup: create DB tables + load ML models. Shutdown: cleanup."""
-    # DB
     await create_all_tables()
-    # ML Pipeline — load all 6 model layers
-    pipeline = get_pipeline()
-    pipeline.load_models()
+    await _bootstrap_admin()
+    await run_in_threadpool(get_pipeline().load_models)   # trains lite models on first boot if missing
     yield
-    # Shutdown cleanup (none needed for mock models)
 
 
 app = FastAPI(
@@ -39,52 +51,54 @@ app = FastAPI(
     description="""
 ## வழி — நம்ம பணம் நம்ம கையில்
 
-An AI-powered platform that reads financial distress in your words,
-scores your stress in real time, classifies Tamil Nadu-specific debt traps,
-and matches you to the correct government scheme or legal aid path.
+Reads financial distress in your own words (English, Tamil, Tanglish), scores stress, classifies
+12 Tamil Nadu debt traps, tracks trajectory, and counsels you through a multi-turn chat grounded in
+24 government schemes, 14 laws and verified helplines.
 
-### 6-Layer Deep Learning Pipeline
-| Layer | Unit | Model |
-|---|---|---|
-| L1 | Unit I | FFNN — Stress Scorer |
-| L2 | Unit II | TextCNN — Debt Classifier |
-| L3 | Unit III-A | BiLSTM — Session Tracker |
-| L4 | Unit III-B | Seq2Seq+Attention — Response Generator |
-| L5 | Unit IV | PPO/DQN — Strategy Optimizer |
-| L6 | Unit V | Behaviour Cloning — Tone Refiner |
+### 6-Layer Pipeline
+| Layer | Unit | Deep-learning track | Serving backend |
+|---|---|---|---|
+| L1 | I | FFNN stress scorer | TF-IDF Ridge + urgency/VADER signals |
+| L2 | II | TextCNN classifier | TF-IDF LogReg + curated indicators |
+| L3 | III-A | BiLSTM tracker | trend analysis |
+| L4 | III-B | Seq2Seq + attention | knowledge-grounded composer |
+| L5 | IV | PPO strategy agent | learned-policy rules |
+| L6 | V | Behaviour cloning | counsellor tone rules |
 
-### Course: Applied Deep Learning (AM4502)
+Chat is powered by Claude when `ANTHROPIC_API_KEY` is set, otherwise by the built-in bilingual counsellor.
     """,
-    version="1.0.0",
+    version=settings.APP_VERSION,
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,
 )
 
-# ── Middleware ────────────────────────────────────────────────────
-app.add_middleware(GZipMiddleware, minimum_size=1000)
+app.add_middleware(GZipMiddleware, minimum_size=1000)   # skips text/event-stream
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origin_regex=settings.ALLOWED_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ── Routers ───────────────────────────────────────────────────────
 app.include_router(health.router, tags=["System"])
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(analyse.router, tags=["Core Pipeline"])
-app.include_router(chat.router, tags=["Core Pipeline"])
+app.include_router(chat.router, tags=["Chat"])
+app.include_router(demo.router, tags=["Public Demo"])
 app.include_router(history.router, tags=["User Data"])
 app.include_router(risk.router, tags=["User Data"])
-app.include_router(schemes.router, tags=["Tamil Nadu Context"])
-app.include_router(budget.router, tags=["Tamil Nadu Context"])
 app.include_router(summary.router, tags=["User Data"])
+app.include_router(dashboard.router, tags=["User Data"])
+app.include_router(schemes.router, tags=["Tamil Nadu Context"])
+app.include_router(knowledge_routes.router, tags=["Tamil Nadu Context"])
+app.include_router(budget.router, tags=["Tools"])
+app.include_router(tools.router, tags=["Tools"])
 app.include_router(feedback.router, tags=["RL Reward Loop"])
 app.include_router(escalate.router, tags=["Crisis Management"])
-app.include_router(dashboard.router, tags=["Frontend Support"])
-app.include_router(admin.router, tags=["Admin Analytics"])
+app.include_router(admin.router, tags=["Admin"])
 app.include_router(pipeline_debug.router, tags=["Model Observability"])
 
 
@@ -93,7 +107,7 @@ async def root():
     return {
         "name": "VazhiAPI",
         "tagline": "நம்ம பணம் நம்ம கையில் — Your Money, Your Wellness",
-        "version": "1.0.0",
+        "version": settings.APP_VERSION,
         "docs": "/docs",
         "health": "/health",
     }

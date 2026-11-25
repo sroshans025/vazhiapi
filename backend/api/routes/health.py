@@ -1,7 +1,11 @@
 """GET /health — System + model status"""
 from fastapi import APIRouter
+
+from counsel.engine import claude_available
 from core.config import get_settings
+from models import lite
 from pipeline.inference_pipeline import get_pipeline
+from tn_context import knowledge
 
 router = APIRouter()
 settings = get_settings()
@@ -10,18 +14,19 @@ settings = get_settings()
 @router.get("/health")
 async def health_check():
     pipeline = get_pipeline()
+    bundle = lite.get_bundle()
     return {
         "status": "healthy",
-        "version": "1.0.0",
+        "version": settings.APP_VERSION,
         "models_loaded": pipeline._loaded,
         "mock_mode": settings.USE_MOCK_MODELS,
-        "database": "sqlite" if "sqlite" in settings.DATABASE_URL else "postgresql",
-        "pipeline_layers": [
-            {"layer": "L1", "model": "FFNN Stress Scorer", "unit": "I", "status": "ready"},
-            {"layer": "L2", "model": "TextCNN Classifier", "unit": "II", "status": "ready"},
-            {"layer": "L3", "model": "BiLSTM Tracker", "unit": "III-A", "status": "ready"},
-            {"layer": "L4", "model": "Seq2Seq+Attention", "unit": "III-B", "status": "ready"},
-            {"layer": "L5", "model": "PPO/DQN Optimizer", "unit": "IV", "status": "ready"},
-            {"layer": "L6", "model": "Behaviour Cloning", "unit": "V", "status": "ready"},
-        ],
+        "database": "sqlite" if settings.DATABASE_URL.startswith("sqlite") else "postgresql",
+        "chat_engine": "claude" if claude_available() else "vazhi-local",
+        "lite_model_metrics": bundle.get("metrics") if bundle else None,
+        "knowledge_base": {
+            "schemes": len(knowledge.schemes()), "debt_categories": len(knowledge.categories()),
+            "laws": len(knowledge.laws()), "helplines": len(knowledge.helplines()),
+            "districts": len(knowledge.TN_DISTRICTS),
+        },
+        "pipeline_layers": [dict(l, status="ready") for l in pipeline.layer_status()],
     }

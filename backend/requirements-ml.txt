@@ -1,0 +1,8 @@
+# Optional deep-learning track (training/train_ffnn.py, train_cnn.py, train_drl.py).
+# Heavy; install only on a machine/Python version these libraries support.
+-r requirements.txt
+tensorflow>=2.18
+torch>=2.5
+stable-baselines3>=2.4
+gymnasium>=1.0
+pandas>=2.2

@@ -1,0 +1,146 @@
+{
+  "version": "2025.2",
+  "disclaimer": "General information, not legal advice. Contact your District Legal Services Authority (15100) for free advice on your case.",
+  "laws": [
+    {
+      "id": "tn_exorbitant_interest_2003",
+      "name": "Tamil Nadu Prohibition of Charging Exorbitant Interest Act, 2003",
+      "name_ta": "தமிழ்நாடு அதிக வட்டி வசூலிப்பு தடைச் சட்டம், 2003",
+      "summary": "Makes it a criminal offence to charge interest above the rates notified by the government, or to use force, threats or harassment to recover a loan. Covers kandhu vatti, meter vatti and daily-interest lending.",
+      "summary_ta": "அரசு நிர்ணயித்ததற்கு மேல் வட்டி வசூலிப்பது, மிரட்டி வசூலிப்பது குற்றம். கந்து வட்டி, மீட்டர் வட்டிக்கு பொருந்தும்.",
+      "your_rights": ["You can file a police complaint against a lender charging exorbitant interest.", "Molesting, threatening or forcibly collecting from a borrower is punishable with imprisonment.", "Property documents taken as security can be recovered through legal action."],
+      "how_to_act": "Go to the nearest police station or Superintendent of Police office with your payment records. If police do not register the complaint, approach the DLSA (15100).",
+      "categories": ["blade_finance", "wedding_debt", "festival_credit"]
+    },
+    {
+      "id": "tn_money_lenders_1957",
+      "name": "Tamil Nadu Money-Lenders Act, 1957",
+      "name_ta": "தமிழ்நாடு கடன் கொடுப்போர் சட்டம், 1957",
+      "summary": "Money lenders must be licensed, keep accounts and give borrowers receipts and statements. Unlicensed lenders face penalties.",
+      "summary_ta": "கடன் கொடுப்பவர்கள் உரிமம் பெற வேண்டும், கணக்கு வைக்க வேண்டும், ரசீது தர வேண்டும்.",
+      "your_rights": ["Ask for a receipt for every payment.", "Ask for a statement of account.", "An unlicensed lender's recovery can be challenged."],
+      "how_to_act": "Ask the lender for their licence number and receipts. Report unlicensed lending to the police and the Revenue/Tahsildar office.",
+      "categories": ["blade_finance"]
+    },
+    {
+      "id": "tn_pawnbrokers_1943",
+      "name": "Tamil Nadu Pawnbrokers Act, 1943",
+      "name_ta": "தமிழ்நாடு அடகுக் கடைக்காரர் சட்டம், 1943",
+      "summary": "Pawnbrokers must be licensed, issue a pawn ticket, follow notified interest limits and give notice before selling unredeemed pledges.",
+      "summary_ta": "அடகுக் கடைக்கு உரிமம் தேவை, அடகுச் சீட்டு தர வேண்டும், விற்கும் முன் அறிவிப்பு தர வேண்டும்.",
+      "your_rights": ["Get a pawn ticket with the item description and interest rate.", "Receive notice before your pledge is sold.", "Receive any surplus after the sale."],
+      "how_to_act": "Keep your pawn ticket safe. Complain to the Tahsildar / police if the broker refuses notice or surplus.",
+      "categories": ["gold_loan_overdue"]
+    },
+    {
+      "id": "rbi_gold_loan_norms",
+      "name": "RBI rules on gold loans (banks & NBFCs)",
+      "name_ta": "தங்க நகைக் கடனுக்கான RBI விதிகள்",
+      "summary": "Regulated lenders must disclose terms, give the borrower prior notice before auction, auction transparently and return any surplus. RBI's 2025 directions also standardise loan-to-value limits and require pledged gold to be returned promptly after repayment.",
+      "summary_ta": "ஏலத்திற்கு முன் அறிவிப்பு, வெளிப்படையான ஏலம், மீதித் தொகை திருப்பித் தருதல் கட்டாயம். கடன் அடைத்தவுடன் நகையை உடனே திருப்பித் தர வேண்டும்.",
+      "your_rights": ["Prior notice before auction.", "Surplus from the auction belongs to you.", "Your gold must be returned promptly after full repayment."],
+      "how_to_act": "Complain to the lender's grievance officer; if unresolved in 30 days, file at cms.rbi.org.in (14448).",
+      "categories": ["gold_loan_overdue"]
+    },
+    {
+      "id": "chit_funds_1982",
+      "name": "Chit Funds Act, 1982",
+      "name_ta": "சீட்டு நிதி சட்டம், 1982",
+      "summary": "Chit funds must be registered with the Registrar of Chits; the foreman must keep security, follow the bye-laws and pay the prize amount on time.",
+      "summary_ta": "சீட்டு நிறுவனங்கள் பதிவு செய்யப்பட வேண்டும்; நடத்துபவர் பாதுகாப்புத் தொகை வைக்க வேண்டும்.",
+      "your_rights": ["Inspect chit records.", "Raise a dispute with the Registrar of Chits.", "Running an unregistered chit is an offence."],
+      "how_to_act": "File a complaint with the District Registrar (Chits) in the Registration Department; for fraud, approach the Economic Offences Wing.",
+      "categories": ["chit_fund_default"]
+    },
+    {
+      "id": "buds_act_2019",
+      "name": "Banning of Unregulated Deposit Schemes Act, 2019",
+      "name_ta": "முறைப்படுத்தப்படாத வைப்புத் திட்டங்கள் தடைச் சட்டம், 2019",
+      "summary": "Bans taking deposits through unregulated schemes; allows attachment of the operator's property to repay depositors.",
+      "summary_ta": "அனுமதி இல்லாத வைப்புத் திட்டங்கள் தடை; நடத்துபவரின் சொத்தை முடக்கி பணம் திருப்பித் தரலாம்.",
+      "your_rights": ["Report the scheme to the police/EOW.", "Claim from attached properties through the competent authority."],
+      "how_to_act": "Report at sachet.rbi.org.in and to the TN Economic Offences Wing.",
+      "categories": ["chit_fund_default"]
+    },
+    {
+      "id": "rbi_digital_lending",
+      "name": "RBI Digital Lending Rules (2022 guidelines / 2025 directions)",
+      "name_ta": "RBI டிஜிட்டல் கடன் விதிகள்",
+      "summary": "Loans must come from an RBI-regulated entity; the full cost (annual percentage rate) must be shown upfront in a Key Fact Statement; money must go directly to your bank account; apps cannot access your contacts or photos; you get a free-look period to exit.",
+      "summary_ta": "கடன் RBI பதிவு பெற்ற நிறுவனத்திடமிருந்து மட்டுமே; முழு செலவு முன்கூட்டியே காட்ட வேண்டும்; தொடர்பு எண்கள், புகைப்படங்களை எடுக்கக் கூடாது.",
+      "your_rights": ["A Key Fact Statement with the APR before you sign.", "No access to your contacts, photos or media.", "A cooling-off period to repay principal and exit without penalty.", "A named grievance officer who must respond."],
+      "how_to_act": "Report threats to 1930 / cybercrime.gov.in; report illegal apps at sachet.rbi.org.in; complain about regulated lenders at cms.rbi.org.in.",
+      "categories": ["loan_app_harassment", "festival_credit"]
+    },
+    {
+      "id": "it_act_2000",
+      "name": "IT Act, 2000 and BNS provisions on extortion, intimidation and defamation",
+      "name_ta": "தகவல் தொழில்நுட்பச் சட்டம், 2000 மற்றும் BNS",
+      "summary": "Sending obscene or morphed images, threatening messages and extortion are criminal offences.",
+      "summary_ta": "மாற்றப்பட்ட புகைப்படங்கள், மிரட்டல் செய்திகள், பணம் பறித்தல் — குற்றச் செயல்கள்.",
+      "your_rights": ["Police must register a complaint of cyber harassment.", "Platforms must remove such content on complaint."],
+      "how_to_act": "Call 1930 or file at cybercrime.gov.in with screenshots; visit the district cyber crime police station.",
+      "categories": ["loan_app_harassment"]
+    },
+    {
+      "id": "rbi_microfinance_2022",
+      "name": "RBI Microfinance Regulations, 2022",
+      "name_ta": "RBI மைக்ரோஃபைனான்ஸ் விதிகள், 2022",
+      "summary": "Total loan repayments of a household (all lenders) must not exceed 50% of household income; lenders must assess income, disclose pricing, and must not use coercive recovery.",
+      "summary_ta": "எல்லா கடன்களின் தவணையும் குடும்ப வருமானத்தில் 50%-ஐ மீறக் கூடாது; மிரட்டி வசூலிக்கக் கூடாது.",
+      "your_rights": ["Repayment cap of 50% of household income.", "No abusive language, late-night visits or public shaming.", "A clear factsheet with the interest rate."],
+      "how_to_act": "Complain to the MFI grievance officer, then cms.rbi.org.in (14448).",
+      "categories": ["microfinance_debt"]
+    },
+    {
+      "id": "rbi_fair_practices",
+      "name": "RBI Fair Practices Code & recovery-agent rules",
+      "name_ta": "RBI நியாய நடைமுறை விதிகள்",
+      "summary": "Recovery agents must carry authorisation, may call only between 8 am and 7 pm, and must not threaten, humiliate, or contact your relatives or friends to shame you.",
+      "summary_ta": "வசூல் முகவர்கள் காலை 8 முதல் இரவு 7 மணி வரை மட்டுமே அழைக்கலாம்; மிரட்டுதல், உறவினர்களை தொடர்பு கொண்டு அவமானப்படுத்துதல் கூடாது.",
+      "your_rights": ["Calls only 8 am – 7 pm.", "Ask the agent for their ID and authorisation letter.", "Banks are responsible for their agents' misconduct."],
+      "how_to_act": "Record call times; complain to the bank's grievance officer and then cms.rbi.org.in.",
+      "categories": ["credit_card_debt", "microfinance_debt", "education_loan"]
+    },
+    {
+      "id": "rbi_ombudsman_2021",
+      "name": "RBI Integrated Ombudsman Scheme, 2021",
+      "name_ta": "RBI ஒருங்கிணைந்த குறைதீர்ப்பாளர் திட்டம், 2021",
+      "summary": "Free, online complaint process against banks, NBFCs and payment companies when the lender does not resolve your complaint within 30 days.",
+      "summary_ta": "வங்கி 30 நாட்களில் தீர்க்காவிட்டால் இலவசமாக ஆன்லைனில் புகார் செய்யலாம்.",
+      "your_rights": ["Free of cost.", "No lawyer needed.", "Compensation can be awarded."],
+      "how_to_act": "File at cms.rbi.org.in or call 14448.",
+      "categories": ["credit_card_debt", "gold_loan_overdue"]
+    },
+    {
+      "id": "dowry_prohibition_1961",
+      "name": "Dowry Prohibition Act, 1961",
+      "name_ta": "வரதட்சணை தடைச் சட்டம், 1961",
+      "summary": "Giving, taking or demanding dowry is punishable.",
+      "summary_ta": "வரதட்சணை கொடுப்பது, வாங்குவது, கேட்பது தண்டனைக்குரியது.",
+      "your_rights": ["Complain to the police or the Dowry Prohibition Officer (District Social Welfare Officer)."],
+      "how_to_act": "Call 181 (women's helpline) or 100/112.",
+      "categories": ["wedding_debt"]
+    },
+    {
+      "id": "rbi_kcc",
+      "name": "Kisan Credit Card & crop-loan relief norms",
+      "name_ta": "கிசான் கடன் அட்டை விதிகள்",
+      "summary": "Banks can restructure crop loans and extend repayment when a natural calamity is notified; KCC loans carry interest subvention.",
+      "summary_ta": "அறிவிக்கப்பட்ட இயற்கைப் பேரிடரின் போது பயிர்க் கடனை மறுசீரமைக்கலாம்.",
+      "your_rights": ["Restructuring after notified calamities.", "Interest subvention on prompt repayment."],
+      "how_to_act": "Apply at your bank branch / Primary Agricultural Cooperative Credit Society.",
+      "categories": ["agricultural_debt"]
+    },
+    {
+      "id": "pmfby",
+      "name": "PM Fasal Bima Yojana claim rules",
+      "name_ta": "பயிர் காப்பீடு கோரிக்கை விதிகள்",
+      "summary": "Localised crop losses must be reported quickly (generally within 72 hours) to the insurer, bank or agriculture office for a claim.",
+      "summary_ta": "உள்ளூர் பயிர் இழப்பை விரைவில் (பொதுவாக 72 மணி நேரத்திற்குள்) தெரிவிக்க வேண்டும்.",
+      "your_rights": ["Claim for prevented sowing, mid-season adversity, post-harvest and localised losses."],
+      "how_to_act": "Call 14447 or use the Crop Insurance app.",
+      "categories": ["agricultural_debt"]
+    }
+  ]
+}
