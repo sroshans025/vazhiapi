@@ -63,7 +63,7 @@ export default function RegisterPage() {
             </div>
             {error && <div className="error-box" role="alert">{error}</div>}
             <button type="submit" className="btn-primary" disabled={loading} style={{ marginTop: "0.5rem" }}>
-              {loading ? "Creating account…" : <>Create account · <span className="font-tamil">வழி தொடங்கு</span> →</>}
+              {loading ? "Creating account…" : <span>Create account · <span className="font-tamil">வழி தொடங்கு</span> →</span>}
             </button>
           </form>
           <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem" }} className="muted">

@@ -3,7 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import StressGauge from "@/components/StressGauge";
 import Markdown from "@/components/Markdown";
-import { apiCategories, apiDemoAnalyse, apiSchemes, errorMessage } from "@/lib/api";
+import { apiDemoAnalyse, errorMessage } from "@/lib/api";
+import * as offline from "@/lib/offline";
 import { ACTION_ICONS, CATEGORY_META, fmtINR } from "@/lib/constants";
 import { useLang } from "@/lib/i18n";
 import type { AnalysisSummary, DebtCategory, GovernmentScheme } from "@/types";
@@ -14,9 +15,12 @@ function useReveal<T extends HTMLElement>() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add("in"); io.disconnect(); } }, { threshold: 0.12 });
+    const show = () => el.classList.add("in");
+    if (typeof IntersectionObserver === "undefined") { show(); return; }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { show(); io.disconnect(); } }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
     io.observe(el);
-    return () => io.disconnect();
+    const safety = setTimeout(show, 2500);   // never leave a section invisible
+    return () => { io.disconnect(); clearTimeout(safety); };
   }, []);
   return ref;
 }
@@ -44,15 +48,19 @@ function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      io.disconnect();
+    let started = false, raf = 0;
+    const run = () => {
+      if (started) return;
+      started = true;
       const start = performance.now();
-      const tick = (t: number) => { const p = Math.min((t - start) / 1200, 1); setV(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(tick); };
-      requestAnimationFrame(tick);
-    });
-    io.observe(el);
-    return () => io.disconnect();
+      const tick = (t: number) => { const p = Math.min((t - start) / 1200, 1); setV(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) raf = requestAnimationFrame(tick); };
+      raf = requestAnimationFrame(tick);
+    };
+    const io = typeof IntersectionObserver === "undefined" ? null
+      : new IntersectionObserver(([e]) => { if (e.isIntersecting) { io?.disconnect(); run(); } }, { threshold: 0 });
+    io?.observe(el);
+    const safety = setTimeout(run, io ? 3000 : 0);
+    return () => { io?.disconnect(); clearTimeout(safety); cancelAnimationFrame(raf); };
   }, [to]);
   return <span ref={ref}>{v.toLocaleString("en-IN")}{suffix}</span>;
 }
@@ -72,7 +80,7 @@ export function HeroDemo() {
     ? ["உங்கள் வார்த்தைகளில்.", "தமிழில்.", "Tanglish-லும்.", "வெட்கமில்லாமல்."]
     : ["in your own words.", "in Tamil.", "in Tanglish.", "without shame."]);
   const [text, setText] = useState(SAMPLES[0].text);
-  const [res, setRes] = useState<AnalysisSummary | null>(null);
+  const [res, setRes] = useState<(AnalysisSummary & { offline?: boolean }) | null>(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -145,16 +153,15 @@ export function HeroDemo() {
                 </span>
                 <div style={{ fontSize: "0.85rem" }}>{ACTION_ICONS[res.rl_action]} <b>{res.rl_action_label}</b></div>
                 <div className="muted" style={{ fontSize: "0.75rem" }}>
-                  {res.language === "ta" ? "Tamil" : res.language === "tanglish" ? "Tanglish" : "English"} detected · {res.processing_time_ms} ms
+                  {res.language === "ta" ? "Tamil" : res.language === "tanglish" ? "Tanglish" : "English"} detected · {res.processing_time_ms} ms{res.offline ? " · quick in-browser analysis" : ""}
                   {res.crisis.level !== "low" && <span style={{ color: "#fca5a5" }}> · {res.crisis.level} risk flags</span>}
                 </div>
               </div>
             </div>
           )}
           {res?.refined_response && (
-            <div style={{ marginTop: "0.9rem", maxHeight: 150, overflow: "hidden", position: "relative", fontSize: "0.85rem" }}>
+            <div className="fade-out" style={{ marginTop: "0.9rem", maxHeight: 170, overflow: "hidden", fontSize: "0.85rem" }}>
               <Markdown text={res.refined_response.split("\n\n").slice(0, 2).join("\n\n")} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 48, background: "linear-gradient(transparent, rgba(27,23,66,0.98))" }} />
             </div>
           )}
         </div>
@@ -236,9 +243,8 @@ export function TrapCalculator() {
 export function CategoryExplorer() {
   const ref = useReveal<HTMLElement>();
   const { lang } = useLang();
-  const [cats, setCats] = useState<DebtCategory[]>([]);
+  const cats = offline.kb.categories as DebtCategory[];
   const [sel, setSel] = useState("blade_finance");
-  useEffect(() => { apiCategories().then((d) => setCats(d.categories)).catch(() => {}); }, []);
   const ids = cats.length ? cats.map((c) => c.id) : Object.keys(CATEGORY_META);
   const cur = cats.find((c) => c.id === sel);
   const m = CATEGORY_META[sel];
@@ -339,8 +345,7 @@ export function PipelineHero() {
 export function SchemesAndCTA() {
   const ref = useReveal<HTMLElement>();
   const { lang } = useLang();
-  const [schemes, setSchemes] = useState<GovernmentScheme[]>([]);
-  useEffect(() => { apiSchemes().then((d) => setSchemes(d.schemes)).catch(() => {}); }, []);
+  const schemes = offline.kb.schemes as GovernmentScheme[];
   const loop = useMemo(() => [...schemes, ...schemes], [schemes]);
   return (
     <section ref={ref} className="reveal" style={{ padding: "5rem 0 4rem" }}>
@@ -371,7 +376,7 @@ export function SchemesAndCTA() {
             A confidential chat that understands kandhu vatti, chit funds and loan-app harassment, and knows the Tamil Nadu schemes and laws that help.
           </p>
           <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/register" className="btn-primary" style={{ padding: "1rem 2.2rem" }}>Start free · <span className="font-tamil">வழி தொடங்கு</span> →</Link>
+            <Link href="/register" className="btn-primary" style={{ padding: "1rem 2.2rem" }}><span>Start free · <span className="font-tamil">வழி தொடங்கு</span> →</span></Link>
             <Link href="/rights" className="btn-ghost" style={{ textDecoration: "none" }}>Know your rights</Link>
           </div>
         </div>

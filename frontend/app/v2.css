@@ -23,7 +23,12 @@ button:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important;
 input[type=range] { width: 100%; accent-color: #f59e0b; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
 @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .grid-4 { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; } }
+/* Tailwind preflight strips list markers; restore them for numbered steps and chat lists */
+ol { list-style: decimal; }
+ol li::marker { color: #f59e0b; font-weight: 700; }
+.md ul { list-style: disc; }
+.fade-out { -webkit-mask-image: linear-gradient(#000 65%, transparent); mask-image: linear-gradient(#000 65%, transparent); }
 
 /* Navbar */
 .nav-brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }

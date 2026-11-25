@@ -7,6 +7,7 @@ import type {
   DebtCategory, GovernmentScheme, Helpline, Law, PipelineResult, TokenResponse,
 } from "@/types";
 import { clearSession, getToken } from "@/lib/auth";
+import * as offline from "@/lib/offline";
 
 export const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
 
@@ -54,7 +55,16 @@ export const apiDeleteMe = () => api.delete("/auth/me");
 
 // ── Pipeline + chat ───────────────────────────────────────────────
 export const apiAnalyse = (data: AnalyseRequest) => api.post<PipelineResult>("/analyse", data).then((r) => r.data);
-export const apiDemoAnalyse = (text: string) => api.post<AnalysisSummary>("/demo/analyse", { text }).then((r) => r.data);
+/** Live demo: the real 6-layer backend when reachable, otherwise the in-browser analyser. */
+export async function apiDemoAnalyse(text: string): Promise<AnalysisSummary & { offline?: boolean }> {
+  try {
+    return (await api.post<AnalysisSummary>("/demo/analyse", { text }, { timeout: 6000 })).data;
+  } catch (e) {
+    const err = e as { response?: { status: number } };
+    if (err.response?.status === 422) throw e;          // genuine validation error
+    return { ...offline.analyzeLocal(text), offline: true };
+  }
+}
 
 export const apiConversations = () =>
   api.get<{ engine: string; conversations: ConversationSummary[] }>("/chat/conversations").then((r) => r.data);
@@ -127,24 +137,32 @@ export const apiDashboard = (userId: string) => api.get<DashboardSummary>(`/dash
 export const apiSummary = (userId: string) => api.get(`/summary/${userId}`).then((r) => r.data);
 
 // ── Knowledge (public) ────────────────────────────────────────────
-export const apiSchemes = (params?: { category?: string; q?: string; level?: string }) =>
-  api.get<{ schemes: GovernmentScheme[]; count: number; total: number }>("/schemes", { params }).then((r) => r.data);
-export const apiMatchSchemes = (profile: Record<string, unknown>) =>
-  api.post<{ schemes: GovernmentScheme[] }>("/schemes/match", profile).then((r) => r.data);
-export const apiCategories = () => api.get<{ categories: DebtCategory[] }>("/knowledge/categories").then((r) => r.data);
-export const apiCategory = (id: string) =>
-  api.get<DebtCategory & { schemes: GovernmentScheme[]; laws: Law[]; helplines: Helpline[] }>(`/knowledge/categories/${id}`).then((r) => r.data);
-export const apiLaws = () => api.get<{ laws: Law[] }>("/knowledge/laws").then((r) => r.data);
-export const apiHelplines = () => api.get<{ helplines: Helpline[] }>("/knowledge/helplines").then((r) => r.data);
+// The public knowledge base ships with the frontend (lib/kb.json, exported from the backend by
+// `python -m training.export_kb`), so these pages render instantly and work with no backend.
+// The same data is served by the API at /schemes and /knowledge/* for other clients.
+const resolve = <T,>(fn: () => T): Promise<T> => new Promise((ok, fail) => { try { ok(fn()); } catch (e) { fail(e); } });
 
-// ── Tools (public) ────────────────────────────────────────────────
-export const apiInterest = (d: { rate: number; period: string; principal?: number; months?: number }) =>
-  api.post("/tools/interest", d).then((r) => r.data);
-export const apiEMI = (d: { principal: number; annual_rate: number; months: number }) => api.post("/tools/emi", d).then((r) => r.data);
+export const apiSchemes = (params?: { category?: string; q?: string; level?: string }) =>
+  resolve(() => offline.filterSchemes(params) as { schemes: GovernmentScheme[]; count: number; total: number });
+export const apiMatchSchemes = (profile: Record<string, unknown>) => resolve(() => offline.matchSchemes(profile));
+export const apiCategories = () => resolve(() => ({ categories: offline.kb.categories as DebtCategory[] }));
+export const apiCategory = (id: string) => resolve(() => {
+  const c = offline.kb.categories.find((x) => x.id === id);
+  if (!c) throw new Error("Category not found");
+  return { ...c, schemes: offline.schemesFor(id), laws: offline.lawsFor(id), helplines: offline.helplinesFor([id], 4) } as DebtCategory & { schemes: GovernmentScheme[]; laws: Law[]; helplines: Helpline[] };
+});
+export const apiLaws = () => resolve(() => ({ laws: offline.kb.laws }));
+export const apiHelplines = () => resolve(() => ({ helplines: offline.kb.helplines }));
+
+// ── Tools (public, pure maths — computed in the browser, identical to /tools/* on the API) ──
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export const apiInterest = (d: { rate: number; period: string; principal?: number; months?: number }) => resolve<any>(() => offline.interest(d));
+export const apiEMI = (d: { principal: number; annual_rate: number; months: number }) => resolve<any>(() => offline.emi(d));
 export const apiPayoff = (d: { monthly_budget: number; strategy: string; debts: { name: string; balance: number; annual_rate: number; min_payment: number }[] }) =>
-  api.post("/tools/payoff", d).then((r) => r.data);
+  resolve<any>(() => offline.payoff(d));
 export const apiBudgetPlan = (d: { monthly_income: number; debt_emi: number; debt_category: string; num_dependents?: number; rent?: number }) =>
-  api.post("/budget-plan", d).then((r) => r.data);
+  resolve<any>(() => offline.budgetPlan(d));
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 // ── RL + crisis ───────────────────────────────────────────────────
 export const apiFeedback = (d: { session_id: string; rating: 1 | -1; message_id?: string; comment?: string }) =>
