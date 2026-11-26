@@ -85,10 +85,30 @@ class Settings(BaseSettings):
         return v
 
 
+def find_postgres_env(env: dict | None = None) -> str | None:
+    """
+    Vercel's Neon / Postgres integrations name variables after a configurable prefix
+    (DATABASE_URL, POSTGRES_URL, STORAGE_URL, NEON_DATABASE_URL, ...). Pick the pooled one.
+    """
+    env = os.environ if env is None else env
+    for key in ("DATABASE_URL", "POSTGRES_URL"):
+        if env.get(key):
+            return env[key]
+    candidates = [(k, v) for k, v in env.items()
+                  if k.endswith("_URL") and str(v).startswith(("postgres://", "postgresql://"))]
+    def rank(kv):
+        k = kv[0]
+        unpooled = any(s in k for s in ("UNPOOLED", "NON_POOLING", "DIRECT"))
+        return (unpooled, "PRISMA" in k, not ("DATABASE_URL" in k or "POSTGRES_URL" in k), len(k))
+    return sorted(candidates, key=rank)[0][1] if candidates else None
+
+
 @lru_cache()
 def get_settings() -> Settings:
-    if not os.environ.get("DATABASE_URL") and os.environ.get("POSTGRES_URL"):
-        os.environ["DATABASE_URL"] = os.environ["POSTGRES_URL"]
+    if not os.environ.get("DATABASE_URL"):
+        found = find_postgres_env()
+        if found:
+            os.environ["DATABASE_URL"] = found
     s = Settings()
     if IS_SERVERLESS and s.DATABASE_URL.startswith("sqlite"):
         log.warning("No DATABASE_URL set on a serverless host: using SQLite in the temp dir. "
