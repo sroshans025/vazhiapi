@@ -38,7 +38,7 @@ export default function StressGauge({ score, label, size = 140, caption = "Stres
         <circle cx={c} cy={c} r={r} fill="none" stroke={color} strokeWidth={12}
           strokeDasharray={`${filled} ${circ}`} strokeLinecap="round" transform={`rotate(135 ${c} ${c})`}
           />
-        <text x={c} y={c + 8} textAnchor="middle" fill={color} fontSize={size * 0.24} fontWeight="800" fontFamily="Inter, sans-serif">
+        <text x={c} y={c + 8} textAnchor="middle" fill={color} fontSize={size * 0.24} fontWeight="800" fontFamily="var(--font-inter), sans-serif">
           {Math.round(shown)}
         </text>
       </svg>

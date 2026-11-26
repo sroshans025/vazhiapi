@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
-
 @import "tailwindcss";
 
 /* ═══════════════ Design tokens — royal purple & gold on warm cream ═══════════════ */
@@ -44,7 +42,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: var(--bg); }
 body {
-  font-family: 'Inter', 'Noto Sans Tamil', system-ui, sans-serif;
+  font-family: var(--font-inter), var(--font-tamil), system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -54,7 +52,7 @@ body {
 h1, h2, h3 { letter-spacing: -0.015em; color: var(--text); }
 a { color: var(--primary); }
 a:hover { color: var(--primary-hover); }
-.font-tamil { font-family: 'Noto Sans Tamil', 'Inter', sans-serif; }
+.font-tamil { font-family: var(--font-tamil), var(--font-inter), sans-serif; }
 ::selection { background: #e9dcf5; }
 :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 6px; }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -98,7 +96,7 @@ a.glass-card:hover, .glass-card.hoverable:hover { border-color: var(--border-str
 .input-field {
   background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px;
   padding: 0.75rem 0.95rem; color: var(--text); width: 100%; font-size: 0.98rem; outline: none;
-  font-family: 'Inter', 'Noto Sans Tamil', sans-serif; transition: border-color 0.15s, box-shadow 0.15s;
+  font-family: var(--font-inter), var(--font-tamil), sans-serif; transition: border-color 0.15s, box-shadow 0.15s;
 }
 .input-field:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(91, 42, 134, 0.15); }
 .input-field::placeholder { color: #a8a29e; }
@@ -165,7 +163,7 @@ ol li::marker { color: var(--accent); font-weight: 700; }
   padding: 0 1.5rem; background: rgba(250, 247, 241, 0.94); border-bottom: 2px solid var(--gold); backdrop-filter: saturate(1.4) blur(8px); }
 .nav-brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
 .brand-mark { width: 36px; height: 36px; border-radius: 9px; background: var(--primary); display: flex; align-items: center; justify-content: center;
-  font-size: 1.15rem; font-weight: 700; color: var(--gold-light); box-shadow: inset 0 0 0 1.5px var(--gold); flex-shrink: 0; text-decoration: none; font-family: 'Noto Sans Tamil', sans-serif; }
+  font-size: 1.15rem; font-weight: 700; color: var(--gold-light); box-shadow: inset 0 0 0 1.5px var(--gold); flex-shrink: 0; text-decoration: none; font-family: var(--font-tamil), sans-serif; }
 .brand-name { font-weight: 800; font-size: 1rem; color: var(--text); line-height: 1.1; }
 .brand-tag { font-size: 0.68rem; color: var(--muted); }
 .nav-links { display: flex; align-items: center; gap: 1.5rem; }
@@ -221,7 +219,7 @@ ol li::marker { color: var(--accent); font-weight: 700; }
 .chat-scroll { flex: 1; overflow-y: auto; padding: 1.25rem 1rem; display: flex; flex-direction: column; gap: 1.1rem; background: #fbfaf7; }
 .msg-row { display: flex; gap: 0.65rem; align-items: flex-start; animation: pop 0.2s ease; }
 .msg-row.user { justify-content: flex-end; }
-.bot-avatar { width: 32px; height: 32px; border-radius: 9px; background: var(--primary); color: var(--gold-light); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Noto Sans Tamil', sans-serif; }
+.bot-avatar { width: 32px; height: 32px; border-radius: 9px; background: var(--primary); color: var(--gold-light); font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-tamil), sans-serif; }
 .bubble-user { background: var(--primary); color: #fff; border-radius: 16px 16px 4px 16px; padding: 0.7rem 1rem; max-width: min(80%, 640px); white-space: pre-wrap; word-break: break-word; }
 .bubble-ai { background: var(--surface); border: 1px solid var(--border); border-radius: 16px 16px 16px 4px; padding: 0.85rem 1.1rem; max-width: min(88%, 720px); min-width: 0; }
 .msg-tools { display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.5rem; font-size: 0.78rem; color: var(--muted); }

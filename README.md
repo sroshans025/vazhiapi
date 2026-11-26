@@ -12,7 +12,7 @@ An AI-powered Tamil Nadu financial wellness platform. It reads a user's financia
 | Backend | FastAPI, SQLAlchemy (async), SQLite / Postgres, Python 3.11+ |
 | ML (serving) | scikit-learn models trained on the VazhiAPI distress corpus, rules, knowledge base |
 | ML (deep track) | TensorFlow / PyTorch / Stable-Baselines3 architectures in `backend/models` |
-| Chat | Claude (`claude-opus-5-5`) when `ANTHROPIC_API_KEY` is set, otherwise the built-in bilingual counsellor |
+| Chat | Optional LLM chat via the Anthropic API when `ANTHROPIC_API_KEY` is set, otherwise the built-in bilingual counsellor |
 
 ## Quick start
 
@@ -72,6 +72,6 @@ Or run everything with `docker compose up --build` (Postgres + backend + fronten
 
 ## Guest mode (no account, no server)
 
-Login and register offer **"Continue without an account"**, and suggest it automatically when the server can't be reached. In guest mode the chat, dashboard and profile run entirely in the browser (`frontend/lib/guest.ts`, `counsellor.ts`, `offline.ts`) on the bundled knowledge base, and data stays in that browser's localStorage. With the backend and an `ANTHROPIC_API_KEY`, signed-in users get Claude, which can answer any question, grounded in the same knowledge base.
+Login and register offer **"Continue without an account"**, and suggest it automatically when the server can't be reached. In guest mode the chat, dashboard and profile run entirely in the browser (`frontend/lib/guest.ts`, `counsellor.ts`, `offline.ts`) on the bundled knowledge base, and data stays in that browser's localStorage. With the backend and an `ANTHROPIC_API_KEY`, signed-in users get the LLM-powered chat, which can answer any question, grounded in the same knowledge base.
 
 Scheme benefits change with government orders. The app tells users to confirm on official portals.

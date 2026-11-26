@@ -1,7 +1,12 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Noto_Sans_Tamil } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/i18n";
 import SOSButton from "@/components/SOSButton";
+
+// Self-hosted at build time by next/font: no runtime request to Google, no layout shift.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const tamil = Noto_Sans_Tamil({ subsets: ["tamil"], variable: "--font-tamil", display: "swap" });
 
 export const metadata: Metadata = {
   title: "VazhiAPI — Tamil Nadu Financial Wellness Platform",
@@ -14,11 +19,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${tamil.variable}`}>
       <body>
         <LanguageProvider>
           {children}

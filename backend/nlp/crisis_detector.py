@@ -20,7 +20,8 @@ CRISIS_PHRASES = [
 ]
 
 SEVERE_PHRASES = [
-    "threatening", "threatened", "threaten", "harassment", "harassing", "harass",
+    "threatening", "threatened", "threaten", "threatens", "threats", "threat calls", "intimidating", "intimidate",
+    "harassment", "harassing", "harass", "harasses", "harassed", "abuses", "abusive", "beats me", "beating me",
     "beaten", "beat me", "hit me", "attacked", "violence", "abusing", "abused",
     "morphed", "nude photo", "obscene", "blackmail", "extortion",
     "seized my property", "took my land", "took my house", "locked my house", "kidnap",
