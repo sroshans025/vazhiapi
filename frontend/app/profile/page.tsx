@@ -77,14 +77,14 @@ export default function ProfilePage() {
           </form>}
           {isGuestUser && (
             <div className="glass-card card-pad" style={{ marginBottom: "1.25rem" }}>
-              <h3 style={{ fontWeight: 700, marginBottom: "0.4rem" }}>📱 Guest mode</h3>
+              <h3 style={{ fontWeight: 700, marginBottom: "0.4rem" }}>Guest mode</h3>
               <p className="muted" style={{ fontSize: "0.88rem", marginBottom: "0.9rem" }}>Your chats and check-ins are stored only in this browser. Create an account to keep them across devices and to request a human counsellor.</p>
               <a href="/register" className="btn-primary btn-sm">Create an account</a>
             </div>
           )}
 
-          <div className="glass-card card-pad" style={{ borderColor: "rgba(239,68,68,0.35)" }}>
-            <h3 style={{ fontWeight: 700, color: "#fca5a5", marginBottom: "0.4rem" }}>{isGuestUser ? "Delete data on this device" : "Delete my account"}</h3>
+          <div className="glass-card card-pad" style={{ borderColor: "#f5c2c2" }}>
+            <h3 style={{ fontWeight: 700, color: "var(--danger)", marginBottom: "0.4rem" }}>{isGuestUser ? "Delete data on this device" : "Delete my account"}</h3>
             <p className="muted" style={{ fontSize: "0.88rem", marginBottom: "0.9rem" }}>{isGuestUser ? "Erases every guest chat and check-in stored in this browser." : "Permanently erases your account, every chat, check-in, feedback and counsellor request. This cannot be undone."}</p>
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <input className="input-field" style={{ maxWidth: 260 }} placeholder='Type "DELETE" to confirm' value={confirmDel} onChange={(e) => setConfirmDel(e.target.value)} />

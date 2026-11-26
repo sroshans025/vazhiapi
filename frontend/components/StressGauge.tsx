@@ -33,11 +33,11 @@ export default function StressGauge({ score, label, size = 140, caption = "Stres
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.35rem" }}>
       <svg width={size} height={size * 0.82} viewBox={`0 0 ${size} ${size * 0.82}`} role="img" aria-label={`Stress ${Math.round(score)} of 100, ${label}`}>
-        <circle cx={c} cy={c} r={r} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={12}
+        <circle cx={c} cy={c} r={r} fill="none" stroke="var(--surface-2)" strokeWidth={12}
           strokeDasharray={`${arc} ${circ}`} strokeLinecap="round" transform={`rotate(135 ${c} ${c})`} />
         <circle cx={c} cy={c} r={r} fill="none" stroke={color} strokeWidth={12}
           strokeDasharray={`${filled} ${circ}`} strokeLinecap="round" transform={`rotate(135 ${c} ${c})`}
-          style={{ filter: `drop-shadow(0 0 8px ${color}88)` }} />
+          />
         <text x={c} y={c + 8} textAnchor="middle" fill={color} fontSize={size * 0.24} fontWeight="800" fontFamily="Inter, sans-serif">
           {Math.round(shown)}
         </text>

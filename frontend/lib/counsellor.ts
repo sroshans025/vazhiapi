@@ -83,9 +83,9 @@ export function suggestionsFor(intent: string, a: AnalysisSummary, lang: MsgLang
   return keys.map((k) => s[k]);
 }
 
-const helplineLines = (tags: string[], n = 4) => helplinesFor(tags, n).map((h) => `- **${h.name}** — 📞 **${h.number}** (${h.hours})`).join("\n");
+const helplineLines = (tags: string[], n = 4) => helplinesFor(tags, n).map((h) => `- **${h.name}**: **${h.number}** (${h.hours})`).join("\n");
 const schemeLines = (cat: string, lang: MsgLanguage, n = 3) => schemesFor(cat, n)
-  .map((s) => `- **${lang === "ta" ? s.name_ta : s.name}** — ${lang === "ta" ? s.description_ta : s.benefit}  \n  📞 ${s.helpline} · ${s.application_url}`).join("\n");
+  .map((s) => `- **${lang === "ta" ? s.name_ta : s.name}** — ${lang === "ta" ? s.description_ta : s.benefit}  \n  Helpline ${s.helpline} · ${s.application_url}`).join("\n");
 
 function compose(cat: string, label: string, lang: MsgLanguage): string {
   const c = kb.categories.find((x) => x.id === cat)!;
@@ -106,7 +106,7 @@ function compose(cat: string, label: string, lang: MsgLanguage): string {
   const steps = ta ? c.first_steps_ta : c.first_steps;
   if (steps.length) parts.push(T(lang, "What you can do now:", "இப்போது செய்யக்கூடியவை:", "Ippo pannakoodiyadhu:") + "\n" + steps.slice(0, 3).map((s, i) => `${i + 1}. ${s}`).join("\n"));
   const sc = schemesFor(cat, 1)[0];
-  if (sc) parts.push(`${T(lang, "Support you may qualify for:", "உங்களுக்கு உதவக்கூடிய திட்டம்:", "Ungalukku help aagura scheme:")} **${ta ? sc.name_ta : sc.name}** — ${ta ? sc.description_ta : sc.benefit} (📞 ${sc.helpline})`);
+  if (sc) parts.push(`${T(lang, "Support you may qualify for:", "உங்களுக்கு உதவக்கூடிய திட்டம்:", "Ungalukku help aagura scheme:")} **${ta ? sc.name_ta : sc.name}** — ${ta ? sc.description_ta : sc.benefit} (Helpline ${sc.helpline})`);
   const law = lawsFor(cat)[0];
   if (law && lvl !== "low") parts.push(`${T(lang, "Your right:", "உங்கள் உரிமை:", "Unga urimai:")} ${ta ? law.summary_ta : law.summary}`);
   return parts.join("\n\n");
@@ -138,9 +138,9 @@ export function reply(ctx: Ctx): { text: string; intent: string; hits: KbHit[] }
       break;
     case "greeting":
       text = T(lang,
-        `Vanakkam${name && name !== "Guest" ? " " + name : ""}! 🙏 I'm Vazhi, your financial wellness companion. Ask me anything about loans, moneylenders, chit funds, loan apps, schemes, your rights, budgeting, scams or credit scores — in English, Tamil or Tanglish.\n\nWhat's on your mind today?`,
-        `வணக்கம்${name && name !== "Guest" ? " " + name : ""}! 🙏 நான் வழி — உங்கள் நிதி நலத் துணை. கடன், வட்டி, சீட்டு, கடன் செயலி, அரசு திட்டங்கள், உரிமைகள், பட்ஜெட், மோசடி — எதைப் பற்றியும் கேளுங்கள்.\n\nஇன்று உங்கள் மனதில் என்ன இருக்கிறது?`,
-        `Vanakkam${name && name !== "Guest" ? " " + name : ""}! 🙏 Naan Vazhi. Kadan, vatti, seettu, loan app, schemes, urimai, budget, scam — edhu venumnaalum kelunga.\n\nInniku enna vishayam?`);
+        `Vanakkam${name && name !== "Guest" ? " " + name : ""}! I'm Vazhi, your financial wellness companion. Ask me anything about loans, moneylenders, chit funds, loan apps, schemes, your rights, budgeting, scams or credit scores — in English, Tamil or Tanglish.\n\nWhat's on your mind today?`,
+        `வணக்கம்${name && name !== "Guest" ? " " + name : ""}! நான் வழி — உங்கள் நிதி நலத் துணை. கடன், வட்டி, சீட்டு, கடன் செயலி, அரசு திட்டங்கள், உரிமைகள், பட்ஜெட், மோசடி — எதைப் பற்றியும் கேளுங்கள்.\n\nஇன்று உங்கள் மனதில் என்ன இருக்கிறது?`,
+        `Vanakkam${name && name !== "Guest" ? " " + name : ""}! Naan Vazhi. Kadan, vatti, seettu, loan app, schemes, urimai, budget, scam — edhu venumnaalum kelunga.\n\nInniku enna vishayam?`);
       break;
     case "thanks":
       text = T(lang, "You're welcome — and well done for taking these steps. Is there anything else worrying you?", "நன்றி! இந்த முயற்சிக்கு பாராட்டுகள். வேறு ஏதாவது கவலை இருக்கிறதா?", "Paravaillai! Vera edhaachum tension irukka?");
@@ -161,7 +161,7 @@ export function reply(ctx: Ctx): { text: string; intent: string; hits: KbHit[] }
       parts.push(top.a);
       const related = hits.slice(1).filter((h) => h.kind === "faq" && h.score >= hits[0].score * 0.55).slice(0, 2);
       if (related.length) parts.push(T(lang, "Related: ", "தொடர்புடையவை: ", "Related: ") + related.map((h) => `*${h.title}*`).join(" · "));
-      if (a.crisis.level === "severe") parts.push(T(lang, "⚠️ Threats or harassment are crimes — call **100 / 112** if you feel unsafe.", "⚠️ மிரட்டல் குற்றம் — பாதுகாப்பில்லை என்றால் **100 / 112**.", "⚠️ Mirattal crime — safe ah illa na **100 / 112**."));
+      if (a.crisis.level === "severe") parts.push(T(lang, "Threats or harassment are crimes — call **100 / 112** if you feel unsafe.", "மிரட்டல் குற்றம் — பாதுகாப்பில்லை என்றால் **100 / 112**.", "Mirattal crime — safe ah illa na **100 / 112**."));
       text = parts.join("\n\n");
       break;
     }
@@ -178,7 +178,7 @@ export function reply(ctx: Ctx): { text: string; intent: string; hits: KbHit[] }
     case "rights": {
       const laws = lawsFor(cat).length ? lawsFor(cat) : kb.laws.slice(0, 2);
       text = T(lang, "You have real legal protection here:\n\n", "உங்களுக்கு சட்டப் பாதுகாப்பு உள்ளது:\n\n", "Ungalukku legal protection irukku:\n\n")
-        + laws.slice(0, 2).map((l) => `**${lang === "ta" ? l.name_ta : l.name}**\n${lang === "ta" ? l.summary_ta : l.summary}\n${l.your_rights.slice(0, 3).map((r) => `  - ${r}`).join("\n")}\n  ➜ ${l.how_to_act}`).join("\n\n")
+        + laws.slice(0, 2).map((l) => `**${lang === "ta" ? l.name_ta : l.name}**\n${lang === "ta" ? l.summary_ta : l.summary}\n${l.your_rights.slice(0, 3).map((r) => `  - ${r}`).join("\n")}\n  What to do: ${l.how_to_act}`).join("\n\n")
         + T(lang, "\n\nFree legal help: **DLSA 15100**. This is general information, not legal advice.", "\n\nஇலவச சட்ட உதவி: **15100**.", "\n\nFree legal help: **15100**.");
       break;
     }
@@ -232,7 +232,7 @@ export function reply(ctx: Ctx): { text: string; intent: string; hits: KbHit[] }
             `\n\n**ஒரு ${r[1]}-க்கு ${r[0]}% = ஆண்டுக்கு ${yearly.toLocaleString("en-IN")}%.**${ill ? " இது 2003 அதிக வட்டி தடைச் சட்டத்தின் கீழ் சட்டவிரோதமாக இருக்கலாம்." : ""}`,
             `\n\n**${r[0]}% per ${r[1]} = varushathukku ${yearly.toLocaleString("en-IN")}%.**${ill ? " Idhu TN Exorbitant Interest Act 2003 padi illegal ah irukka chance adhigam." : ""}`);
         }
-        if (a.crisis.level === "severe") text += T(lang, "\n\n⚠️ Threats or harassment are crimes. If you feel unsafe, call **100 / 112**; for loan-app threats call **1930**.", "\n\n⚠️ மிரட்டல் குற்றம். **100 / 112**; கடன் செயலி மிரட்டலுக்கு **1930**.", "\n\n⚠️ Mirattal oru crime. **100 / 112**; loan app threat ku **1930**.");
+        if (a.crisis.level === "severe") text += T(lang, "\n\nThreats or harassment are crimes. If you feel unsafe, call **100 / 112**; for loan-app threats call **1930**.", "\n\nமிரட்டல் குற்றம். **100 / 112**; கடன் செயலி மிரட்டலுக்கு **1930**.", "\n\nMirattal oru crime. **100 / 112**; loan app threat ku **1930**.");
         if (ctx.district && lang !== "ta") text += `\n\nYour nearest free legal-aid office is the **${ctx.district} District Legal Services Authority** (call 15100).`;
         text += T(lang, "\n\nCan you tell me a bit more — roughly how much you owe and to whom?", "\n\nஇன்னும் கொஞ்சம் சொல்லுங்கள் — யாரிடம், எவ்வளவு கடன்?", "\n\nKonjam detail ah sollunga — yaar kitta, evlo kadan?");
       }

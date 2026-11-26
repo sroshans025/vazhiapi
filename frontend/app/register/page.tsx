@@ -32,7 +32,7 @@ export default function RegisterPage() {
 
   return (
     <main className="hero" style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "1.5rem" }}>
-      <div className="hero-orb" style={{ width: 380, height: 380, background: "#f59e0b", bottom: -120, right: -100, opacity: 0.2 }} />
+      <div className="hero-orb" style={{ width: 380, height: 380, background: "var(--primary)", bottom: -120, right: -100, opacity: 0.2 }} />
       <div style={{ width: "100%", maxWidth: 480, position: "relative" }}>
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
           <h1 style={{ fontSize: "1.75rem", fontWeight: 800, marginBottom: "0.375rem" }}>Join <span className="gradient-text">VazhiAPI</span></h1>
@@ -62,7 +62,7 @@ export default function RegisterPage() {
               <label className="label" htmlFor="pw">Password *</label>
               <input id="pw" className="input-field" type="password" autoComplete="new-password" placeholder="At least 8 characters" value={form.password}
                 onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))} required minLength={8} />
-              {form.password && <div className="bar" style={{ marginTop: "0.4rem" }}><div style={{ width: `${Math.min(100, form.password.length * 8)}%`, background: pwOk ? "#10b981" : "#f59e0b" }} /></div>}
+              {form.password && <div className="bar" style={{ marginTop: "0.4rem" }}><div style={{ width: `${Math.min(100, form.password.length * 8)}%`, background: pwOk ? "var(--success)" : "var(--primary)" }} /></div>}
             </div>
             {error && <div className="error-box" role="alert">{error}</div>}
             {offline && <GuestEntry prominent name={form.full_name} district={form.district} />}

@@ -1,4 +1,5 @@
 "use client";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -75,7 +76,7 @@ export default function Navbar() {
           )}
         </div>
         <button className="nav-burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          {open ? "✕" : "☰"}
+          {open ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
     </nav>

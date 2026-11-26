@@ -108,7 +108,7 @@ def compose_response(category: str, stress_label: str, lang: str, max_steps: int
     if schemes:
         s = schemes[0]
         desc = s.get("description_ta") if use_ta else s.get("benefit")
-        parts.append(f"{h['scheme']} **{s['name_ta'] if use_ta else s['name']}** — {desc} (📞 {s['helpline']})")
+        parts.append(f"{h['scheme']} **{s['name_ta'] if use_ta else s['name']}** — {desc} (Helpline {s['helpline']})")
     laws = knowledge.laws_for(category)
     if laws and level != "low":
         law = laws[0]

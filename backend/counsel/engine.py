@@ -182,12 +182,12 @@ def _scheme_lines(cat: str, lang: str, n: int = 3) -> str:
     for s in knowledge.schemes_for(cat, limit=n):
         name = s["name_ta"] if lang == "ta" else s["name"]
         desc = s["description_ta"] if lang == "ta" else s["benefit"]
-        lines.append(f"- **{name}** — {desc}  \n  📞 {s['helpline']} · {s['application_url']}")
+        lines.append(f"- **{name}** — {desc}  \n  Helpline {s['helpline']} · {s['application_url']}")
     return "\n".join(lines)
 
 
 def _helpline_lines(tags: list[str], n: int = 4) -> str:
-    return "\n".join(f"- **{h['name']}** — 📞 **{h['number']}** ({h['hours']})" for h in knowledge.helplines_for(tags, n))
+    return "\n".join(f"- **{h['name']}**: **{h['number']}** ({h['hours']})" for h in knowledge.helplines_for(tags, n))
 
 
 def _previous_categories(history: list[dict]) -> list[str]:
@@ -221,9 +221,9 @@ class LocalCounsellor:
 
         if intent == "greeting":
             text = _t(lang,
-                      f"Vanakkam{' ' + name if name else ''}! 🙏 I'm Vazhi, your financial wellness companion. You can tell me about any money worry — a loan, a moneylender, a chit fund, an app that's harassing you — in English, Tamil or Tanglish. Everything here is confidential and judgement-free.\n\nWhat's on your mind today?",
-                      f"வணக்கம்{' ' + name if name else ''}! 🙏 நான் வழி — உங்கள் நிதி நலத் துணை. கடன், வட்டிக்காரர், சீட்டு, மிரட்டும் கடன் செயலி — எதைப் பற்றியும் தமிழிலோ ஆங்கிலத்திலோ சொல்லலாம். எல்லாம் ரகசியம், யாரும் குறை சொல்ல மாட்டார்கள்.\n\nஇன்று உங்கள் மனதில் என்ன இருக்கிறது?",
-                      f"Vanakkam{' ' + name if name else ''}! 🙏 Naan Vazhi — unga financial wellness companion. Kadan, vatti, seettu, loan app threat — edhu irundhaalum Tamil, English, Tanglish la sollunga. Ellame confidential.\n\nInniku enna vishayam?")
+                      f"Vanakkam{' ' + name if name else ''}! I'm Vazhi, your financial wellness companion. You can tell me about any money worry — a loan, a moneylender, a chit fund, an app that's harassing you — in English, Tamil or Tanglish. Everything here is confidential and judgement-free.\n\nWhat's on your mind today?",
+                      f"வணக்கம்{' ' + name if name else ''}! நான் வழி — உங்கள் நிதி நலத் துணை. கடன், வட்டிக்காரர், சீட்டு, மிரட்டும் கடன் செயலி — எதைப் பற்றியும் தமிழிலோ ஆங்கிலத்திலோ சொல்லலாம். எல்லாம் ரகசியம், யாரும் குறை சொல்ல மாட்டார்கள்.\n\nஇன்று உங்கள் மனதில் என்ன இருக்கிறது?",
+                      f"Vanakkam{' ' + name if name else ''}! Naan Vazhi — unga financial wellness companion. Kadan, vatti, seettu, loan app threat — edhu irundhaalum Tamil, English, Tanglish la sollunga. Ellame confidential.\n\nInniku enna vishayam?")
             return text, intent
 
         if intent == "thanks":
@@ -266,9 +266,9 @@ class LocalCounsellor:
             if related:
                 parts.append(_t(lang, "Related: ", "தொடர்புடையவை: ", "Related: ") + " · ".join(f"*{h['title']}*" for h in related))
             if a["crisis"]["level"] == "severe":
-                parts.append(_t(lang, "⚠️ Threats or harassment are crimes — call **100 / 112** if you feel unsafe.",
-                                "⚠️ மிரட்டல் குற்றம் — பாதுகாப்பில்லை என்றால் **100 / 112**.",
-                                "⚠️ Mirattal crime — safe ah illa na **100 / 112**."))
+                parts.append(_t(lang, "Threats or harassment are crimes — call **100 / 112** if you feel unsafe.",
+                                "மிரட்டல் குற்றம் — பாதுகாப்பில்லை என்றால் **100 / 112**.",
+                                "Mirattal crime — safe ah illa na **100 / 112**."))
             return "\n\n".join(parts), intent
 
         if intent == "general":
@@ -299,7 +299,7 @@ class LocalCounsellor:
                 nm = law["name_ta"] if lang == "ta" else law["name"]
                 summ = law["summary_ta"] if lang == "ta" else law["summary"]
                 rights = "\n".join(f"  - {r}" for r in law["your_rights"][:3])
-                blocks.append(f"**{nm}**\n{summ}\n{rights}\n  ➜ {law['how_to_act']}")
+                blocks.append(f"**{nm}**\n{summ}\n{rights}\n  What to do: {law['how_to_act']}")
             text = _t(lang, "You have real legal protection here:\n\n", "உங்களுக்கு சட்டப் பாதுகாப்பு உள்ளது:\n\n",
                       "Ungalukku legal protection irukku:\n\n") + "\n\n".join(blocks) + \
                 _t(lang, "\n\nFree legal help: **DLSA 15100**. This is general information, not legal advice for your specific case.",
@@ -371,9 +371,9 @@ class LocalCounsellor:
                        f"\n\n**ஒரு {unit}-க்கு {r:g}% = ஆண்டுக்கு {yearly:,.0f}%.**" + (" இது 2003 அதிக வட்டி தடைச் சட்டத்தின் கீழ் சட்டவிரோதமாக இருக்கலாம்." if yearly > 36 else ""),
                        f"\n\n**{r:g}% per {unit} = varushathukku {yearly:,.0f}%.**" + (" Idhu TN Exorbitant Interest Act 2003 padi illegal ah irukka chance adhigam." if yearly > 36 else ""))
         if a["crisis"]["level"] == "severe":
-            text += _t(lang, "\n\n⚠️ Threats or harassment are crimes. If you feel unsafe, call **100 / 112**; for loan-app threats call **1930**.",
-                       "\n\n⚠️ மிரட்டல் குற்றம். பாதுகாப்பில்லை என்றால் **100 / 112**; கடன் செயலி மிரட்டலுக்கு **1930**.",
-                       "\n\n⚠️ Mirattal oru crime. Safe ah illa na **100 / 112**; loan app threat ku **1930**.")
+            text += _t(lang, "\n\nThreats or harassment are crimes. If you feel unsafe, call **100 / 112**; for loan-app threats call **1930**.",
+                       "\n\nமிரட்டல் குற்றம். பாதுகாப்பில்லை என்றால் **100 / 112**; கடன் செயலி மிரட்டலுக்கு **1930**.",
+                       "\n\nMirattal oru crime. Safe ah illa na **100 / 112**; loan app threat ku **1930**.")
         if ctx.district and lang != "ta":
             text += f"\n\nYour nearest free legal-aid office is the **{ctx.district} District Legal Services Authority** (call 15100)."
         text += _t(lang, "\n\nCan you tell me a bit more — roughly how much you owe and to whom? That helps me make the plan specific.",

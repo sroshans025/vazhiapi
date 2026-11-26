@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import "./v2.css";
 import { LanguageProvider } from "@/lib/i18n";
 import SOSButton from "@/components/SOSButton";
 
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: { title: "VazhiAPI — வழி", description: "நம்ம பணம் நம்ம கையில் — Your Money, Your Wellness", type: "website" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0f0c29" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#f7f5f0" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

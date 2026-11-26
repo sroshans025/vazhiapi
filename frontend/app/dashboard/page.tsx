@@ -1,4 +1,6 @@
 "use client";
+import { PhoneCall, Sprout, TriangleAlert } from "lucide-react";
+import CategoryIcon, { TrendIcon } from "@/components/CategoryIcon";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -13,7 +15,7 @@ import { useLang } from "@/lib/i18n";
 import type { DashboardSummary } from "@/types";
 
 type HistRow = { session_id: string; created_at: string; input_preview: string; stress_score: number; stress_label: string; debt_category: string; crisis_level?: string };
-const tooltipStyle = { background: "rgba(15,12,41,0.95)", border: "1px solid rgba(245,158,11,0.3)", borderRadius: "0.5rem", color: "#f1f5f9" };
+const tooltipStyle = { background: "#ffffff", border: "1px solid var(--border)", borderRadius: "0.5rem", color: "var(--text)" };
 
 export default function DashboardPage() {
   const { user, ready } = useAuth(true);
@@ -37,7 +39,7 @@ export default function DashboardPage() {
     try { setEsc((await apiEscalate(user.user_id, { reason: "Requested from dashboard" })).message); } catch (e) { setError(errorMessage(e)); }
   };
 
-  const pieData = data ? Object.entries(data.category_breakdown).map(([k, v]) => ({ name: CATEGORY_META[k]?.label ?? k, value: v, color: CATEGORY_META[k]?.color ?? "#f59e0b" })) : [];
+  const pieData = data ? Object.entries(data.category_breakdown).map(([k, v]) => ({ name: CATEGORY_META[k]?.label ?? k, value: v, color: CATEGORY_META[k]?.color ?? "var(--primary)" })) : [];
   const trendData = data?.stress_trend.map((p) => ({ ...p, label: new Date(p.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) })) ?? [];
   const info = data?.primary_category_info;
 
@@ -55,7 +57,7 @@ export default function DashboardPage() {
 
           {data && !data.has_data && (
             <div className="glass-card" style={{ textAlign: "center", padding: "3.5rem 1.5rem" }}>
-              <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🌱</div>
+              <div style={{ marginBottom: "1rem" }}><Sprout size={40} color="var(--primary)" /></div>
               <h2 style={{ marginBottom: "0.75rem" }}>No check-ins yet</h2>
               <p className="muted" style={{ marginBottom: "1.5rem" }}>Start a conversation and your stress trend, debt types and matched schemes will appear here.</p>
               <Link href="/checkin" className="btn-primary">Start a check-in →</Link>
@@ -69,19 +71,19 @@ export default function DashboardPage() {
                   <StressGauge score={data.current_risk.score} label={data.current_risk.label} size={120} caption="Latest stress" />
                 </div>
                 <div className="glass-card" style={{ padding: "1.25rem", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
-                  <div className="stat-num" style={{ color: data.trend === "rising" ? "#ef4444" : data.trend === "declining" ? "#10b981" : "#f59e0b" }}>
-                    {data.trend === "rising" ? "↗" : data.trend === "declining" ? "↘" : "→"}
+                  <div className="stat-num" style={{ color: data.trend === "rising" ? "var(--danger)" : data.trend === "declining" ? "var(--success)" : "var(--primary)" }}>
+                    <TrendIcon t={data.trend} size={30} />
                   </div>
                   <div style={{ fontWeight: 700, textTransform: "capitalize" }}>{data.trend === "declining" ? "Improving" : data.trend}</div>
                   <div className="muted" style={{ fontSize: "0.78rem" }}>avg {data.average_score} · best {data.best_score}</div>
                 </div>
                 <div className="glass-card" style={{ padding: "1.25rem", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
-                  <div className="stat-num" style={{ color: "#a78bfa" }}>{data.session_count}</div>
+                  <div className="stat-num" style={{ color: "var(--primary)" }}>{data.session_count}</div>
                   <div style={{ fontWeight: 700 }}>Check-ins</div>
                   <div className="muted" style={{ fontSize: "0.78rem" }}>last {data.last_session ? new Date(data.last_session).toLocaleDateString("en-IN") : "—"}</div>
                 </div>
                 <div className="glass-card" style={{ padding: "1.25rem", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}>
-                  <div style={{ fontSize: "2rem" }}>{info?.icon}</div>
+                  <div style={{ fontSize: "2rem" }}><CategoryIcon id={data.primary_category ?? "general_financial_stress"} size={24} tile /></div>
                   <div style={{ fontWeight: 700, color: info?.color }}>{lang === "ta" ? info?.label_ta : info?.label}</div>
                   <div className="muted" style={{ fontSize: "0.78rem" }}>Primary concern</div>
                 </div>
@@ -92,12 +94,12 @@ export default function DashboardPage() {
                   <h3 style={{ fontWeight: 600, marginBottom: "1rem" }}>Stress over time</h3>
                   <ResponsiveContainer width="100%" height={220}>
                     <AreaChart data={trendData}>
-                      <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#f59e0b" stopOpacity={0.45} /><stop offset="100%" stopColor="#f59e0b" stopOpacity={0} /></linearGradient></defs>
-                      <CartesianGrid stroke="rgba(255,255,255,0.05)" vertical={false} />
-                      <XAxis dataKey="label" tick={{ fill: "rgba(241,245,249,0.45)", fontSize: 11 }} />
-                      <YAxis domain={[0, 100]} tick={{ fill: "rgba(241,245,249,0.45)", fontSize: 11 }} width={30} />
+                      <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--primary)" stopOpacity={0.45} /><stop offset="100%" stopColor="var(--primary)" stopOpacity={0} /></linearGradient></defs>
+                      <CartesianGrid stroke="var(--surface-2)" vertical={false} />
+                      <XAxis dataKey="label" tick={{ fill: "var(--muted)", fontSize: 11 }} />
+                      <YAxis domain={[0, 100]} tick={{ fill: "var(--muted)", fontSize: 11 }} width={30} />
                       <Tooltip contentStyle={tooltipStyle} formatter={(v) => [`${v}/100`, "Stress"]} />
-                      <Area type="monotone" dataKey="score" stroke="#f59e0b" strokeWidth={2} fill="url(#sg)" />
+                      <Area type="monotone" dataKey="score" stroke="var(--primary)" strokeWidth={2} fill="url(#sg)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -137,8 +139,8 @@ export default function DashboardPage() {
                       <tr key={h.session_id}>
                         <td className="muted" style={{ whiteSpace: "nowrap" }}>{new Date(h.created_at).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</td>
                         <td style={{ maxWidth: 380 }}>{h.input_preview}</td>
-                        <td style={{ whiteSpace: "nowrap" }}>{CATEGORY_META[h.debt_category]?.icon} {CATEGORY_META[h.debt_category]?.label}</td>
-                        <td><b style={{ color: stressColor(h.stress_score) }}>{Math.round(h.stress_score)}</b>{h.crisis_level && h.crisis_level !== "low" && <span title={h.crisis_level}> ⚠️</span>}</td>
+                        <td style={{ whiteSpace: "nowrap" }}><CategoryIcon id={h.debt_category} size={15} /> {CATEGORY_META[h.debt_category]?.label}</td>
+                        <td><b style={{ color: stressColor(h.stress_score) }}>{Math.round(h.stress_score)}</b>{h.crisis_level && h.crisis_level !== "low" && <span title={h.crisis_level}> <TriangleAlert size={14} color="var(--danger)" className="icon" /></span>}</td>
                       </tr>
                     ))}</tbody>
                   </table>
@@ -157,7 +159,7 @@ export default function DashboardPage() {
                   <div style={{ fontWeight: 600, marginBottom: "0.25rem" }}>Need a human to talk to?</div>
                   <div className="muted" style={{ fontSize: "0.875rem" }}>{esc || "We'll flag your account for a trained counsellor to follow up."}</div>
                 </div>
-                <button className="btn-danger" onClick={escalate} disabled={!!esc}>{esc ? "✓ Requested" : "🧑‍⚕️ Talk to a counsellor"}</button>
+                <button className="btn-danger" onClick={escalate} disabled={!!esc}>{esc ? "Requested" : <><PhoneCall size={16} /> Talk to a counsellor</>}</button>
               </div>
             </div>
           )}

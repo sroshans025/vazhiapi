@@ -87,7 +87,7 @@ async def test_chat_multiturn_and_conversations(client):
     assert "520%" in r2["response"]                       # 10% × 52 weeks
     r3 = (await client.post("/chat", json={"message": "which government schemes can help me?", "conversation_id": conv},
                             headers=u["h"])).json()
-    assert "📞" in r3["response"]
+    assert "Helpline" in r3["response"]
 
     lst = (await client.get("/chat/conversations", headers=u["h"])).json()
     assert lst["conversations"][0]["id"] == conv and lst["conversations"][0]["message_count"] == 6

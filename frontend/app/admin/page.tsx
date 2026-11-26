@@ -1,4 +1,5 @@
 "use client";
+import CategoryIcon from "@/components/CategoryIcon";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -32,7 +33,7 @@ export default function AdminPage() {
     try { await apiUpdateEscalation(id, { status, notes }); load(); } catch (e) { setError(errorMessage(e)); }
   };
 
-  const barData = data ? Object.entries(data.category_distribution).map(([k, v]) => ({ name: CATEGORY_META[k]?.label ?? k, sessions: v, color: CATEGORY_META[k]?.color ?? "#f59e0b" })) : [];
+  const barData = data ? Object.entries(data.category_distribution).map(([k, v]) => ({ name: CATEGORY_META[k]?.label ?? k, sessions: v, color: CATEGORY_META[k]?.color ?? "var(--primary)" })) : [];
 
   return (
     <>
@@ -47,13 +48,13 @@ export default function AdminPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               <div className="grid-4">
                 {[
-                  { l: "Users", v: data.total_users, c: "#a78bfa" },
-                  { l: "Check-ins", v: data.total_sessions, c: "#f59e0b" },
-                  { l: "Avg stress", v: `${data.avg_stress_score}`, c: "#f97316" },
-                  { l: "Pending escalations", v: data.pending_escalations, c: "#ef4444" },
+                  { l: "Users", v: data.total_users, c: "var(--primary)" },
+                  { l: "Check-ins", v: data.total_sessions, c: "var(--primary)" },
+                  { l: "Avg stress", v: `${data.avg_stress_score}`, c: "#c2410c" },
+                  { l: "Pending escalations", v: data.pending_escalations, c: "var(--danger)" },
                   { l: "Conversations", v: data.total_conversations, c: "#3b82f6" },
                   { l: "Feedback received", v: data.feedback_count, c: "#14b8a6" },
-                  { l: "Rated helpful", v: data.helpful_rate == null ? "—" : `${data.helpful_rate}%`, c: "#10b981" },
+                  { l: "Rated helpful", v: data.helpful_rate == null ? "—" : `${data.helpful_rate}%`, c: "var(--success)" },
                   { l: "Crisis-flagged check-ins", v: (data.crisis_distribution.critical ?? 0) + (data.crisis_distribution.severe ?? 0), c: "#ec4899" },
                 ].map((s) => (
                   <div key={s.l} className="glass-card" style={{ padding: "1.1rem", textAlign: "center" }}>
@@ -69,9 +70,9 @@ export default function AdminPage() {
                   {barData.length ? (
                     <ResponsiveContainer width="100%" height={240}>
                       <BarChart data={barData}>
-                        <XAxis dataKey="name" tick={{ fill: "rgba(241,245,249,0.45)", fontSize: 10 }} interval={0} angle={-25} textAnchor="end" height={60} />
-                        <YAxis tick={{ fill: "rgba(241,245,249,0.45)", fontSize: 10 }} width={30} allowDecimals={false} />
-                        <Tooltip contentStyle={{ background: "rgba(15,12,41,0.95)", border: "1px solid rgba(245,158,11,0.3)", borderRadius: "0.5rem", color: "#f1f5f9" }} />
+                        <XAxis dataKey="name" tick={{ fill: "var(--muted)", fontSize: 10 }} interval={0} angle={-25} textAnchor="end" height={60} />
+                        <YAxis tick={{ fill: "var(--muted)", fontSize: 10 }} width={30} allowDecimals={false} />
+                        <Tooltip contentStyle={{ background: "#ffffff", border: "1px solid var(--border)", borderRadius: "0.5rem", color: "var(--text)" }} />
                         <Bar dataKey="sessions" radius={[4, 4, 0, 0]}>{barData.map((d) => <Cell key={d.name} fill={d.color} />)}</Bar>
                       </BarChart>
                     </ResponsiveContainer>
@@ -82,7 +83,7 @@ export default function AdminPage() {
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                     {Object.entries(data.avg_stress_by_category).sort((a, b) => b[1] - a[1]).map(([cat, score]) => (
                       <div key={cat} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                        <div style={{ width: 120, fontSize: "0.78rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} className="muted">{CATEGORY_META[cat]?.icon} {CATEGORY_META[cat]?.label ?? cat}</div>
+                        <div style={{ width: 120, fontSize: "0.78rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} className="muted"><CategoryIcon id={cat} size={15} /> {CATEGORY_META[cat]?.label ?? cat}</div>
                         <div className="bar" style={{ flex: 1, height: 8 }}><div style={{ width: `${score}%`, background: CATEGORY_META[cat]?.color }} /></div>
                         <div style={{ fontSize: "0.78rem", width: 34, textAlign: "right" }}>{score}</div>
                       </div>
@@ -94,7 +95,7 @@ export default function AdminPage() {
 
               <div className="glass-card card-pad">
                 <h3 style={{ fontWeight: 600, marginBottom: "1rem" }}>Escalation queue <span className="badge badge-crimson" style={{ marginLeft: "0.5rem" }}>{data.escalation_queue.length}</span></h3>
-                {data.escalation_queue.length === 0 ? <div className="muted" style={{ textAlign: "center", padding: "2rem" }}>No open escalations 🎉</div> : (
+                {data.escalation_queue.length === 0 ? <div className="muted" style={{ textAlign: "center", padding: "2rem" }}>No open escalations</div> : (
                   <div style={{ overflowX: "auto" }}>
                     <table className="table">
                       <thead><tr><th>User</th><th>Reason</th><th>Status</th><th>Assigned</th><th>Created</th><th>Actions</th></tr></thead>

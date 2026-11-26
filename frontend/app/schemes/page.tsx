@@ -1,4 +1,6 @@
 "use client";
+import { Search } from "lucide-react";
+import CategoryIcon from "@/components/CategoryIcon";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
@@ -9,8 +11,8 @@ import { useLang } from "@/lib/i18n";
 import type { GovernmentScheme } from "@/types";
 
 const OCCUPATIONS = [
-  ["farmer", "🌾 Farmer"], ["vendor", "🛒 Street vendor"], ["self_employed", "🧰 Small business"], ["daily_wage", "👷 Daily-wage worker"],
-  ["salaried", "💼 Salaried"], ["student", "🎓 Student"], ["homemaker", "🏠 Homemaker"], ["unemployed", "🔎 Looking for work"],
+  ["farmer", "Farmer"], ["vendor", "Street vendor"], ["self_employed", "Small business"], ["daily_wage", "Daily-wage worker"],
+  ["salaried", "Salaried"], ["student", "Student"], ["homemaker", "Homemaker"], ["unemployed", "Looking for work"],
 ];
 
 function Finder() {
@@ -24,8 +26,8 @@ function Finder() {
     try { setRes((await apiMatchSchemes(p)).schemes); } catch (e) { setErr(errorMessage(e)); } finally { setLoading(false); }
   };
   return (
-    <div className="glass-card card-pad" style={{ marginBottom: "2rem", borderColor: "rgba(245,158,11,0.3)" }}>
-      <div style={{ fontWeight: 800, fontSize: "1.15rem", marginBottom: "0.25rem" }}>🔎 Scheme Finder</div>
+    <div className="glass-card card-pad" style={{ marginBottom: "2rem", borderColor: "var(--border)" }}>
+      <div style={{ fontWeight: 800, fontSize: "1.15rem", marginBottom: "0.25rem" }}>Scheme Finder</div>
       <p className="muted" style={{ fontSize: "0.85rem", marginBottom: "1rem" }}>Answer what you&apos;re comfortable with. Nothing here is saved.</p>
       <div className="grid-3" style={{ gap: "1rem" }}>
         <div><label className="label">Gender</label>
@@ -40,7 +42,7 @@ function Finder() {
           </select></div>
         <div><label className="label">Main debt worry</label>
           <select className="input-field" value={p.debt_category ?? ""} onChange={(e) => set("debt_category", e.target.value)}>
-            <option value="">Any</option>{Object.entries(CATEGORY_META).map(([k, v]) => <option key={k} value={k}>{v.icon} {v.label}</option>)}
+            <option value="">Any</option>{Object.entries(CATEGORY_META).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
           </select></div>
       </div>
       <label className="label" style={{ marginTop: "1rem" }}>Work</label>
@@ -87,7 +89,7 @@ export default function SchemesPage() {
           <PageHero eyebrow={`${total || 24} schemes · Tamil Nadu + Central`} title={<span className="gradient-text">{lang === "ta" ? "அரசு திட்டங்கள்" : "Government schemes that can help"}</span>}
             subtitle="Zero-interest SHG credit, direct benefits, free legal aid, insurance and complaint channels, filtered by your debt situation.">
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginTop: "1.25rem" }}>
-              <button className="btn-primary" onClick={() => setFinder((f) => !f)}>{finder ? "Hide" : "🔎 Find schemes for me"}</button>
+              <button className="btn-primary" onClick={() => setFinder((f) => !f)}>{finder ? "Hide" : <><Search size={16} /> Find schemes for me</>}</button>
             </div>
           </PageHero>
 
@@ -101,7 +103,7 @@ export default function SchemesPage() {
           </div>
           <div className="tabs">
             <button className={`chip ${!cat ? "active" : ""}`} onClick={() => setCat("")}>All debt types</button>
-            {Object.entries(CATEGORY_META).map(([k, v]) => <button key={k} className={`chip ${cat === k ? "active" : ""}`} onClick={() => setCat(k)}>{v.icon} {lang === "ta" ? v.label_ta : v.label}</button>)}
+            {Object.entries(CATEGORY_META).map(([k, v]) => <button key={k} className={`chip ${cat === k ? "active" : ""}`} onClick={() => setCat(k)}><CategoryIcon id={k} size={14} /> {lang === "ta" ? v.label_ta : v.label}</button>)}
           </div>
 
           {err && <div className="error-box">{err}</div>}

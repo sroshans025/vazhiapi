@@ -1,4 +1,6 @@
 "use client";
+import { ChartColumn, Copy, ExternalLink, Lock, Menu, MessageCircle, Mic, Phone, PhoneCall, Send, Smartphone, Square, ThumbsDown, ThumbsUp, Trash2 } from "lucide-react";
+import CategoryIcon, { ActionIcon, TrendIcon } from "@/components/CategoryIcon";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -9,7 +11,7 @@ import {
 } from "@/lib/api";
 import { useAuth } from "@/lib/useAuth";
 import { useLang } from "@/lib/i18n";
-import { ACTION_ICONS, CATEGORY_META } from "@/lib/constants";
+import { CATEGORY_META } from "@/lib/constants";
 import type { AnalysisSummary, ChatMessage, ConversationSummary } from "@/types";
 
 const STARTERS = {
@@ -247,20 +249,20 @@ export default function ChatPage() {
             {conversations.map((c) => (
               <div key={c.id} role="button" tabIndex={0} className={`conv-item ${c.id === convId ? "active" : ""}`}
                 onClick={() => openConversation(c.id)} onKeyDown={(e) => e.key === "Enter" && openConversation(c.id)}>
-                <span>💬</span>
+                <MessageCircle size={15} className="icon" />
                 <span className="title" title={c.title}>{c.title}</span>
-                <button className="conv-del" aria-label="Delete conversation" onClick={(e) => { e.stopPropagation(); removeConv(c.id); }}>🗑</button>
+                <button className="conv-del" aria-label="Delete conversation" onClick={(e) => { e.stopPropagation(); removeConv(c.id); }}><Trash2 size={14} /></button>
               </div>
             ))}
           </div>
           {user.user_id === "guest" && (
             <div className="benefit-box" style={{ marginTop: "auto", fontSize: "0.74rem", lineHeight: 1.5 }}>
-              📱 {lang === "ta" ? "விருந்தினர் முறை: உரையாடல்கள் இந்தச் சாதனத்தில் மட்டும்." : "Guest mode: chats stay on this device."}{" "}
+              <Smartphone size={14} className="icon" /> {lang === "ta" ? "விருந்தினர் முறை: உரையாடல்கள் இந்தச் சாதனத்தில் மட்டும்." : "Guest mode: chats stay on this device."}{" "}
               <Link href="/register">{lang === "ta" ? "கணக்கு உருவாக்கு" : "Create an account"}</Link>
             </div>
           )}
           <div style={{ marginTop: user.user_id === "guest" ? 0 : "auto", fontSize: "0.72rem" }} className="muted">
-            🔒 {lang === "ta" ? "உங்கள் உரையாடல்கள் ரகசியமானவை. சுயவிவரத்தில் எப்போது வேண்டுமானாலும் நீக்கலாம்." : "Private to you. Delete anytime from your profile."}
+            <Lock size={13} className="icon" /> {lang === "ta" ? "உங்கள் உரையாடல்கள் ரகசியமானவை. சுயவிவரத்தில் எப்போது வேண்டுமானாலும் நீக்கலாம்." : "Private to you. Delete anytime from your profile."}
           </div>
         </aside>
 
@@ -268,7 +270,7 @@ export default function ChatPage() {
         <section className="chat-main">
           <div className="chat-head">
             <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", minWidth: 0 }}>
-              <button className="btn-ghost btn-sm mobile-toggle" onClick={() => setShowSide(true)} aria-label="Conversations">☰</button>
+              <button className="btn-ghost btn-sm mobile-toggle" onClick={() => setShowSide(true)} aria-label="Conversations"><Menu size={16} /></button>
               <div className="bot-avatar">வ</div>
               <div style={{ minWidth: 0 }}>
                 <div style={{ fontWeight: 700, fontSize: "0.95rem" }}>Vazhi Counsellor</div>
@@ -278,8 +280,8 @@ export default function ChatPage() {
               </div>
             </div>
             <div style={{ display: "flex", gap: "0.4rem", flexShrink: 0 }}>
-              <button className="btn-ghost btn-sm mobile-toggle panel-t" onClick={() => setShowPanel(true)} disabled={!analysis}>📊</button>
-              <button className="btn-danger btn-sm" onClick={escalate} title={t("talk_human")}>🧑‍⚕️ <span className="nav-desktop-only">{t("talk_human")}</span></button>
+              <button className="btn-ghost btn-sm mobile-toggle panel-t" onClick={() => setShowPanel(true)} disabled={!analysis}><ChartColumn size={16} /></button>
+              <button className="btn-danger btn-sm" onClick={escalate} title={t("talk_human")}><PhoneCall size={15} /> <span className="nav-desktop-only">{t("talk_human")}</span></button>
             </div>
           </div>
 
@@ -287,13 +289,13 @@ export default function ChatPage() {
             {escalated && <div className="ok-box">✓ {escalated}</div>}
             {(crisis === "critical" || crisis === "severe") && (
               <div className="crisis-banner">
-                <div style={{ fontWeight: 700, color: "#fecaca", marginBottom: "0.35rem" }}>
-                  {crisis === "critical" ? (lang === "ta" ? "💛 நீங்கள் தனியாக இல்லை — இப்போதே பேசுங்கள்" : "💛 You're not alone — please talk to someone now")
-                    : (lang === "ta" ? "⚠️ மிரட்டல் ஒரு குற்றம்" : "⚠️ Threats and harassment are crimes")}
+                <div style={{ fontWeight: 700, color: "var(--danger)", marginBottom: "0.35rem" }}>
+                  {crisis === "critical" ? (lang === "ta" ? "நீங்கள் தனியாக இல்லை — இப்போதே பேசுங்கள்" : "You're not alone — please talk to someone now")
+                    : (lang === "ta" ? "மிரட்டல் ஒரு குற்றம்" : "Threats and harassment are crimes")}
                 </div>
                 <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                   {(crisis === "critical" ? [["Tele-MANAS", "14416"], ["Emergency", "112"], ["SNEHA", "044-24640050"]] : [["Police", "100"], ["Cyber crime", "1930"], ["Legal aid", "15100"]]).map(([n, num]) => (
-                    <a key={num} href={`tel:${num}`} className="chip" style={{ borderColor: "rgba(239,68,68,0.5)", color: "#fecaca" }}>📞 {n} · <b>{num}</b></a>
+                    <a key={num} href={`tel:${num}`} className="chip" style={{ borderColor: "#f5c2c2", color: "var(--danger)" }}><Phone size={13} className="icon" /> {n} · <b>{num}</b></a>
                   ))}
                 </div>
               </div>
@@ -338,14 +340,14 @@ export default function ChatPage() {
                     <div className="msg-tools">
                       {m.meta?.category && CATEGORY_META[m.meta.category] && (
                         <span className="badge" style={{ background: `${CATEGORY_META[m.meta.category].color}22`, color: CATEGORY_META[m.meta.category].color, border: `1px solid ${CATEGORY_META[m.meta.category].color}44` }}>
-                          {CATEGORY_META[m.meta.category].icon} {lang === "ta" ? CATEGORY_META[m.meta.category].label_ta : CATEGORY_META[m.meta.category].label}
+                          <CategoryIcon id={m.meta.category} size={15} /> {lang === "ta" ? CATEGORY_META[m.meta.category].label_ta : CATEGORY_META[m.meta.category].label}
                         </span>
                       )}
                       {typeof m.meta?.stress_score === "number" && <span className="badge badge-saffron">Stress {Math.round(m.meta.stress_score)}</span>}
                       <span style={{ marginLeft: "0.25rem" }}>{t("helpful")}</span>
-                      <button className={`icon-btn ${rated[m.id] === 1 ? "on" : ""}`} onClick={() => rate(m, 1)} aria-label="Helpful">👍</button>
-                      <button className={`icon-btn ${rated[m.id] === -1 ? "on" : ""}`} onClick={() => rate(m, -1)} aria-label="Not helpful">👎</button>
-                      <button className="icon-btn" onClick={() => copy(m)} aria-label="Copy">{copied === m.id ? "✓ Copied" : "⧉ Copy"}</button>
+                      <button className={`icon-btn ${rated[m.id] === 1 ? "on" : ""}`} onClick={() => rate(m, 1)} aria-label="Helpful"><ThumbsUp size={14} /></button>
+                      <button className={`icon-btn ${rated[m.id] === -1 ? "on" : ""}`} onClick={() => rate(m, -1)} aria-label="Not helpful"><ThumbsDown size={14} /></button>
+                      <button className="icon-btn" onClick={() => copy(m)} aria-label="Copy">{copied === m.id ? "✓ Copied" : <><Copy size={13} /> Copy</>}</button>
                     </div>
                   )}
                 </div>
@@ -354,7 +356,7 @@ export default function ChatPage() {
 
             {!busy && suggestions.length > 0 && (
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", paddingLeft: "2.6rem" }}>
-                {suggestions.map((s) => <button key={s} className="chip" onClick={() => send(s)}>↳ {s}</button>)}
+                {suggestions.map((s) => <button key={s} className="chip" onClick={() => send(s)}>{s}</button>)}
               </div>
             )}
             {error && <div className="error-box">{error}</div>}
@@ -365,11 +367,11 @@ export default function ChatPage() {
               <textarea ref={taRef} rows={1} value={input} placeholder={t("chat_placeholder")} aria-label="Message"
                 onChange={(e) => { setInput(e.target.value); autoSize(); }}
                 onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); send(); } }} />
-              <button className={`mic-btn ${listening ? "rec" : ""}`} onClick={toggleMic} aria-label="Voice input" title={lang === "ta" ? "தமிழில் பேசுங்கள்" : "Speak (Tamil or English)"}>🎙</button>
+              <button className={`mic-btn ${listening ? "rec" : ""}`} onClick={toggleMic} aria-label="Voice input" title={lang === "ta" ? "தமிழில் பேசுங்கள்" : "Speak (Tamil or English)"}><Mic size={17} /></button>
               {busy ? (
-                <button className="send-btn" onClick={stop} aria-label="Stop" style={{ background: "linear-gradient(135deg,#ef4444,#b91c1c)", color: "white" }}>■</button>
+                <button className="send-btn stop" onClick={stop} aria-label="Stop"><Square size={14} fill="currentColor" /></button>
               ) : (
-                <button className="send-btn" onClick={() => send()} disabled={!input.trim()} aria-label="Send">➤</button>
+                <button className="send-btn" onClick={() => send()} disabled={!input.trim()} aria-label="Send"><Send size={17} /></button>
               )}
             </div>
             <div className="muted" style={{ fontSize: "0.7rem", marginTop: "0.4rem", textAlign: "center" }}>
@@ -382,7 +384,7 @@ export default function ChatPage() {
         <aside className={`chat-panel ${showPanel ? "show" : ""}`}>
           {!analysis ? (
             <div className="glass-card panel-card" style={{ textAlign: "center" }}>
-              <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>📊</div>
+              <div style={{ marginBottom: "0.5rem" }}><ChartColumn size={28} color="var(--primary)" /></div>
               <div style={{ fontWeight: 600, marginBottom: "0.35rem" }}>{lang === "ta" ? "நேரடி பகுப்பாய்வு" : "Live analysis"}</div>
               <div className="muted" style={{ fontSize: "0.8rem", lineHeight: 1.6 }}>
                 {lang === "ta" ? "ஒவ்வொரு செய்தியும் 6 அடுக்கு AI மூலம் பகுப்பாய்வு செய்யப்படும்." : "Each message runs through the 6-layer pipeline — stress, debt type, trajectory and the best strategy appear here."}
@@ -396,28 +398,28 @@ export default function ChatPage() {
               </div>
               <div className="glass-card panel-card">
                 <div className="panel-label">L2 · {lang === "ta" ? "கடன் வகை" : "Debt type"}</div>
-                <div style={{ fontWeight: 700, color: meta?.color }}>{meta?.icon} {lang === "ta" ? analysis.debt_category_label_ta : analysis.debt_category_label}</div>
+                <div style={{ fontWeight: 700, color: meta?.color }}><CategoryIcon id={analysis.debt_category} size={16} /> {lang === "ta" ? analysis.debt_category_label_ta : analysis.debt_category_label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem", marginTop: "0.6rem" }}>
                   {Object.entries(analysis.debt_category_probabilities).slice(0, 3).map(([k, v]) => (
                     <div key={k}>
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.72rem" }} className="muted">
                         <span>{CATEGORY_META[k]?.label ?? k}</span><span>{Math.round(v * 100)}%</span>
                       </div>
-                      <div className="bar"><div style={{ width: `${v * 100}%`, background: CATEGORY_META[k]?.color ?? "#f59e0b" }} /></div>
+                      <div className="bar"><div style={{ width: `${v * 100}%`, background: CATEGORY_META[k]?.color ?? "var(--primary)" }} /></div>
                     </div>
                   ))}
                 </div>
               </div>
               <div className="glass-card panel-card">
                 <div className="panel-label">L3 · {lang === "ta" ? "போக்கு" : "Trajectory"}</div>
-                <div style={{ fontWeight: 700, color: analysis.crisis_trajectory === "Rising" ? "#ef4444" : analysis.crisis_trajectory === "Declining" ? "#10b981" : "#f59e0b" }}>
-                  {analysis.crisis_trajectory === "Rising" ? "↗" : analysis.crisis_trajectory === "Declining" ? "↘" : "→"} {analysis.crisis_trajectory}
+                <div style={{ fontWeight: 700, color: analysis.crisis_trajectory === "Rising" ? "var(--danger)" : analysis.crisis_trajectory === "Declining" ? "var(--success)" : "var(--primary)" }}>
+                  <TrendIcon t={analysis.crisis_trajectory} /> {analysis.crisis_trajectory}
                 </div>
                 <div className="muted" style={{ fontSize: "0.78rem" }}>Predicted peak {analysis.predicted_peak_score}/100</div>
               </div>
               <div className="glass-card panel-card">
                 <div className="panel-label">L5 · {lang === "ta" ? "உத்தி" : "Strategy"}</div>
-                <div style={{ fontWeight: 700 }}>{ACTION_ICONS[analysis.rl_action]} {analysis.rl_action_label}</div>
+                <div style={{ fontWeight: 700 }}><ActionIcon action={analysis.rl_action} /> {analysis.rl_action_label}</div>
                 <div className="muted" style={{ fontSize: "0.78rem", marginTop: "0.3rem", lineHeight: 1.5 }}>{analysis.rl_action_description}</div>
               </div>
               {analysis.matched_schemes?.length > 0 && (
@@ -426,8 +428,8 @@ export default function ChatPage() {
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                     {analysis.matched_schemes.map((s) => (
                       <a key={s.id} href={s.application_url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "inherit" }}>
-                        <div style={{ fontSize: "0.82rem", fontWeight: 600 }}>{lang === "ta" ? s.name_ta : s.name} ↗</div>
-                        <div className="muted" style={{ fontSize: "0.72rem" }}>📞 {s.helpline}</div>
+                        <div style={{ fontSize: "0.82rem", fontWeight: 600 }}>{lang === "ta" ? s.name_ta : s.name} <ExternalLink size={12} className="icon" /></div>
+                        <div className="muted" style={{ fontSize: "0.72rem" }}><Phone size={13} className="icon" /> {s.helpline}</div>
                       </a>
                     ))}
                   </div>

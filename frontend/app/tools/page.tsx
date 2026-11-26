@@ -1,4 +1,5 @@
 "use client";
+import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
@@ -7,10 +8,10 @@ import { CATEGORY_META, fmtINR } from "@/lib/constants";
 
 type Tab = "interest" | "emi" | "payoff" | "budget";
 const TABS: { id: Tab; label: string }[] = [
-  { id: "interest", label: "⚖️ True interest rate" },
-  { id: "emi", label: "🧮 EMI calculator" },
-  { id: "payoff", label: "🪜 Debt payoff planner" },
-  { id: "budget", label: "📒 Budget planner" },
+  { id: "interest", label: "True interest rate" },
+  { id: "emi", label: "EMI calculator" },
+  { id: "payoff", label: "Debt payoff planner" },
+  { id: "budget", label: "Budget planner" },
 ];
 
 function Num({ label, value, onChange, step = 1, min = 0 }: { label: string; value: number; onChange: (n: number) => void; step?: number; min?: number }) {
@@ -57,20 +58,20 @@ function InterestTool() {
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div>
               <div className="muted" style={{ fontSize: "0.8rem" }}>Yearly (simple) rate</div>
-              <div className="big-num" style={{ color: data.likely_illegal_private_lending ? "#ef4444" : "#10b981" }}>{data.simple_annual_rate.toLocaleString("en-IN")}%</div>
+              <div className="big-num" style={{ color: data.likely_illegal_private_lending ? "var(--danger)" : "var(--success)" }}>{data.simple_annual_rate.toLocaleString("en-IN")}%</div>
               <div className="muted" style={{ fontSize: "0.78rem" }}>Effective with compounding: {data.effective_annual_rate >= 10000 ? "over 10,000" : data.effective_annual_rate.toLocaleString("en-IN")}%</div>
             </div>
-            {data.likely_illegal_private_lending && <div className="error-box">⚖️ A private lender charging this much is very likely breaking the <b>TN Prohibition of Charging Exorbitant Interest Act, 2003</b>. Free legal help: <a href="tel:15100">15100</a>.</div>}
+            {data.likely_illegal_private_lending && <div className="error-box">A private lender charging this much is very likely breaking the <b>TN Prohibition of Charging Exorbitant Interest Act, 2003</b>. Free legal help: <a href="tel:15100">15100</a>.</div>}
             <div className="grid-2" style={{ gap: "0.75rem" }}>
-              <div><div className="muted" style={{ fontSize: "0.75rem" }}>Total you repay</div><div style={{ fontSize: "1.3rem", fontWeight: 800, color: "#fca5a5" }}>{fmtINR(data.total_payable_simple)}</div></div>
-              <div><div className="muted" style={{ fontSize: "0.75rem" }}>Same via SHG (~10%)</div><div style={{ fontSize: "1.3rem", fontWeight: 800, color: "#6ee7b7" }}>{fmtINR(data.shg_comparison_total)}</div></div>
+              <div><div className="muted" style={{ fontSize: "0.75rem" }}>Total you repay</div><div style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--danger)" }}>{fmtINR(data.total_payable_simple)}</div></div>
+              <div><div className="muted" style={{ fontSize: "0.75rem" }}>Same via SHG (~10%)</div><div style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--success)" }}>{fmtINR(data.shg_comparison_total)}</div></div>
             </div>
             <div>
               <div className="panel-label">Compare yearly rates</div>
               {[{ name: "This loan", apr: data.simple_annual_rate }, ...data.benchmarks].map((b: { name: string; apr: number }) => (
                 <div key={b.name} style={{ marginBottom: "0.45rem" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.78rem" }}><span>{b.name}</span><span>{b.apr.toLocaleString("en-IN")}%</span></div>
-                  <div className="bar"><div style={{ width: `${Math.min(100, (b.apr / Math.max(data.simple_annual_rate, 50)) * 100)}%`, background: b.name === "This loan" ? "#ef4444" : "#10b981" }} /></div>
+                  <div className="bar"><div style={{ width: `${Math.min(100, (b.apr / Math.max(data.simple_annual_rate, 50)) * 100)}%`, background: b.name === "This loan" ? "var(--danger)" : "var(--success)" }} /></div>
                 </div>
               ))}
             </div>
@@ -99,7 +100,7 @@ function EMITool() {
         {data && (
           <>
             <div className="grid-3" style={{ gap: "0.75rem", marginBottom: "1rem" }}>
-              <div><div className="muted" style={{ fontSize: "0.75rem" }}>Monthly EMI</div><div style={{ fontSize: "1.4rem", fontWeight: 800, color: "#fcd34d" }}>{fmtINR(data.emi)}</div></div>
+              <div><div className="muted" style={{ fontSize: "0.75rem" }}>Monthly EMI</div><div style={{ fontSize: "1.4rem", fontWeight: 800, color: "var(--primary)" }}>{fmtINR(data.emi)}</div></div>
               <div><div className="muted" style={{ fontSize: "0.75rem" }}>Total interest</div><div style={{ fontSize: "1.1rem", fontWeight: 700 }}>{fmtINR(data.total_interest)}</div></div>
               <div><div className="muted" style={{ fontSize: "0.75rem" }}>Total payable</div><div style={{ fontSize: "1.1rem", fontWeight: 700 }}>{fmtINR(data.total_payable)}</div></div>
             </div>
@@ -143,7 +144,7 @@ function PayoffTool() {
                   <td><input className="input-field" style={{ padding: "0.5rem" }} type="number" value={d.balance} onChange={(e) => upd(i, "balance", e.target.value)} /></td>
                   <td><input className="input-field" style={{ padding: "0.5rem" }} type="number" value={d.annual_rate} onChange={(e) => upd(i, "annual_rate", e.target.value)} /></td>
                   <td><input className="input-field" style={{ padding: "0.5rem" }} type="number" value={d.min_payment} onChange={(e) => upd(i, "min_payment", e.target.value)} /></td>
-                  <td><button className="icon-btn" aria-label="Remove" onClick={() => setDebts((ds) => ds.filter((_, j) => j !== i))}>✕</button></td>
+                  <td><button className="icon-btn" aria-label="Remove" onClick={() => setDebts((ds) => ds.filter((_, j) => j !== i))}><X size={15} /></button></td>
                 </tr>
               ))}
             </tbody>
@@ -163,7 +164,7 @@ function PayoffTool() {
         <div className="grid-2">
           <div className="glass-card card-pad">
             <div className="panel-label">Your plan · {data.strategy}</div>
-            <div className="big-num" style={{ color: "#10b981" }}>{data.debt_free ? `${data.months} months` : "50+ years"}</div>
+            <div className="big-num" style={{ color: "var(--success)" }}>{data.debt_free ? `${data.months} months` : "50+ years"}</div>
             <div className="muted" style={{ marginBottom: "0.75rem" }}>to be debt-free · total interest {fmtINR(data.total_interest)}</div>
             <div className="panel-label">Payoff order</div>
             <ol style={{ paddingLeft: "1.2rem" }}>{data.payoff_order.map((n: string) => <li key={n}>{n}</li>)}</ol>
@@ -191,7 +192,7 @@ function BudgetTool() {
   const [cat, setCat] = useState("blade_finance");
   const ok = income > 0 && emi >= 0;
   const { data, err } = useDebounced(() => (ok ? apiBudgetPlan({ monthly_income: income, debt_emi: emi, debt_category: cat, num_dependents: deps }) : Promise.resolve(null)), [income, emi, deps, cat]);
-  const colors: Record<string, string> = { needs_essentials: "#3b82f6", debt_repayment: "#ef4444", savings_target: "#10b981", discretionary: "#a855f7" };
+  const colors: Record<string, string> = { needs_essentials: "#3b82f6", debt_repayment: "var(--danger)", savings_target: "var(--success)", discretionary: "#a855f7" };
   return (
     <div className="grid-2">
       <div className="glass-card card-pad" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -201,7 +202,7 @@ function BudgetTool() {
         <div>
           <label className="label">Main debt type</label>
           <select className="input-field" value={cat} onChange={(e) => setCat(e.target.value)}>
-            {Object.entries(CATEGORY_META).map(([k, v]) => <option key={k} value={k}>{v.icon} {v.label}</option>)}
+            {Object.entries(CATEGORY_META).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
           </select>
         </div>
       </div>
@@ -210,7 +211,7 @@ function BudgetTool() {
         {data && (
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", flexWrap: "wrap" }}>
-              <span className="big-num" style={{ color: data.emi_to_income_ratio > 40 ? "#ef4444" : data.emi_to_income_ratio > 25 ? "#f59e0b" : "#10b981" }}>{data.emi_to_income_ratio}%</span>
+              <span className="big-num" style={{ color: data.emi_to_income_ratio > 40 ? "var(--danger)" : data.emi_to_income_ratio > 25 ? "var(--primary)" : "var(--success)" }}>{data.emi_to_income_ratio}%</span>
               <span className="muted">of income goes to loans · <b style={{ textTransform: "capitalize" }}>{data.status.replace("_", " ")}</b></span>
             </div>
             <div style={{ display: "flex", height: 18, borderRadius: 999, overflow: "hidden" }}>
