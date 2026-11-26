@@ -5,10 +5,10 @@ import { useLang } from "@/lib/i18n";
 
 const TYPE_COLORS: Record<string, string> = {
   "Direct Benefit Transfer": "#15803d",
-  "Low-Interest Credit": "#0f6e5c",
+  "Low-Interest Credit": "#5b2a86",
   "Micro Credit": "#7e22ce",
   "Micro Enterprise Loan": "#7e22ce",
-  "Free Legal Aid": "#b45309",
+  "Free Legal Aid": "#8a6510",
   "Complaint / Regulatory Redressal": "#b91c1c",
   "Health Insurance": "#be123c",
   Insurance: "#0369a1",

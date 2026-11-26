@@ -81,7 +81,7 @@ export function HeroIntro() {
           <div className="eyebrow" style={{ marginBottom: "1rem" }}>{ta ? "தமிழ்நாட்டுக்கான இலவச நிதி நல உதவி" : "Free financial wellness help for Tamil Nadu"}</div>
           <h1 style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", fontWeight: 800, lineHeight: 1.1, marginBottom: "1rem" }}>
             {ta ? "கடனில் இருந்து வெளியே வர " : "Find your way out of debt. "}
-            <span className="font-tamil" style={{ color: "var(--primary)", fontSize: "0.82em" }}>வழி இருக்கிறது.</span>
+            <span className="font-tamil" style={{ color: "var(--accent)", fontSize: "0.82em" }}>வழி இருக்கிறது.</span>
           </h1>
           <p style={{ fontSize: "1.12rem", color: "var(--text-2)", lineHeight: 1.7, maxWidth: 560, marginBottom: "1.75rem" }}>
             {ta
@@ -102,7 +102,7 @@ export function HeroIntro() {
           <Photo k="shgMeeting" priority style={{ aspectRatio: "4 / 3.2", boxShadow: "var(--shadow)" }} />
           <div className="card" style={{ position: "absolute", left: "-1rem", bottom: "-1.5rem", padding: "0.85rem 1rem", maxWidth: 270, boxShadow: "var(--shadow)" }}>
             <div style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start" }}>
-              <span className="icon-tile" style={{ background: "var(--primary-soft)", width: 34, height: 34 }}><Landmark size={17} color="var(--primary)" /></span>
+              <span className="icon-tile" style={{ background: "var(--accent-soft)", width: 34, height: 34 }}><Landmark size={17} color="var(--accent)" /></span>
               <div style={{ fontSize: "0.84rem", lineHeight: 1.45 }}>
                 <b>{ta ? "24 அரசு திட்டங்கள்" : "24 government schemes"}</b><br />
                 <span className="muted">{ta ? "SHG கடன், இலவச சட்ட உதவி, நேரடி உதவி" : "SHG credit, free legal aid, direct benefits"}</span>
@@ -368,7 +368,7 @@ export function HowItWorks() {
           {STEPS.map((s, i) => (
             <div key={s.t} className="card" style={{ padding: "1.25rem" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.75rem" }}>
-                <span className="icon-tile" style={{ background: "var(--primary-soft)" }}><s.Icon size={18} color="var(--primary)" /></span>
+                <span className="icon-tile" style={{ background: "var(--accent-soft)" }}><s.Icon size={18} color="var(--accent)" /></span>
                 <span className="muted" style={{ fontWeight: 700, fontSize: "0.85rem" }}>Step {i + 1}</span>
               </div>
               <div style={{ fontWeight: 700, marginBottom: "0.35rem" }}>{s.t}</div>
@@ -392,7 +392,7 @@ export function SchemesAndCTA() {
       <div style={{ maxWidth: 1180, margin: "0 auto 2.5rem", padding: "0 1.25rem" }} className="grid-4">
         {[{ n: 24, l: "Government schemes" }, { n: 12, l: "Debt traps recognised" }, { n: 14, l: "Laws explained simply" }, { n: 38, l: "Districts covered" }].map((x) => (
           <div key={x.l} className="card" style={{ padding: "1.25rem", textAlign: "center" }}>
-            <div className="stat-num" style={{ color: "var(--primary)" }}><CountUp to={x.n} /></div>
+            <div className="stat-num" style={{ color: "var(--accent)" }}><CountUp to={x.n} /></div>
             <div className="muted" style={{ fontSize: "0.86rem" }}>{x.l}</div>
           </div>
         ))}

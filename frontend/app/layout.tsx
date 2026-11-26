@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: { title: "VazhiAPI — வழி", description: "நம்ம பணம் நம்ம கையில் — Your Money, Your Wellness", type: "website" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#f7f5f0" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#5b2a86" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
