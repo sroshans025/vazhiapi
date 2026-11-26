@@ -197,6 +197,22 @@ async def test_public_knowledge_schemes_tools_demo(client):
     assert demo["debt_category"] == "blade_finance" and "session_id" not in demo
 
 
+async def test_chat_answers_knowledge_questions(client):
+    u = await make_user(client, "faq@test.com")
+    cases = {
+        "how can I improve my cibil score": "on time",
+        "someone took money from my gpay by fraud": "1930",
+        "what documents do I need for government schemes": "Aadhaar",
+        "online rummy la panam pochu": "Online Gambling",
+        "what can you do": "Vazhi",
+    }
+    for q, expect in cases.items():
+        d = (await client.post("/chat", json={"message": q}, headers=u["h"])).json()
+        assert expect.lower() in d["response"].lower(), (q, d["response"][:200])
+    off = (await client.post("/chat", json={"message": "what is the capital of France"}, headers=u["h"])).json()
+    assert off["analysis"]["stress_score"] < 30 and "best at" in off["response"]
+
+
 async def test_delete_account(client):
     u = await make_user(client, "bye@test.com")
     await client.post("/chat", json={"message": "help with my wedding loans"}, headers=u["h"])

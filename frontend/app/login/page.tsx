@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { apiLogin, errorMessage } from "@/lib/api";
+import { apiLogin, errorMessage, isNetworkError } from "@/lib/api";
+import GuestEntry from "@/components/GuestEntry";
 import { saveSession } from "@/lib/auth";
 
 function nextPath() {
@@ -17,14 +18,16 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
+  const [offline, setOffline] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); setError("");
+    setLoading(true); setError(""); setOffline(false);
     try {
       saveSession(await apiLogin({ email: form.email.trim(), password: form.password }));
       router.push(nextPath());
     } catch (err) {
+      setOffline(isNetworkError(err));
       setError(errorMessage(err, "Invalid email or password. Please try again."));
     } finally { setLoading(false); }
   };
@@ -54,8 +57,15 @@ export default function LoginPage() {
               </div>
             </div>
             {error && <div className="error-box" role="alert">{error}</div>}
-            <button type="submit" className="btn-primary" disabled={loading} style={{ marginTop: "0.5rem" }}>{loading ? "Signing in…" : "Sign In →"}</button>
+            {offline && <GuestEntry prominent />}
+            <button type="submit" className={offline ? "btn-ghost" : "btn-primary"} disabled={loading} style={{ marginTop: "0.5rem" }}>{loading ? "Signing in…" : offline ? "Try signing in again" : "Sign In →"}</button>
           </form>
+          {!offline && (
+            <div style={{ marginTop: "1.25rem" }}>
+              <div className="muted" style={{ textAlign: "center", fontSize: "0.75rem", marginBottom: "0.6rem" }}>or</div>
+              <GuestEntry />
+            </div>
+          )}
           <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem" }} className="muted">
             Don&apos;t have an account? <Link href="/register">Register free</Link>
           </p>

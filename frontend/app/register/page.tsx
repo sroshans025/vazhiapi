@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { apiRegister, errorMessage } from "@/lib/api";
+import { apiRegister, errorMessage, isNetworkError } from "@/lib/api";
+import GuestEntry from "@/components/GuestEntry";
 import { saveSession } from "@/lib/auth";
 import { TN_DISTRICTS } from "@/lib/constants";
 import { useLang } from "@/lib/i18n";
@@ -13,6 +14,7 @@ export default function RegisterPage() {
   const [form, setForm] = useState({ email: "", password: "", full_name: "", district: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [offline, setOffline] = useState(false);
   const pwOk = form.password.length >= 8;
 
   const submit = async (e: React.FormEvent) => {
@@ -23,6 +25,7 @@ export default function RegisterPage() {
       saveSession(await apiRegister({ ...form, email: form.email.trim(), full_name: form.full_name.trim(), preferred_language: lang }));
       router.push("/checkin");
     } catch (err) {
+      setOffline(isNetworkError(err));
       setError(errorMessage(err, "Registration failed. Please try again."));
     } finally { setLoading(false); }
   };
@@ -62,10 +65,17 @@ export default function RegisterPage() {
               {form.password && <div className="bar" style={{ marginTop: "0.4rem" }}><div style={{ width: `${Math.min(100, form.password.length * 8)}%`, background: pwOk ? "#10b981" : "#f59e0b" }} /></div>}
             </div>
             {error && <div className="error-box" role="alert">{error}</div>}
+            {offline && <GuestEntry prominent name={form.full_name} district={form.district} />}
             <button type="submit" className="btn-primary" disabled={loading} style={{ marginTop: "0.5rem" }}>
               {loading ? "Creating account…" : <span>Create account · <span className="font-tamil">வழி தொடங்கு</span> →</span>}
             </button>
           </form>
+          {!offline && (
+            <div style={{ marginTop: "1.25rem" }}>
+              <div className="muted" style={{ textAlign: "center", fontSize: "0.75rem", marginBottom: "0.6rem" }}>or</div>
+              <GuestEntry name={form.full_name} district={form.district} />
+            </div>
+          )}
           <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem" }} className="muted">
             Already have an account? <Link href="/login">Sign in</Link>
           </p>

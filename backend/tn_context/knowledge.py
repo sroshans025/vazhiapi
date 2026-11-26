@@ -50,6 +50,90 @@ def helplines() -> list[dict]:
     return _load("helplines.json")["helplines"]
 
 
+@lru_cache()
+def faq() -> list[dict]:
+    return _load("faq.json")["entries"]
+
+
+# ── Retrieval (BM25-lite over FAQ + schemes + laws + categories) ──────────────
+import math
+import re
+
+_STOP = set("""a an the is are was were be been am i me my mine you your we our they them their he she it its of to in on
+for with at by from as and or but if so do does did doing have has had can could should would will shall may might
+what which who whom how when where why this that these those there here not no yes please tell about any some
+get got give want need know also just very much more most than then too only into out up down over under again
+enna epdi eppadi yen naan nan enaku ennaku irukku iruku panna pannanum sollunga""".split())
+
+
+def _tokens(text: str) -> list[str]:
+    out = []
+    for t in re.findall(r"[஀-௿]+|[a-z0-9]+", text.lower()):
+        if t in _STOP or len(t) < 2:
+            continue
+        if not re.match(r"[஀-௿]", t):
+            for suf in ("ing", "ed", "es", "s"):
+                if len(t) > 4 and t.endswith(suf):
+                    t = t[: -len(suf)]
+                    break
+        out.append(t)
+    return out
+
+
+@lru_cache()
+def _index() -> tuple[list[dict], list[dict[str, float]], dict[str, float]]:
+    docs: list[dict] = []
+    for e in faq():
+        docs.append({"kind": "faq", "id": e["id"], "title": e["q"][0], "item": e,
+                     "fields": [(" ".join(e["q"]), 3.0), (" ".join(e["kw"]), 3.0), (e["topic"], 1.5), (e["a"], 0.6)]})
+    for s in schemes():
+        docs.append({"kind": "scheme", "id": s["id"], "title": s["name"], "item": s,
+                     "fields": [(s["name"] + " " + s["name_ta"], 3.0), (s["type"], 1.5), (s["description"] + " " + s["benefit"], 1.0)]})
+    for l in laws():
+        docs.append({"kind": "law", "id": l["id"], "title": l["name"], "item": l,
+                     "fields": [(l["name"] + " " + l["name_ta"], 2.5), (l["summary"], 1.0), (" ".join(l["your_rights"]), 0.8)]})
+    for c in categories():
+        docs.append({"kind": "category", "id": c["id"], "title": c["label"], "item": c,
+                     "fields": [(c["label"] + " " + c["label_ta"], 2.5), (" ".join(c["indicators"]), 2.0), (c["description"], 0.8)]})
+    vecs: list[dict[str, float]] = []
+    df: dict[str, int] = {}
+    for d in docs:
+        v: dict[str, float] = {}
+        for text, w in d["fields"]:
+            for t in _tokens(text):
+                v[t] = v.get(t, 0.0) + w
+        vecs.append(v)
+        for t in v:
+            df[t] = df.get(t, 0) + 1
+    n = len(docs)
+    idf = {t: math.log(1 + (n - c + 0.5) / (c + 0.5)) for t, c in df.items()}
+    return docs, vecs, idf
+
+
+def search(query: str, k: int = 4, kinds: tuple[str, ...] | None = None) -> list[dict]:
+    """Return the top-k knowledge items for a free-text question with a relevance score."""
+    docs, vecs, idf = _index()
+    q = _tokens(query)
+    if not q:
+        return []
+    scored = []
+    for d, v in zip(docs, vecs):
+        if kinds and d["kind"] not in kinds:
+            continue
+        s = 0.0
+        for t in set(q):
+            tf = v.get(t)
+            if tf is None and len(t) >= 5:         # cheap prefix match (e.g. "insur" ~ "insurance")
+                tf = next((val for key, val in v.items() if key.startswith(t[:5])), None)
+                tf = tf * 0.5 if tf else None
+            if tf:
+                s += idf.get(t, 1.0) * (tf * 2.2) / (tf + 1.2)
+        if s > 0:
+            scored.append((s / (1 + 0.15 * len(set(q))), d))
+    scored.sort(key=lambda x: -x[0])
+    return [{"kind": d["kind"], "id": d["id"], "title": d["title"], "score": round(s, 3), "item": d["item"]} for s, d in scored[:k]]
+
+
 def schemes_for(category: str, limit: int | None = None) -> list[dict]:
     out = [s for s in schemes() if category in s.get("applicable_categories", [])]
     return out[:limit] if limit else out

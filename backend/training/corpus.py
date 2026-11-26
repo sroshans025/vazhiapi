@@ -202,8 +202,42 @@ def generate(seed: int = 42, per_combo: int = 3) -> list[dict]:
     return rows
 
 
+NEUTRAL = {
+    "en": ["hi", "hello there", "good morning", "thank you so much", "what is the capital of France", "can you explain how a bank works",
+           "tell me about saving money", "what is inflation", "how do I learn computers", "what is the weather like",
+           "I want to plan my finances better", "how does a recurring deposit work", "explain mutual funds simply",
+           "what is a credit card", "is it good to buy gold", "how much should I save every month", "what is GST",
+           "my salary got credited today", "I cleared my loan last month", "I am doing better now, thanks",
+           "who is the chief minister", "how to write a resume", "how to open a savings account", "what is an EMI"],
+    "ta": ["வணக்கம்", "நன்றி", "சேமிப்பு பற்றி சொல்லுங்கள்", "வங்கிக் கணக்கு எப்படி திறப்பது", "தங்கம் வாங்குவது நல்லதா",
+           "மாதம் எவ்வளவு சேமிக்க வேண்டும்", "என் கடனை முடித்துவிட்டேன்", "இப்போது நன்றாக இருக்கிறேன்"],
+    "tanglish": ["vanakkam", "romba nandri", "saving pathi sollunga", "bank account epdi open panradhu", "gold vaangalama",
+                 "maasam evlo save pannanum", "kadan mudichitten", "ippo nalla irukken"],
+}
+
+
+def neutral_rows(rng: random.Random) -> list[dict]:
+    """Calm / information-seeking messages so the stress model learns what 'not distressed' looks like."""
+    rows = []
+    for lang, items in NEUTRAL.items():
+        for i, t in enumerate(items):
+            for _ in range(3):
+                rows.append({"text": t, "category": "general_financial_stress", "language": lang, "severity": "none",
+                             "stress": round(rng.uniform(3, 14), 1), "group": f"neutral:{lang}:{i}"})
+    faq_path = Path(__file__).resolve().parent.parent / "tn_context" / "faq.json"
+    if faq_path.exists():
+        entries = json.loads(faq_path.read_text(encoding="utf-8"))["entries"]
+        for e in entries:
+            cat = (e.get("categories") or ["general_financial_stress"])[0]
+            for j, q in enumerate(e["q"]):
+                rows.append({"text": q, "category": cat, "language": "tanglish" if j == 2 else "en", "severity": "info",
+                             "stress": round(rng.uniform(10, 28), 1), "group": f"faq:{e['id']}:{j}"})
+    return rows
+
+
 def write(path: Path = OUT) -> Path:
     rows = generate()
+    rows += neutral_rows(random.Random(7))
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         for r in rows:

@@ -18,6 +18,7 @@ export default function ProfilePage() {
   const [msg, setMsg] = useState("");
   const [err, setErr] = useState("");
   const [confirmDel, setConfirmDel] = useState("");
+  const isGuestUser = user?.user_id === "guest";
 
   useEffect(() => {
     if (!ready || !user) return;
@@ -68,16 +69,23 @@ export default function ProfilePage() {
             <button className="btn-primary" style={{ alignSelf: "flex-start" }}>Save</button>
           </form>
 
-          <form onSubmit={changePw} className="glass-card card-pad" style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "1.25rem" }}>
+          {!isGuestUser && <form onSubmit={changePw} className="glass-card card-pad" style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "1.25rem" }}>
             <h3 style={{ fontWeight: 700 }}>Change password</h3>
             <input className="input-field" type="password" autoComplete="current-password" placeholder="Current password" value={pw.current_password} onChange={(e) => setPw((p) => ({ ...p, current_password: e.target.value }))} required />
             <input className="input-field" type="password" autoComplete="new-password" placeholder="New password (8+ characters)" minLength={8} value={pw.new_password} onChange={(e) => setPw((p) => ({ ...p, new_password: e.target.value }))} required />
             <button className="btn-ghost" style={{ alignSelf: "flex-start" }}>Update password</button>
-          </form>
+          </form>}
+          {isGuestUser && (
+            <div className="glass-card card-pad" style={{ marginBottom: "1.25rem" }}>
+              <h3 style={{ fontWeight: 700, marginBottom: "0.4rem" }}>📱 Guest mode</h3>
+              <p className="muted" style={{ fontSize: "0.88rem", marginBottom: "0.9rem" }}>Your chats and check-ins are stored only in this browser. Create an account to keep them across devices and to request a human counsellor.</p>
+              <a href="/register" className="btn-primary btn-sm">Create an account</a>
+            </div>
+          )}
 
           <div className="glass-card card-pad" style={{ borderColor: "rgba(239,68,68,0.35)" }}>
-            <h3 style={{ fontWeight: 700, color: "#fca5a5", marginBottom: "0.4rem" }}>Delete my account</h3>
-            <p className="muted" style={{ fontSize: "0.88rem", marginBottom: "0.9rem" }}>Permanently erases your account, every chat, check-in, feedback and counsellor request. This cannot be undone.</p>
+            <h3 style={{ fontWeight: 700, color: "#fca5a5", marginBottom: "0.4rem" }}>{isGuestUser ? "Delete data on this device" : "Delete my account"}</h3>
+            <p className="muted" style={{ fontSize: "0.88rem", marginBottom: "0.9rem" }}>{isGuestUser ? "Erases every guest chat and check-in stored in this browser." : "Permanently erases your account, every chat, check-in, feedback and counsellor request. This cannot be undone."}</p>
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <input className="input-field" style={{ maxWidth: 260 }} placeholder='Type "DELETE" to confirm' value={confirmDel} onChange={(e) => setConfirmDel(e.target.value)} />
               <button className="btn-danger" disabled={confirmDel !== "DELETE"} onClick={del}>Delete everything</button>

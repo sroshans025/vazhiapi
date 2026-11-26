@@ -35,6 +35,7 @@ class ChatContext:
     history: list[dict] = field(default_factory=list)   # [{"role","content","meta"}] oldest→newest, excl. current
     user_name: str | None = None
     district: str | None = None
+    kb_hits: list[dict] | None = None   # knowledge-base retrieval for this message
 
 
 # ───────────────────────────── intents ─────────────────────────────
@@ -52,6 +53,8 @@ INTENTS: list[tuple[str, list[str]]] = [
                   "apr", "vatti evlo", "வட்டி எவ்வளவு"]),
     ("budget", ["budget", "salary", "income", "save money", "savings", "monthly expenses", "plan my",
                 "சம்பளம்", "சேமிப்பு", "பட்ஜெட்"]),
+    ("about", ["what can you do", "who are you", "what is vazhi", "what is vazhiapi", "how can you help", "what do you do",
+               "nee yaar", "neenga yaar", "நீங்கள் யார்", "என்ன செய்ய முடியும்"]),
     ("thanks", ["thank", "thanks", "nandri", "நன்றி", "helpful"]),
     ("greeting", ["hi", "hello", "hey", "vanakkam", "வணக்கம்", "good morning", "good evening"]),
 ]
@@ -63,7 +66,10 @@ def _has(text: str, phrase: str) -> bool:
     return re.search(rf"(?<![a-z]){re.escape(phrase)}(?![a-z])", text) is not None
 
 
-def detect_intent(message: str, analysis: dict) -> str:
+FAQ_MIN_SCORE = 5.0   # retrieval confidence needed to answer from the knowledge base
+
+
+def detect_intent(message: str, analysis: dict, kb_hits: list[dict] | None = None) -> str:
     t = message.lower().strip()
     if analysis["crisis"]["level"] == "critical":
         return "crisis"
@@ -73,9 +79,23 @@ def detect_intent(message: str, analysis: dict) -> str:
         return "greeting"
     if "thanks" in hits and words <= 8 and not analysis["detected_keywords"]:
         return "thanks"
-    for name in ("human", "helpline", "interest", "scheme", "rights", "budget"):
+    for name in ("human", "helpline", "about"):
         if name in hits:
             return name
+    calm = analysis["stress_score"] < 55 and analysis["crisis"]["level"] == "low"
+    if "interest" in hits and _parse_rate(message) and calm:
+        return "interest"
+    if "budget" in hits and _parse_amounts(message):
+        return "budget"
+    if kb_hits and kb_hits[0]["kind"] == "faq" and kb_hits[0]["score"] >= FAQ_MIN_SCORE:
+        return "faq"
+    for name in ("scheme", "rights") + (("interest", "budget") if calm else ()):
+        if name in hits:
+            return name
+    if (not analysis["detected_keywords"] and analysis["debt_category"] == "general_financial_stress"
+            and analysis["stress_score"] < 45 and words >= 3
+            and not any(h["kind"] == "faq" and h["score"] >= FAQ_MIN_SCORE * 0.6 for h in (kb_hits or []))):
+        return "general"
     return "distress"
 
 
@@ -108,7 +128,7 @@ def suggestions_for(intent: str, analysis: dict, lang: str) -> list[str]:
     cat = analysis["debt_category"]
     if intent == "crisis":
         keys = ["helpline", "human", "steps"]
-    elif intent in ("greeting", "thanks"):
+    elif intent in ("greeting", "thanks", "general"):
         keys = ["steps", "schemes", "budget"]
     elif intent == "scheme":
         keys = ["rights", "budget", "human"]
@@ -182,7 +202,8 @@ class LocalCounsellor:
         cat = a["debt_category"]
         cat_info = knowledge.category_map()[cat]
         cat_label = cat_info["label_ta"] if lang == "ta" else cat_info["label"]
-        intent = detect_intent(ctx.message, a)
+        kb_hits = ctx.kb_hits if ctx.kb_hits is not None else knowledge.search(ctx.message, 4)
+        intent = detect_intent(ctx.message, a, kb_hits)
         name = (ctx.user_name or "").split(" ")[0]
 
         if intent == "crisis":
@@ -224,6 +245,41 @@ class LocalCounsellor:
             text = _t(lang, "Here are the free numbers most relevant to your situation:\n\n",
                       "உங்கள் சூழலுக்கு பொருத்தமான இலவச எண்கள்:\n\n",
                       "Unga situation ku useful aana free numbers:\n\n") + _helpline_lines(tags, 5)
+            return text, intent
+
+        if intent == "about":
+            about = next(e for e in knowledge.faq() if e["id"] == "what_is_vazhi")
+            kb_hits = [{"kind": "faq", "id": about["id"], "title": about["q"][0], "score": 99.0, "item": about}]
+            intent = "faq"
+
+        if intent == "faq":
+            top = kb_hits[0]
+            parts = []
+            if a["stress_score"] >= 55 and a["crisis"]["level"] != "low":
+                parts.append(_t(lang, "That sounds stressful — let's take it one step at a time.",
+                                "இது கஷ்டமான நிலை — ஒவ்வொரு படியாக பார்ப்போம்.",
+                                "Idhu kashtamana nilamai — onnu onna paarpom."))
+            if lang == "ta":
+                parts.append("_(விரிவான தகவல் கீழே ஆங்கிலத்தில்)_")
+            parts.append(top["item"]["a"])
+            related = [h for h in kb_hits[1:] if h["kind"] == "faq" and h["score"] >= top["score"] * 0.55][:2]
+            if related:
+                parts.append(_t(lang, "Related: ", "தொடர்புடையவை: ", "Related: ") + " · ".join(f"*{h['title']}*" for h in related))
+            if a["crisis"]["level"] == "severe":
+                parts.append(_t(lang, "⚠️ Threats or harassment are crimes — call **100 / 112** if you feel unsafe.",
+                                "⚠️ மிரட்டல் குற்றம் — பாதுகாப்பில்லை என்றால் **100 / 112**.",
+                                "⚠️ Mirattal crime — safe ah illa na **100 / 112**."))
+            return "\n\n".join(parts), intent
+
+        if intent == "general":
+            text = _t(lang,
+                      "I'm best at **money, debt, rights and wellbeing questions for Tamil Nadu**, so I can't answer that one reliably here. "
+                      "Here are things I can help with right away:\n- *“How can I improve my CIBIL score?”*\n- *“Someone took money from my UPI — what do I do?”*\n"
+                      "- *“What documents do I need for government schemes?”*\n- *“Is 10% per week interest legal?”*\n\nOr just tell me what's worrying you.",
+                      "நான் **பணம், கடன், உரிமைகள், நலம்** தொடர்பான கேள்விகளுக்கு சிறப்பாக உதவுவேன்; அந்தக் கேள்விக்கு இங்கே சரியான பதில் தர முடியாது. "
+                      "இவற்றைக் கேளுங்கள்:\n- *“என் CIBIL ஸ்கோரை எப்படி உயர்த்துவது?”*\n- *“UPI மோசடியில் பணம் போனது — என்ன செய்வது?”*\n- *“அரசு திட்டங்களுக்கு என்ன ஆவணங்கள் வேண்டும்?”*",
+                      "Naan **panam, kadan, urimai, wellbeing** questions la dhaan best ah help pannuven — andha question ku inga correct answer tharamudiyadhu. "
+                      "Idha try pannunga:\n- *“CIBIL score epdi improve panradhu?”*\n- *“UPI fraud la panam pochu, enna pannanum?”*\n- *“Scheme ku enna documents venum?”*")
             return text, intent
 
         if intent == "scheme":
@@ -306,6 +362,14 @@ class LocalCounsellor:
             return text, intent
 
         text = compose_response(cat, a["stress_label"], lang)
+        rate = _parse_rate(ctx.message)
+        if rate:   # distress message that also quotes a rate: add the yearly-rate reality check
+            r, unit = rate
+            yearly = r * {"day": 365, "week": 52, "month": 12, "year": 1}[unit]
+            text += _t(lang,
+                       f"\n\n**{r:g}% per {unit} = {yearly:,.0f}% a year.**" + (" A private lender charging this is very likely breaking the TN Prohibition of Charging Exorbitant Interest Act, 2003." if yearly > 36 else ""),
+                       f"\n\n**ஒரு {unit}-க்கு {r:g}% = ஆண்டுக்கு {yearly:,.0f}%.**" + (" இது 2003 அதிக வட்டி தடைச் சட்டத்தின் கீழ் சட்டவிரோதமாக இருக்கலாம்." if yearly > 36 else ""),
+                       f"\n\n**{r:g}% per {unit} = varushathukku {yearly:,.0f}%.**" + (" Idhu TN Exorbitant Interest Act 2003 padi illegal ah irukka chance adhigam." if yearly > 36 else ""))
         if a["crisis"]["level"] == "severe":
             text += _t(lang, "\n\n⚠️ Threats or harassment are crimes. If you feel unsafe, call **100 / 112**; for loan-app threats call **1930**.",
                        "\n\n⚠️ மிரட்டல் குற்றம். பாதுகாப்பில்லை என்றால் **100 / 112**; கடன் செயலி மிரட்டலுக்கு **1930**.",
@@ -330,6 +394,8 @@ How you respond:
 - Ask at most one follow-up question when you need details (amount owed, interest rate, income, who the lender is).
 - Use the conversation history: don't repeat advice you already gave; build on it.
 - You are not a lawyer or doctor. For legal action, point to free legal aid (DLSA, 15100).
+- People may also ask about anything else — general knowledge, studies, work, health, technology, daily life. Answer those helpfully and accurately too, in the same warm, concise style; if a question connects to their money situation, mention that briefly. Decline only what would be harmful.
+- The <context> block may include "Knowledge base matches" — verified answers from VazhiAPI's Tamil Nadu dataset. Prefer them for facts about schemes, laws, procedures and helplines.
 
 Safety (overrides everything else):
 - If the person mentions suicide, self-harm, or not wanting to live, respond with warmth first, tell them their life matters more than any debt, and give Tele-MANAS 14416 (24×7, Tamil available) and emergency 112 before anything about money. Encourage them to talk to someone now.
@@ -358,6 +424,9 @@ def _context_block(ctx: ChatContext) -> str:
         *[f"- {l['name']}: {l['summary']} How to act: {l['how_to_act']}" for l in laws],
         "Helplines:",
         *[f"- {h['name']}: {h['number']} ({h['hours']})" for h in knowledge.helplines_for(tags, 5)],
+        "Knowledge base matches for this message:",
+        *[f"- [{h['kind']}] {h['title']}: {(h['item'].get('a') or h['item'].get('summary') or h['item'].get('description') or '')[:900]}"
+          for h in (ctx.kb_hits or []) if h["score"] >= 2.5][:3],
         "</context>",
     ]
     return "\n".join(lines)
@@ -429,7 +498,9 @@ async def generate_reply(ctx: ChatContext) -> AsyncIterator[tuple[str, str]]:
     Yields ("delta", text) chunks, then a final ("meta", json-able info) is returned via
     the `info` dict on the generator object. Falls back to the local engine on any Claude error.
     """
-    intent = detect_intent(ctx.message, ctx.analysis)
+    if ctx.kb_hits is None:
+        ctx.kb_hits = knowledge.search(ctx.message, 4)
+    intent = detect_intent(ctx.message, ctx.analysis, ctx.kb_hits)
     if claude_available():
         produced = False
         try:

@@ -66,6 +66,12 @@ Or run everything with `docker compose up --build` (Postgres + backend + fronten
 ## Datasets
 
 * `backend/tn_context/*.json`: debt categories (12), government schemes (24), laws (14), helplines (14), all bilingual.
-* `backend/datasets/vazhi_distress_corpus.jsonl`: 1,440 labelled English/Tamil/Tanglish distress messages (category + stress). Regenerate with `python -m training.corpus`, retrain with `python -m training.train_lite`. Metrics are measured on held-out situation templates (currently ~48% category accuracy across 12 classes, stress MAE ~7); at serving time L2 blends the model with curated indicators.
+* `backend/tn_context/faq.json`: 66 Q&A entries (budgeting, saving, banking, UPI fraud and scams, credit scores, loans, recovery-agent rules, police complaints, Lok Adalat, loan apps, schemes and documents, health insurance, jobs and PF, gambling, stress, family and abuse, farming, gold, housing) with English/Tamil/Tanglish keywords. The chat retrieves from it (BM25-style search over Q&A + schemes + laws + categories).
+* `backend/datasets/vazhi_distress_corpus.jsonl`: 1,745 labelled messages: trilingual distress messages plus neutral and information-seeking ones, so calm questions score low stress. Regenerate with `python -m training.corpus`, retrain with `python -m training.train_lite`. Metrics are measured on held-out phrasings (currently ~45% category accuracy across 12 classes, stress MAE ~8); at serving time L2 blends the model with curated indicators.
+* After editing any of these, run `python -m training.export_kb` to refresh `frontend/lib/kb.json`, the copy the website uses offline.
+
+## Guest mode (no account, no server)
+
+Login and register offer **"Continue without an account"**, and suggest it automatically when the server can't be reached. In guest mode the chat, dashboard and profile run entirely in the browser (`frontend/lib/guest.ts`, `counsellor.ts`, `offline.ts`) on the bundled knowledge base, and data stays in that browser's localStorage. With the backend and an `ANTHROPIC_API_KEY`, signed-in users get Claude, which can answer any question, grounded in the same knowledge base.
 
 Scheme benefits change with government orders. The app tells users to confirm on official portals.

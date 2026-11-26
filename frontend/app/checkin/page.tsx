@@ -156,7 +156,7 @@ export default function ChatPage() {
         onDone: (d) => {
           setMessages((m) => m.map((x) => (x.id === tempAi.id ? { ...d.message } : x)));
           setSuggestions(d.suggestions);
-          setEngine(d.engine === "claude" ? "claude" : "vazhi-local");
+          setEngine(d.engine);
           refreshList();
         },
         onError: (detail) => { setError(detail); setMessages((m) => m.map((x) => (x.id === tempAi.id ? { ...x, streaming: false, error: true } : x))); },
@@ -253,7 +253,13 @@ export default function ChatPage() {
               </div>
             ))}
           </div>
-          <div style={{ marginTop: "auto", fontSize: "0.72rem" }} className="muted">
+          {user.user_id === "guest" && (
+            <div className="benefit-box" style={{ marginTop: "auto", fontSize: "0.74rem", lineHeight: 1.5 }}>
+              📱 {lang === "ta" ? "விருந்தினர் முறை: உரையாடல்கள் இந்தச் சாதனத்தில் மட்டும்." : "Guest mode: chats stay on this device."}{" "}
+              <Link href="/register">{lang === "ta" ? "கணக்கு உருவாக்கு" : "Create an account"}</Link>
+            </div>
+          )}
+          <div style={{ marginTop: user.user_id === "guest" ? 0 : "auto", fontSize: "0.72rem" }} className="muted">
             🔒 {lang === "ta" ? "உங்கள் உரையாடல்கள் ரகசியமானவை. சுயவிவரத்தில் எப்போது வேண்டுமானாலும் நீக்கலாம்." : "Private to you. Delete anytime from your profile."}
           </div>
         </aside>
@@ -267,7 +273,7 @@ export default function ChatPage() {
               <div style={{ minWidth: 0 }}>
                 <div style={{ fontWeight: 700, fontSize: "0.95rem" }}>Vazhi Counsellor</div>
                 <div style={{ fontSize: "0.72rem" }} className="muted">
-                  {busy ? (lang === "ta" ? "பதிலளிக்கிறது…" : "typing…") : engine === "claude" ? "Powered by Claude · Tamil · English · Tanglish" : "Tamil · English · Tanglish · Confidential"}
+                  {busy ? (lang === "ta" ? "பதிலளிக்கிறது…" : "typing…") : engine === "claude" ? "Powered by Claude · Tamil · English · Tanglish" : engine === "vazhi-browser" ? "On-device mode · Tamil · English · Tanglish" : "Tamil · English · Tanglish · Confidential"}
                 </div>
               </div>
             </div>

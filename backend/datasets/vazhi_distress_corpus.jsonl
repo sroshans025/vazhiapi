@@ -1438,3 +1438,308 @@
 {"text": "Sir, chit fund is not giving my prize amount even after 3 months. It's manageable but I want to plan better.", "category": "chit_fund_default", "language": "en", "severity": "low", "stress": 13.2, "group": "chit_fund_default:en:3"}
 {"text": "Amma here. my father's surgery cost Rs 40000 and I borrowed from everyone. It's getting difficult every month.", "category": "medical_debt", "language": "en", "severity": "moderate", "stress": 49.9, "group": "medical_debt:en:0"}
 {"text": "Sir, our seettu organiser disappeared with ₹2 lakh of members money and I have no money left for food.", "category": "chit_fund_default", "language": "en", "severity": "high", "stress": 66.5, "group": "chit_fund_default:en:2"}
+{"text": "hi", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 6.6, "group": "neutral:en:0"}
+{"text": "hi", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 4.7, "group": "neutral:en:0"}
+{"text": "hi", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.2, "group": "neutral:en:0"}
+{"text": "hello there", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.8, "group": "neutral:en:1"}
+{"text": "hello there", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 8.9, "group": "neutral:en:1"}
+{"text": "hello there", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 7.0, "group": "neutral:en:1"}
+{"text": "good morning", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.6, "group": "neutral:en:2"}
+{"text": "good morning", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 8.6, "group": "neutral:en:2"}
+{"text": "good morning", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.4, "group": "neutral:en:2"}
+{"text": "thank you so much", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 7.8, "group": "neutral:en:3"}
+{"text": "thank you so much", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.8, "group": "neutral:en:3"}
+{"text": "thank you so much", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 4.0, "group": "neutral:en:3"}
+{"text": "what is the capital of France", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 7.7, "group": "neutral:en:4"}
+{"text": "what is the capital of France", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 12.1, "group": "neutral:en:4"}
+{"text": "what is the capital of France", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 4.4, "group": "neutral:en:4"}
+{"text": "can you explain how a bank works", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 5.5, "group": "neutral:en:5"}
+{"text": "can you explain how a bank works", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.9, "group": "neutral:en:5"}
+{"text": "can you explain how a bank works", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 13.4, "group": "neutral:en:5"}
+{"text": "tell me about saving money", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.3, "group": "neutral:en:6"}
+{"text": "tell me about saving money", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 7.4, "group": "neutral:en:6"}
+{"text": "tell me about saving money", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 13.7, "group": "neutral:en:6"}
+{"text": "what is inflation", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.5, "group": "neutral:en:7"}
+{"text": "what is inflation", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 12.4, "group": "neutral:en:7"}
+{"text": "what is inflation", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 6.2, "group": "neutral:en:7"}
+{"text": "how do I learn computers", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 4.6, "group": "neutral:en:8"}
+{"text": "how do I learn computers", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 4.3, "group": "neutral:en:8"}
+{"text": "how do I learn computers", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 6.4, "group": "neutral:en:8"}
+{"text": "what is the weather like", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 12.0, "group": "neutral:en:9"}
+{"text": "what is the weather like", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 5.0, "group": "neutral:en:9"}
+{"text": "what is the weather like", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.4, "group": "neutral:en:9"}
+{"text": "I want to plan my finances better", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.0, "group": "neutral:en:10"}
+{"text": "I want to plan my finances better", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 7.1, "group": "neutral:en:10"}
+{"text": "I want to plan my finances better", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.0, "group": "neutral:en:10"}
+{"text": "how does a recurring deposit work", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.7, "group": "neutral:en:11"}
+{"text": "how does a recurring deposit work", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.7, "group": "neutral:en:11"}
+{"text": "how does a recurring deposit work", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 5.3, "group": "neutral:en:11"}
+{"text": "explain mutual funds simply", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.5, "group": "neutral:en:12"}
+{"text": "explain mutual funds simply", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 7.7, "group": "neutral:en:12"}
+{"text": "explain mutual funds simply", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 6.5, "group": "neutral:en:12"}
+{"text": "what is a credit card", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.4, "group": "neutral:en:13"}
+{"text": "what is a credit card", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 8.0, "group": "neutral:en:13"}
+{"text": "what is a credit card", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 6.3, "group": "neutral:en:13"}
+{"text": "is it good to buy gold", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 11.7, "group": "neutral:en:14"}
+{"text": "is it good to buy gold", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.7, "group": "neutral:en:14"}
+{"text": "is it good to buy gold", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 5.7, "group": "neutral:en:14"}
+{"text": "how much should I save every month", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.3, "group": "neutral:en:15"}
+{"text": "how much should I save every month", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 8.8, "group": "neutral:en:15"}
+{"text": "how much should I save every month", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 12.6, "group": "neutral:en:15"}
+{"text": "what is GST", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 11.0, "group": "neutral:en:16"}
+{"text": "what is GST", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 6.2, "group": "neutral:en:16"}
+{"text": "what is GST", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 13.8, "group": "neutral:en:16"}
+{"text": "my salary got credited today", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 4.3, "group": "neutral:en:17"}
+{"text": "my salary got credited today", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 7.6, "group": "neutral:en:17"}
+{"text": "my salary got credited today", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 11.3, "group": "neutral:en:17"}
+{"text": "I cleared my loan last month", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 4.7, "group": "neutral:en:18"}
+{"text": "I cleared my loan last month", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 8.4, "group": "neutral:en:18"}
+{"text": "I cleared my loan last month", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.4, "group": "neutral:en:18"}
+{"text": "I am doing better now, thanks", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.4, "group": "neutral:en:19"}
+{"text": "I am doing better now, thanks", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 11.4, "group": "neutral:en:19"}
+{"text": "I am doing better now, thanks", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.3, "group": "neutral:en:19"}
+{"text": "who is the chief minister", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 12.6, "group": "neutral:en:20"}
+{"text": "who is the chief minister", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 6.5, "group": "neutral:en:20"}
+{"text": "who is the chief minister", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.6, "group": "neutral:en:20"}
+{"text": "how to write a resume", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.5, "group": "neutral:en:21"}
+{"text": "how to write a resume", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 9.4, "group": "neutral:en:21"}
+{"text": "how to write a resume", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 8.0, "group": "neutral:en:21"}
+{"text": "how to open a savings account", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 12.2, "group": "neutral:en:22"}
+{"text": "how to open a savings account", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 13.4, "group": "neutral:en:22"}
+{"text": "how to open a savings account", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 8.2, "group": "neutral:en:22"}
+{"text": "what is an EMI", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.3, "group": "neutral:en:23"}
+{"text": "what is an EMI", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 3.7, "group": "neutral:en:23"}
+{"text": "what is an EMI", "category": "general_financial_stress", "language": "en", "severity": "none", "stress": 10.7, "group": "neutral:en:23"}
+{"text": "வணக்கம்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 10.1, "group": "neutral:ta:0"}
+{"text": "வணக்கம்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 13.9, "group": "neutral:ta:0"}
+{"text": "வணக்கம்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 12.0, "group": "neutral:ta:0"}
+{"text": "நன்றி", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 6.1, "group": "neutral:ta:1"}
+{"text": "நன்றி", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 7.2, "group": "neutral:ta:1"}
+{"text": "நன்றி", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 10.4, "group": "neutral:ta:1"}
+{"text": "சேமிப்பு பற்றி சொல்லுங்கள்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 3.2, "group": "neutral:ta:2"}
+{"text": "சேமிப்பு பற்றி சொல்லுங்கள்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 8.1, "group": "neutral:ta:2"}
+{"text": "சேமிப்பு பற்றி சொல்லுங்கள்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 4.8, "group": "neutral:ta:2"}
+{"text": "வங்கிக் கணக்கு எப்படி திறப்பது", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 4.3, "group": "neutral:ta:3"}
+{"text": "வங்கிக் கணக்கு எப்படி திறப்பது", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 3.6, "group": "neutral:ta:3"}
+{"text": "வங்கிக் கணக்கு எப்படி திறப்பது", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 11.5, "group": "neutral:ta:3"}
+{"text": "தங்கம் வாங்குவது நல்லதா", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 4.4, "group": "neutral:ta:4"}
+{"text": "தங்கம் வாங்குவது நல்லதா", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 5.7, "group": "neutral:ta:4"}
+{"text": "தங்கம் வாங்குவது நல்லதா", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 7.3, "group": "neutral:ta:4"}
+{"text": "மாதம் எவ்வளவு சேமிக்க வேண்டும்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 12.6, "group": "neutral:ta:5"}
+{"text": "மாதம் எவ்வளவு சேமிக்க வேண்டும்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 3.9, "group": "neutral:ta:5"}
+{"text": "மாதம் எவ்வளவு சேமிக்க வேண்டும்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 7.9, "group": "neutral:ta:5"}
+{"text": "என் கடனை முடித்துவிட்டேன்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 9.0, "group": "neutral:ta:6"}
+{"text": "என் கடனை முடித்துவிட்டேன்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 12.7, "group": "neutral:ta:6"}
+{"text": "என் கடனை முடித்துவிட்டேன்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 12.0, "group": "neutral:ta:6"}
+{"text": "இப்போது நன்றாக இருக்கிறேன்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 12.5, "group": "neutral:ta:7"}
+{"text": "இப்போது நன்றாக இருக்கிறேன்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 6.1, "group": "neutral:ta:7"}
+{"text": "இப்போது நன்றாக இருக்கிறேன்", "category": "general_financial_stress", "language": "ta", "severity": "none", "stress": 7.6, "group": "neutral:ta:7"}
+{"text": "vanakkam", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 6.9, "group": "neutral:tanglish:0"}
+{"text": "vanakkam", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 12.7, "group": "neutral:tanglish:0"}
+{"text": "vanakkam", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 13.5, "group": "neutral:tanglish:0"}
+{"text": "romba nandri", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 4.7, "group": "neutral:tanglish:1"}
+{"text": "romba nandri", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 4.9, "group": "neutral:tanglish:1"}
+{"text": "romba nandri", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 5.6, "group": "neutral:tanglish:1"}
+{"text": "saving pathi sollunga", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 5.6, "group": "neutral:tanglish:2"}
+{"text": "saving pathi sollunga", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 8.3, "group": "neutral:tanglish:2"}
+{"text": "saving pathi sollunga", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 9.5, "group": "neutral:tanglish:2"}
+{"text": "bank account epdi open panradhu", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 5.9, "group": "neutral:tanglish:3"}
+{"text": "bank account epdi open panradhu", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 3.0, "group": "neutral:tanglish:3"}
+{"text": "bank account epdi open panradhu", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 7.6, "group": "neutral:tanglish:3"}
+{"text": "gold vaangalama", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 7.1, "group": "neutral:tanglish:4"}
+{"text": "gold vaangalama", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 9.2, "group": "neutral:tanglish:4"}
+{"text": "gold vaangalama", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 13.5, "group": "neutral:tanglish:4"}
+{"text": "maasam evlo save pannanum", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 10.6, "group": "neutral:tanglish:5"}
+{"text": "maasam evlo save pannanum", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 8.7, "group": "neutral:tanglish:5"}
+{"text": "maasam evlo save pannanum", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 9.8, "group": "neutral:tanglish:5"}
+{"text": "kadan mudichitten", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 10.4, "group": "neutral:tanglish:6"}
+{"text": "kadan mudichitten", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 3.6, "group": "neutral:tanglish:6"}
+{"text": "kadan mudichitten", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 12.9, "group": "neutral:tanglish:6"}
+{"text": "ippo nalla irukken", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 11.6, "group": "neutral:tanglish:7"}
+{"text": "ippo nalla irukken", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 12.6, "group": "neutral:tanglish:7"}
+{"text": "ippo nalla irukken", "category": "general_financial_stress", "language": "tanglish", "severity": "none", "stress": 11.8, "group": "neutral:tanglish:7"}
+{"text": "How do I make a monthly budget?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 17.1, "group": "faq:budget_basics:0"}
+{"text": "how to plan my salary", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 17.2, "group": "faq:budget_basics:1"}
+{"text": "budget podradhu epdi", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 11.9, "group": "faq:budget_basics:2"}
+{"text": "What is an emergency fund?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 21.4, "group": "faq:emergency_fund:0"}
+{"text": "how much should I save for emergencies", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 11.1, "group": "faq:emergency_fund:1"}
+{"text": "How can I save money on a low income?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 11.2, "group": "faq:save_low_income:0"}
+{"text": "salary is small how to save", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 13.8, "group": "faq:save_low_income:1"}
+{"text": "konjam salary epdi save panradhu", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 12.9, "group": "faq:save_low_income:2"}
+{"text": "Should I put money in RD or FD?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 16.1, "group": "faq:rd_fd:0"}
+{"text": "what is recurring deposit", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 10.9, "group": "faq:rd_fd:1"}
+{"text": "fixed deposit or chit", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 10.0, "group": "faq:rd_fd:2"}
+{"text": "What post office savings schemes are there?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 12.7, "group": "faq:post_office_schemes:0"}
+{"text": "Sukanya Samriddhi", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 11.8, "group": "faq:post_office_schemes:1"}
+{"text": "PPF account", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 16.5, "group": "faq:post_office_schemes:2"}
+{"text": "Are chit funds safe?", "category": "chit_fund_default", "language": "en", "severity": "info", "stress": 10.5, "group": "faq:chit_safe:0"}
+{"text": "how to check if a chit is registered", "category": "chit_fund_default", "language": "en", "severity": "info", "stress": 25.7, "group": "faq:chit_safe:1"}
+{"text": "seettu safe ah", "category": "chit_fund_default", "language": "tanglish", "severity": "info", "stress": 21.1, "group": "faq:chit_safe:2"}
+{"text": "How do I open a bank account with no money?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 12.7, "group": "faq:jan_dhan:0"}
+{"text": "zero balance account", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 14.5, "group": "faq:jan_dhan:1"}
+{"text": "Jan Dhan account", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 16.3, "group": "faq:jan_dhan:2"}
+{"text": "Money was taken from my account by fraud", "category": "loan_app_harassment", "language": "en", "severity": "info", "stress": 16.6, "group": "faq:upi_fraud:0"}
+{"text": "UPI fraud what to do", "category": "loan_app_harassment", "language": "en", "severity": "info", "stress": 12.2, "group": "faq:upi_fraud:1"}
+{"text": "someone cheated me on GPay", "category": "loan_app_harassment", "language": "tanglish", "severity": "info", "stress": 25.3, "group": "faq:upi_fraud:2"}
+{"text": "Someone is asking for my OTP", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 27.9, "group": "faq:otp_scam:0"}
+{"text": "KYC update call", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 18.4, "group": "faq:otp_scam:1"}
+{"text": "fake bank call", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 18.7, "group": "faq:otp_scam:2"}
+{"text": "Police called saying I am under digital arrest", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 11.5, "group": "faq:digital_arrest:0"}
+{"text": "CBI video call asking money", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 11.8, "group": "faq:digital_arrest:1"}
+{"text": "My cheque bounced, what happens?", "category": "blade_finance", "language": "en", "severity": "info", "stress": 16.2, "group": "faq:cheque_bounce:0"}
+{"text": "cheque given to lender bounced", "category": "blade_finance", "language": "en", "severity": "info", "stress": 14.8, "group": "faq:cheque_bounce:1"}
+{"text": "check bounce case", "category": "blade_finance", "language": "tanglish", "severity": "info", "stress": 24.9, "group": "faq:cheque_bounce:2"}
+{"text": "What is a CIBIL score?", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 12.9, "group": "faq:cibil_score:0"}
+{"text": "what is credit score", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 10.4, "group": "faq:cibil_score:1"}
+{"text": "how to check my credit score free", "category": "credit_card_debt", "language": "tanglish", "severity": "info", "stress": 27.1, "group": "faq:cibil_score:2"}
+{"text": "How can I improve my credit score?", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 19.5, "group": "faq:improve_score:0"}
+{"text": "loan rejected low cibil", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 12.6, "group": "faq:improve_score:1"}
+{"text": "Should I settle my loan?", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 19.8, "group": "faq:loan_settlement:0"}
+{"text": "one time settlement OTS", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 10.5, "group": "faq:loan_settlement:1"}
+{"text": "bank offering settlement", "category": "credit_card_debt", "language": "tanglish", "severity": "info", "stress": 19.5, "group": "faq:loan_settlement:2"}
+{"text": "Can I close my loan early?", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 27.6, "group": "faq:prepayment:0"}
+{"text": "foreclosure charges", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 25.5, "group": "faq:prepayment:1"}
+{"text": "prepay loan penalty", "category": "credit_card_debt", "language": "tanglish", "severity": "info", "stress": 22.5, "group": "faq:prepayment:2"}
+{"text": "What is flat interest rate?", "category": "microfinance_debt", "language": "en", "severity": "info", "stress": 14.7, "group": "faq:flat_vs_reducing:0"}
+{"text": "flat rate vs reducing rate", "category": "microfinance_debt", "language": "en", "severity": "info", "stress": 16.6, "group": "faq:flat_vs_reducing:1"}
+{"text": "why is my loan interest so high", "category": "microfinance_debt", "language": "tanglish", "severity": "info", "stress": 13.0, "group": "faq:flat_vs_reducing:2"}
+{"text": "I have many loans, how do I manage?", "category": "microfinance_debt", "language": "en", "severity": "info", "stress": 23.9, "group": "faq:debt_consolidation:0"}
+{"text": "should I take one loan to close all loans", "category": "microfinance_debt", "language": "en", "severity": "info", "stress": 19.6, "group": "faq:debt_consolidation:1"}
+{"text": "debt consolidation", "category": "microfinance_debt", "language": "tanglish", "severity": "info", "stress": 24.0, "group": "faq:debt_consolidation:2"}
+{"text": "I can't pay my EMI this month", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 15.9, "group": "faq:cant_pay_emi:0"}
+{"text": "missed EMI what will happen", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 14.0, "group": "faq:cant_pay_emi:1"}
+{"text": "EMI katta mudiyala", "category": "credit_card_debt", "language": "tanglish", "severity": "info", "stress": 24.6, "group": "faq:cant_pay_emi:2"}
+{"text": "Recovery agents are harassing me", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 27.7, "group": "faq:recovery_agents:0"}
+{"text": "bank agent came home and shouted", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 25.3, "group": "faq:recovery_agents:1"}
+{"text": "collection agent threatening", "category": "credit_card_debt", "language": "tanglish", "severity": "info", "stress": 24.5, "group": "faq:recovery_agents:2"}
+{"text": "Can the bank take my house?", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 24.7, "group": "faq:property_seizure:0"}
+{"text": "SARFAESI notice", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 23.3, "group": "faq:property_seizure:1"}
+{"text": "bank auction notice for house", "category": "credit_card_debt", "language": "tanglish", "severity": "info", "stress": 14.1, "group": "faq:property_seizure:2"}
+{"text": "Moneylender is keeping my house papers", "category": "blade_finance", "language": "en", "severity": "info", "stress": 19.3, "group": "faq:documents_with_lender:0"}
+{"text": "lender took my documents", "category": "blade_finance", "language": "en", "severity": "info", "stress": 16.4, "group": "faq:documents_with_lender:1"}
+{"text": "patta with vatti kaaran", "category": "blade_finance", "language": "tanglish", "severity": "info", "stress": 10.5, "group": "faq:documents_with_lender:2"}
+{"text": "Police are not taking my complaint", "category": "blade_finance", "language": "en", "severity": "info", "stress": 10.5, "group": "faq:police_refuse:0"}
+{"text": "how to file a police complaint", "category": "blade_finance", "language": "en", "severity": "info", "stress": 15.0, "group": "faq:police_refuse:1"}
+{"text": "FIR not registered", "category": "blade_finance", "language": "tanglish", "severity": "info", "stress": 14.7, "group": "faq:police_refuse:2"}
+{"text": "What is Lok Adalat?", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 22.5, "group": "faq:lok_adalat_how:0"}
+{"text": "how to settle bank loan in Lok Adalat", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 27.2, "group": "faq:lok_adalat_how:1"}
+{"text": "How do I know if a loan app is genuine?", "category": "loan_app_harassment", "language": "en", "severity": "info", "stress": 18.1, "group": "faq:legit_lender_check:0"}
+{"text": "is this lender RBI registered", "category": "loan_app_harassment", "language": "en", "severity": "info", "stress": 26.9, "group": "faq:legit_lender_check:1"}
+{"text": "Loan app is sending my morphed photos", "category": "loan_app_harassment", "language": "en", "severity": "info", "stress": 27.8, "group": "faq:loan_app_morph:0"}
+{"text": "loan app messaging my contacts", "category": "loan_app_harassment", "language": "en", "severity": "info", "stress": 27.2, "group": "faq:loan_app_morph:1"}
+{"text": "app threatening to call my family", "category": "loan_app_harassment", "language": "tanglish", "severity": "info", "stress": 16.6, "group": "faq:loan_app_morph:2"}
+{"text": "How do I apply for Kalaignar Magalir Urimai Thogai?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 14.0, "group": "faq:kmut_apply:0"}
+{"text": "1000 rupees scheme for women", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 14.1, "group": "faq:kmut_apply:1"}
+{"text": "magalir urimai thogai eligibility", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 13.5, "group": "faq:kmut_apply:2"}
+{"text": "What documents do I need for government schemes?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 13.7, "group": "faq:common_documents:0"}
+{"text": "documents for scheme apply", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 21.2, "group": "faq:common_documents:1"}
+{"text": "How do I get an income certificate?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 26.2, "group": "faq:esevai_certificate:0"}
+{"text": "community certificate apply", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 25.1, "group": "faq:esevai_certificate:1"}
+{"text": "e-Sevai centre", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 18.6, "group": "faq:esevai_certificate:2"}
+{"text": "How do I join a self-help group?", "category": "blade_finance", "language": "en", "severity": "info", "stress": 21.8, "group": "faq:join_shg:0"}
+{"text": "SHG loan how to get", "category": "blade_finance", "language": "en", "severity": "info", "stress": 24.4, "group": "faq:join_shg:1"}
+{"text": "magalir kuzhu join panradhu", "category": "blade_finance", "language": "tanglish", "severity": "info", "stress": 11.5, "group": "faq:join_shg:2"}
+{"text": "How do I get the CM health insurance card?", "category": "medical_debt", "language": "en", "severity": "info", "stress": 21.9, "group": "faq:cmchis_card:0"}
+{"text": "free treatment scheme Tamil Nadu", "category": "medical_debt", "language": "en", "severity": "info", "stress": 26.4, "group": "faq:cmchis_card:1"}
+{"text": "CMCHIS card", "category": "medical_debt", "language": "tanglish", "severity": "info", "stress": 24.1, "group": "faq:cmchis_card:2"}
+{"text": "Hospital bill is too high", "category": "medical_debt", "language": "en", "severity": "info", "stress": 23.5, "group": "faq:medical_bill_help:0"}
+{"text": "how to reduce hospital bill", "category": "medical_debt", "language": "en", "severity": "info", "stress": 18.6, "group": "faq:medical_bill_help:1"}
+{"text": "private hospital asking advance", "category": "medical_debt", "language": "tanglish", "severity": "info", "stress": 13.2, "group": "faq:medical_bill_help:2"}
+{"text": "My insurance claim was rejected", "category": "medical_debt", "language": "en", "severity": "info", "stress": 24.2, "group": "faq:insurance_claim_rejected:0"}
+{"text": "insurance company not paying", "category": "medical_debt", "language": "en", "severity": "info", "stress": 16.0, "group": "faq:insurance_claim_rejected:1"}
+{"text": "Which insurance should I buy?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 24.4, "group": "faq:term_insurance:0"}
+{"text": "is LIC policy good investment", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 27.5, "group": "faq:term_insurance:1"}
+{"text": "term insurance", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 17.1, "group": "faq:term_insurance:2"}
+{"text": "I lost my job, what should I do?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 17.2, "group": "faq:job_loss:0"}
+{"text": "no job how to manage", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 27.0, "group": "faq:job_loss:1"}
+{"text": "velai pochu", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 23.0, "group": "faq:job_loss:2"}
+{"text": "How can I withdraw my PF?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 13.1, "group": "faq:epf_withdraw:0"}
+{"text": "EPF advance for medical", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 12.3, "group": "faq:epf_withdraw:1"}
+{"text": "PF money withdrawal", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 12.7, "group": "faq:epf_withdraw:2"}
+{"text": "Job offer asking me to pay a fee", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 26.3, "group": "faq:fake_job:0"}
+{"text": "work from home task scam", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 24.5, "group": "faq:fake_job:1"}
+{"text": "part time job telegram", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 12.6, "group": "faq:fake_job:2"}
+{"text": "Is this double your money scheme real?", "category": "chit_fund_default", "language": "en", "severity": "info", "stress": 24.9, "group": "faq:ponzi:0"}
+{"text": "someone promising high returns", "category": "chit_fund_default", "language": "en", "severity": "info", "stress": 27.6, "group": "faq:ponzi:1"}
+{"text": "MLM business join panalama", "category": "chit_fund_default", "language": "tanglish", "severity": "info", "stress": 21.8, "group": "faq:ponzi:2"}
+{"text": "I lost money in online rummy", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 16.3, "group": "faq:online_gambling:0"}
+{"text": "betting addiction", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 19.9, "group": "faq:online_gambling:1"}
+{"text": "online gambling debt", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 12.4, "group": "faq:online_gambling:2"}
+{"text": "I am very stressed about money", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 10.3, "group": "faq:stress_coping:0"}
+{"text": "can't sleep because of debt", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 27.5, "group": "faq:stress_coping:1"}
+{"text": "romba tension ah irukku", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 21.7, "group": "faq:stress_coping:2"}
+{"text": "How do I tell my family about my debt?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 19.5, "group": "faq:tell_family:0"}
+{"text": "my husband doesn't know about the loan", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 26.8, "group": "faq:tell_family:1"}
+{"text": "family ku theriyadhu", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 17.8, "group": "faq:tell_family:2"}
+{"text": "My husband takes all my salary", "category": "wedding_debt", "language": "en", "severity": "info", "stress": 25.7, "group": "faq:domestic_money_abuse:0"}
+{"text": "family forcing me to take loans", "category": "wedding_debt", "language": "en", "severity": "info", "stress": 24.9, "group": "faq:domestic_money_abuse:1"}
+{"text": "financial abuse", "category": "wedding_debt", "language": "tanglish", "severity": "info", "stress": 13.8, "group": "faq:domestic_money_abuse:2"}
+{"text": "என் கணவர் என் சம்பளத்தை எடுத்துக்கொள்கிறார்", "category": "wedding_debt", "language": "en", "severity": "info", "stress": 14.5, "group": "faq:domestic_money_abuse:3"}
+{"text": "How do I get a Kisan Credit Card?", "category": "agricultural_debt", "language": "en", "severity": "info", "stress": 15.3, "group": "faq:kcc_apply:0"}
+{"text": "crop loan from bank", "category": "agricultural_debt", "language": "en", "severity": "info", "stress": 14.3, "group": "faq:kcc_apply:1"}
+{"text": "KCC apply", "category": "agricultural_debt", "language": "tanglish", "severity": "info", "stress": 20.6, "group": "faq:kcc_apply:2"}
+{"text": "How do I claim crop insurance?", "category": "agricultural_debt", "language": "en", "severity": "info", "stress": 14.7, "group": "faq:crop_claim:0"}
+{"text": "crop damaged by rain", "category": "agricultural_debt", "language": "en", "severity": "info", "stress": 17.5, "group": "faq:crop_claim:1"}
+{"text": "PMFBY claim", "category": "agricultural_debt", "language": "tanglish", "severity": "info", "stress": 12.4, "group": "faq:crop_claim:2"}
+{"text": "PM Kisan money not received", "category": "agricultural_debt", "language": "en", "severity": "info", "stress": 26.4, "group": "faq:pmkisan_status:0"}
+{"text": "PM Kisan eKYC", "category": "agricultural_debt", "language": "en", "severity": "info", "stress": 16.4, "group": "faq:pmkisan_status:1"}
+{"text": "Should I sell gold or take a gold loan?", "category": "gold_loan_overdue", "language": "en", "severity": "info", "stress": 18.2, "group": "faq:gold_loan_vs_sell:0"}
+{"text": "gold loan interest", "category": "gold_loan_overdue", "language": "en", "severity": "info", "stress": 20.5, "group": "faq:gold_loan_vs_sell:1"}
+{"text": "nagai adagu vaikalama", "category": "gold_loan_overdue", "language": "tanglish", "severity": "info", "stress": 26.3, "group": "faq:gold_loan_vs_sell:2"}
+{"text": "I got a gold auction notice", "category": "gold_loan_overdue", "language": "en", "severity": "info", "stress": 17.6, "group": "faq:gold_auction_notice:0"}
+{"text": "my jewels will be auctioned", "category": "gold_loan_overdue", "language": "en", "severity": "info", "stress": 26.5, "group": "faq:gold_auction_notice:1"}
+{"text": "When do I start repaying my education loan?", "category": "education_loan", "language": "en", "severity": "info", "stress": 19.0, "group": "faq:education_loan_moratorium:0"}
+{"text": "education loan moratorium", "category": "education_loan", "language": "en", "severity": "info", "stress": 19.6, "group": "faq:education_loan_moratorium:1"}
+{"text": "no job but education loan EMI", "category": "education_loan", "language": "tanglish", "severity": "info", "stress": 19.4, "group": "faq:education_loan_moratorium:2"}
+{"text": "What scholarships are there for my child?", "category": "education_loan", "language": "en", "severity": "info", "stress": 10.3, "group": "faq:scholarships:0"}
+{"text": "college fees help", "category": "education_loan", "language": "en", "severity": "info", "stress": 17.9, "group": "faq:scholarships:1"}
+{"text": "post matric scholarship", "category": "education_loan", "language": "tanglish", "severity": "info", "stress": 13.3, "group": "faq:scholarships:2"}
+{"text": "Where can I learn a skill for free?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 10.1, "group": "faq:naan_mudhalvan:0"}
+{"text": "skill training Tamil Nadu", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 24.4, "group": "faq:naan_mudhalvan:1"}
+{"text": "Naan Mudhalvan", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 13.1, "group": "faq:naan_mudhalvan:2"}
+{"text": "I want to start a small business, where can I get a loan?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 18.5, "group": "faq:start_business_loan:0"}
+{"text": "business loan without security", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 23.1, "group": "faq:start_business_loan:1"}
+{"text": "Is there a scheme to build a house?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 20.0, "group": "faq:pmay_housing:0"}
+{"text": "housing scheme for poor", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 15.9, "group": "faq:pmay_housing:1"}
+{"text": "PMAY", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 19.3, "group": "faq:pmay_housing:2"}
+{"text": "Landlord is evicting me", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 20.0, "group": "faq:rent_eviction:0"}
+{"text": "rent arrears what to do", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 24.1, "group": "faq:rent_eviction:1"}
+{"text": "vaadagai katta mudiyala", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 11.9, "group": "faq:rent_eviction:2"}
+{"text": "How do I get a ration card?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 20.1, "group": "faq:ration_card:0"}
+{"text": "ration card name add", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 14.5, "group": "faq:ration_card:1"}
+{"text": "smart card apply", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 15.0, "group": "faq:ration_card:2"}
+{"text": "Pension for elderly parents", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 23.9, "group": "faq:old_age_pension:0"}
+{"text": "old age pension apply", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 19.1, "group": "faq:old_age_pension:1"}
+{"text": "widow pension", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 20.1, "group": "faq:old_age_pension:2"}
+{"text": "How do I register in the labour welfare board?", "category": "wedding_debt", "language": "en", "severity": "info", "stress": 23.7, "group": "faq:unorganised_board:0"}
+{"text": "construction worker welfare board", "category": "wedding_debt", "language": "en", "severity": "info", "stress": 26.4, "group": "faq:unorganised_board:1"}
+{"text": "auto driver welfare board", "category": "wedding_debt", "language": "tanglish", "severity": "info", "stress": 18.0, "group": "faq:unorganised_board:2"}
+{"text": "Do I need to file income tax?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 21.0, "group": "faq:itr_needed:0"}
+{"text": "ITR filing for small salary", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 19.1, "group": "faq:itr_needed:1"}
+{"text": "TDS refund", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 19.2, "group": "faq:itr_needed:2"}
+{"text": "Is buy now pay later safe?", "category": "festival_credit", "language": "en", "severity": "info", "stress": 22.5, "group": "faq:bnpl:0"}
+{"text": "pay later app bill", "category": "festival_credit", "language": "en", "severity": "info", "stress": 18.1, "group": "faq:bnpl:1"}
+{"text": "EMI on phone purchase", "category": "festival_credit", "language": "tanglish", "severity": "info", "stress": 19.6, "group": "faq:bnpl:2"}
+{"text": "I signed as guarantor and now the bank is calling me", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 18.6, "group": "faq:guarantor:0"}
+{"text": "guarantor liability", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 26.9, "group": "faq:guarantor:1"}
+{"text": "Group members are pressuring me to pay", "category": "microfinance_debt", "language": "en", "severity": "info", "stress": 22.6, "group": "faq:joint_liability_group:0"}
+{"text": "microfinance center meeting problem", "category": "microfinance_debt", "language": "en", "severity": "info", "stress": 25.8, "group": "faq:joint_liability_group:1"}
+{"text": "JLG loan default", "category": "microfinance_debt", "language": "tanglish", "severity": "info", "stress": 27.0, "group": "faq:joint_liability_group:2"}
+{"text": "How do I plan for Deepavali without debt?", "category": "festival_credit", "language": "en", "severity": "info", "stress": 14.7, "group": "faq:festival_planning:0"}
+{"text": "Pongal expenses planning", "category": "festival_credit", "language": "en", "severity": "info", "stress": 20.1, "group": "faq:festival_planning:1"}
+{"text": "How do I plan a wedding without big loans?", "category": "wedding_debt", "language": "en", "severity": "info", "stress": 27.0, "group": "faq:wedding_planning:0"}
+{"text": "marriage expenses too high", "category": "wedding_debt", "language": "en", "severity": "info", "stress": 25.1, "group": "faq:wedding_planning:1"}
+{"text": "What interest can a moneylender legally charge?", "category": "blade_finance", "language": "en", "severity": "info", "stress": 12.5, "group": "faq:moneylender_legal_rate:0"}
+{"text": "is 10 rupees vatti legal", "category": "blade_finance", "language": "en", "severity": "info", "stress": 12.2, "group": "faq:moneylender_legal_rate:1"}
+{"text": "vatti evlo legal", "category": "blade_finance", "language": "tanglish", "severity": "info", "stress": 18.0, "group": "faq:moneylender_legal_rate:2"}
+{"text": "How do I complain against a bank?", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 11.3, "group": "faq:complain_bank:0"}
+{"text": "bank wrongly charged me", "category": "credit_card_debt", "language": "en", "severity": "info", "stress": 14.3, "group": "faq:complain_bank:1"}
+{"text": "bank not responding", "category": "credit_card_debt", "language": "tanglish", "severity": "info", "stress": 11.3, "group": "faq:complain_bank:2"}
+{"text": "Bank cut money for minimum balance", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 22.1, "group": "faq:minimum_balance:0"}
+{"text": "account in negative balance", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 24.1, "group": "faq:minimum_balance:1"}
+{"text": "How does compound interest work?", "category": "blade_finance", "language": "en", "severity": "info", "stress": 26.1, "group": "faq:interest_compounding:0"}
+{"text": "why does my loan keep growing", "category": "blade_finance", "language": "en", "severity": "info", "stress": 12.8, "group": "faq:interest_compounding:1"}
+{"text": "What can you do?", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 22.9, "group": "faq:what_is_vazhi:0"}
+{"text": "who are you", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 21.9, "group": "faq:what_is_vazhi:1"}
+{"text": "what is VazhiAPI", "category": "general_financial_stress", "language": "tanglish", "severity": "info", "stress": 12.6, "group": "faq:what_is_vazhi:2"}
+{"text": "help", "category": "general_financial_stress", "language": "en", "severity": "info", "stress": 25.9, "group": "faq:what_is_vazhi:3"}

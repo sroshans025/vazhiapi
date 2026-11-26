@@ -26,6 +26,7 @@ def main():
         "laws": knowledge.laws(),
         "helplines": knowledge.helplines(),
         "districts": knowledge.TN_DISTRICTS,
+        "faq": knowledge.faq(),
         "nlp": {
             "crisis": CRISIS_PHRASES, "severe": SEVERE_PHRASES, "high": HIGH_PHRASES,
             "urgency": URGENCY_KEYWORDS, "tanglish": sorted(TANGLISH_MARKERS),

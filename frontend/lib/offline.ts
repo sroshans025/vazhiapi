@@ -6,14 +6,76 @@
 import KB from "@/lib/kb.json";
 import type { AnalysisSummary, DebtCategory, GovernmentScheme, Helpline, Law } from "@/types";
 
+export interface FaqEntry { id: string; topic: string; q: string[]; kw: string[]; categories: string[]; a: string }
+
 export const kb = KB as unknown as {
   categories: (DebtCategory & { indicators: string[]; laws: string[] })[];
   schemes: (GovernmentScheme & { criteria?: Record<string, unknown> })[];
   laws: Law[];
   helplines: Helpline[];
   districts: string[];
+  faq: FaqEntry[];
   nlp: { crisis: string[]; severe: string[]; high: string[]; urgency: Record<string, number>; tanglish: string[] };
 };
+
+// ── Knowledge retrieval (BM25-lite; mirrors tn_context/knowledge.py::search) ──
+const STOP = new Set(`a an the is are was were be been am i me my mine you your we our they them their he she it its of to in on
+for with at by from as and or but if so do does did doing have has had can could should would will shall may might
+what which who whom how when where why this that these those there here not no yes please tell about any some
+get got give want need know also just very much more most than then too only into out up down over under again
+enna epdi eppadi yen naan nan enaku ennaku irukku iruku panna pannanum sollunga`.split(/\s+/));
+
+function tokens(text: string): string[] {
+  const out: string[] = [];
+  for (let t of text.toLowerCase().match(/[஀-௿]+|[a-z0-9]+/g) ?? []) {
+    if (STOP.has(t) || t.length < 2) continue;
+    if (!/^[஀-௿]/.test(t)) for (const suf of ["ing", "ed", "es", "s"]) if (t.length > 4 && t.endsWith(suf)) { t = t.slice(0, -suf.length); break; }
+    out.push(t);
+  }
+  return out;
+}
+
+export type KbHit = { kind: "faq" | "scheme" | "law" | "category"; id: string; title: string; score: number; item: Record<string, unknown> };
+type Doc = { kind: KbHit["kind"]; id: string; title: string; item: Record<string, unknown>; v: Map<string, number> };
+let _index: { docs: Doc[]; idf: Map<string, number> } | null = null;
+
+function buildIndex() {
+  const docs: Doc[] = [];
+  const add = (kind: KbHit["kind"], id: string, title: string, item: object, fields: [string, number][]) => {
+    const v = new Map<string, number>();
+    for (const [text, w] of fields) for (const t of tokens(text)) v.set(t, (v.get(t) ?? 0) + w);
+    docs.push({ kind, id, title, item: item as Record<string, unknown>, v });
+  };
+  for (const e of kb.faq) add("faq", e.id, e.q[0], e, [[e.q.join(" "), 3], [e.kw.join(" "), 3], [e.topic, 1.5], [e.a, 0.6]]);
+  for (const s of kb.schemes) add("scheme", s.id, s.name, s, [[s.name + " " + s.name_ta, 3], [s.type, 1.5], [s.description + " " + s.benefit, 1]]);
+  for (const l of kb.laws) add("law", l.id, l.name, l, [[l.name + " " + l.name_ta, 2.5], [l.summary, 1], [l.your_rights.join(" "), 0.8]]);
+  for (const c of kb.categories) add("category", c.id, c.label, c, [[c.label + " " + c.label_ta, 2.5], [c.indicators.join(" "), 2], [c.description, 0.8]]);
+  const df = new Map<string, number>();
+  for (const d of docs) for (const t of d.v.keys()) df.set(t, (df.get(t) ?? 0) + 1);
+  const n = docs.length, idf = new Map<string, number>();
+  for (const [t, c] of df) idf.set(t, Math.log(1 + (n - c + 0.5) / (c + 0.5)));
+  return { docs, idf };
+}
+
+export function searchKb(query: string, k = 4): KbHit[] {
+  _index ??= buildIndex();
+  const q = [...new Set(tokens(query))];
+  if (!q.length) return [];
+  const scored: [number, Doc][] = [];
+  for (const d of _index.docs) {
+    let s = 0;
+    for (const t of q) {
+      let tf = d.v.get(t);
+      if (tf === undefined && t.length >= 5) {
+        for (const [key, val] of d.v) if (key.startsWith(t.slice(0, 5))) { tf = val * 0.5; break; }
+      }
+      if (tf) s += (_index.idf.get(t) ?? 1) * (tf * 2.2) / (tf + 1.2);
+    }
+    if (s > 0) scored.push([s / (1 + 0.15 * q.length), d]);
+  }
+  scored.sort((a, b) => b[0] - a[0]);
+  return scored.slice(0, k).map(([s, d]) => ({ kind: d.kind, id: d.id, title: d.title, score: Math.round(s * 1000) / 1000, item: d.item }));
+}
 
 const TAMIL = /[஀-௿]/;
 const norm = (t: string) => t.normalize("NFC").toLowerCase().replace(/[^\p{L}\p{N}\s஀-௿']/gu, " ").replace(/\s+/g, " ").trim();
@@ -110,7 +172,7 @@ export function analyzeLocal(text: string): AnalysisSummary {
   // stress from urgency lexicon
   let urg = 0;
   for (const [k, w] of Object.entries(kb.nlp.urgency)) if (hit(k, n)) urg += w;
-  let stress = Math.min(97, 18 + Math.min(urg / 10, 1) * 55 + Math.min(total, 4) * 4);
+  let stress = Math.min(97, 12 + Math.min(urg / 10, 1) * 55 + Math.min(total, 4) * 7);
   if ((n.split(" ").length <= 3) && total === 0 && urg === 0) stress = Math.min(stress, 15);
   if (level === "critical") stress = Math.max(stress, 90); else if (level === "severe") stress = Math.max(stress, 72); else if (level === "high") stress = Math.max(stress, 55);
   stress = Math.round(stress * 10) / 10;

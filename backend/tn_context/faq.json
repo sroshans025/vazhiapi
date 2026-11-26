@@ -1,0 +1,1477 @@
+{
+ "version": "2025.3",
+ "note": "General guidance for Tamil Nadu households. Rules, rates and benefit amounts change — users are always pointed to the official source.",
+ "entries": [
+  {
+   "id": "budget_basics",
+   "topic": "Budgeting",
+   "q": [
+    "How do I make a monthly budget?",
+    "how to plan my salary",
+    "budget podradhu epdi"
+   ],
+   "kw": [
+    "budget",
+    "plan",
+    "salary",
+    "monthly",
+    "expenses",
+    "பட்ஜெட்",
+    "செலவு",
+    "சம்பளம்",
+    "selavu"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "Start with **one month of real numbers**:\n1. Write your take-home income (all earners).\n2. List fixed costs first: rent, food, power, school fees, medicines, transport.\n3. Add every loan payment (EMIs, weekly vatti, chit instalments).\n4. Whatever is left is for savings and other spending.\n\nA simple target: **essentials ≤ 50–60%, loan repayments ≤ 30%, savings ≥ 10%**. If loans take more than 40% of income, that's a debt-trap warning — talk to your lenders about longer tenure before you miss payments. The **Budget Planner** in Tools does this math for you."
+  },
+  {
+   "id": "emergency_fund",
+   "topic": "Saving",
+   "q": [
+    "What is an emergency fund?",
+    "how much should I save for emergencies"
+   ],
+   "kw": [
+    "emergency",
+    "fund",
+    "save",
+    "savings",
+    "சேமிப்பு",
+    "அவசர",
+    "semippu"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "An emergency fund is money kept aside only for shocks — illness, job loss, a broken two-wheeler — so you don't have to borrow from a moneylender.\n\n- **Goal:** 3 months of essential expenses (start with ₹5,000–₹10,000 as a first milestone).\n- **Where:** a savings account or a recurring deposit you can break, *not* in a chit or gold you'd have to pawn.\n- **How:** set an automatic transfer on salary day, even ₹500 a month. Build it in parallel with repaying high-interest debt."
+  },
+  {
+   "id": "save_low_income",
+   "topic": "Saving",
+   "q": [
+    "How can I save money on a low income?",
+    "salary is small how to save",
+    "konjam salary epdi save panradhu"
+   ],
+   "kw": [
+    "save",
+    "low income",
+    "small salary",
+    "poor",
+    "kammi",
+    "சேமிப்பு",
+    "குறைந்த வருமானம்"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "Small, automatic steps work better than big plans:\n1. **Pay yourself first** — move ₹200–₹500 to a separate account or RD on payday.\n2. **Use what you're entitled to** — ration card PDS, KMUT ₹1,000/month for eligible women heads, free bus travel for women in TN town buses, scholarships.\n3. **Join an SHG** — regular group savings plus cheap credit.\n4. **Cut the costliest leak first** — usually high-interest daily/weekly loans.\n5. **Track cash for one month** — small daily spends (tea, snacks, recharges) add up.\n\nOpen the **Scheme Finder** to see benefits you may be missing."
+  },
+  {
+   "id": "rd_fd",
+   "topic": "Saving",
+   "q": [
+    "Should I put money in RD or FD?",
+    "what is recurring deposit",
+    "fixed deposit or chit"
+   ],
+   "kw": [
+    "rd",
+    "fd",
+    "recurring deposit",
+    "fixed deposit",
+    "deposit",
+    "bank",
+    "வைப்பு"
+   ],
+   "categories": [],
+   "a": "- **Recurring Deposit (RD):** you deposit a fixed amount every month (e.g. ₹500) for 1–5 years and earn interest. Great for building a festival or emergency fund.\n- **Fixed Deposit (FD):** one lump sum locked for a period. Good once you already have savings.\n\nBank and post-office deposits are regulated and insured (bank deposits up to ₹5 lakh per bank under DICGC). They pay less than chit funds promise, but you won't lose your money if an organiser runs away. Rates change — check your bank or post office."
+  },
+  {
+   "id": "post_office_schemes",
+   "topic": "Saving",
+   "q": [
+    "What post office savings schemes are there?",
+    "Sukanya Samriddhi",
+    "PPF account"
+   ],
+   "kw": [
+    "post office",
+    "ppf",
+    "sukanya",
+    "nsc",
+    "mis",
+    "small savings",
+    "அஞ்சலகம்",
+    "தபால்"
+   ],
+   "categories": [],
+   "a": "India Post small-savings schemes are government-backed:\n- **Sukanya Samriddhi Yojana** — for a girl child under 10; long-term savings for her education/marriage, tax benefits.\n- **PPF** — 15-year account, tax-free returns, small yearly minimum.\n- **Post Office RD / Time Deposit / Monthly Income Scheme (MIS)** — safe regular savings or monthly interest.\n- **Senior Citizens Savings Scheme** — for 60+.\n\nInterest rates are revised every quarter — ask your nearest post office or check indiapost.gov.in."
+  },
+  {
+   "id": "chit_safe",
+   "topic": "Chit funds",
+   "q": [
+    "Are chit funds safe?",
+    "how to check if a chit is registered",
+    "seettu safe ah"
+   ],
+   "kw": [
+    "chit",
+    "seettu",
+    "kuri",
+    "registered",
+    "safe",
+    "சீட்டு",
+    "குறி"
+   ],
+   "categories": [
+    "chit_fund_default"
+   ],
+   "a": "Chit funds are legal **only if registered** under the Chit Funds Act, 1982 with the Registrar of Chits (TN Registration Department).\n\nBefore joining:\n1. Ask for the **registration number** and verify it with the District Registrar.\n2. Get a written agreement and receipts for every instalment.\n3. Be wary of very high promised returns or 'only cash' collection.\n\nInformal neighbourhood chits have no protection if the organiser absconds. A bank RD is safer for savings; an SHG loan is cheaper for borrowing. Report fraud at sachet.rbi.org.in or to the police Economic Offences Wing."
+  },
+  {
+   "id": "jan_dhan",
+   "topic": "Banking",
+   "q": [
+    "How do I open a bank account with no money?",
+    "zero balance account",
+    "Jan Dhan account"
+   ],
+   "kw": [
+    "bank account",
+    "open account",
+    "zero balance",
+    "jan dhan",
+    "வங்கி கணக்கு",
+    "account open"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "You can open a **zero-balance account (PMJDY / BSBD)** at any bank branch or Bank Mitra with Aadhaar (or other ID and address proof). It comes with a RuPay card and is needed to receive government benefits like KMUT and PM-KISAN directly.\n\nTips: link your mobile number, never share your OTP/PIN, and ask the bank to enable UPI so you don't have to carry cash. Helpline: 1800-11-0001."
+  },
+  {
+   "id": "upi_fraud",
+   "topic": "Fraud",
+   "q": [
+    "Money was taken from my account by fraud",
+    "UPI fraud what to do",
+    "someone cheated me on GPay"
+   ],
+   "kw": [
+    "upi",
+    "fraud",
+    "gpay",
+    "phonepe",
+    "paytm",
+    "otp",
+    "scam",
+    "cheated",
+    "online fraud",
+    "மோசடி",
+    "ஏமாற்று"
+   ],
+   "categories": [
+    "loan_app_harassment"
+   ],
+   "a": "**Act within the first hour — speed matters:**\n1. Call **1930** (National Cyber Crime Helpline) or file at **cybercrime.gov.in** — they can freeze the money in transit.\n2. Call your bank's customer care (number on the back of your card / official app) and **block your card/UPI**.\n3. Give the bank a written complaint. Under RBI rules, if a fraud wasn't your fault and you report it within **3 working days**, your liability can be **zero**.\n4. Keep screenshots, the transaction ID and the fraudster's number.\n\nNever pay anyone who calls promising to 'recover' your money — that is a second scam."
+  },
+  {
+   "id": "otp_scam",
+   "topic": "Fraud",
+   "q": [
+    "Someone is asking for my OTP",
+    "KYC update call",
+    "fake bank call"
+   ],
+   "kw": [
+    "otp",
+    "kyc",
+    "pin",
+    "cvv",
+    "call",
+    "link",
+    "sms",
+    "customer care",
+    "ஓடிபி"
+   ],
+   "categories": [],
+   "a": "**Banks, RBI, police and government never ask for your OTP, PIN, CVV or to install a screen-sharing app.** Common traps:\n- 'Your KYC expired / account will be blocked — click this link'\n- 'You won a prize / refund — enter your UPI PIN to receive' (a PIN is only for *sending* money)\n- Fake customer-care numbers from search results\n- 'Courier/drugs found in your name — digital arrest' video calls\n\nHang up, don't click, and verify using the number printed on your card or passbook. Report suspicious numbers on the **Sanchar Saathi** portal (Chakshu) and frauds on **1930**."
+  },
+  {
+   "id": "digital_arrest",
+   "topic": "Fraud",
+   "q": [
+    "Police called saying I am under digital arrest",
+    "CBI video call asking money"
+   ],
+   "kw": [
+    "digital arrest",
+    "cbi",
+    "customs",
+    "parcel",
+    "video call",
+    "police call",
+    "arrest"
+   ],
+   "categories": [],
+   "a": "**'Digital arrest' is a scam. Real police never arrest anyone over a video call or ask you to transfer money to 'verify' your account.** Disconnect immediately, don't stay on camera, and don't send money. Tell a family member, then report on **1930** / cybercrime.gov.in. If you already paid, report within the hour so the transfer can be frozen."
+  },
+  {
+   "id": "cheque_bounce",
+   "topic": "Legal",
+   "q": [
+    "My cheque bounced, what happens?",
+    "cheque given to lender bounced",
+    "check bounce case"
+   ],
+   "kw": [
+    "cheque",
+    "check",
+    "bounce",
+    "dishonour",
+    "section 138",
+    "காசோலை"
+   ],
+   "categories": [
+    "blade_finance",
+    "credit_card_debt"
+   ],
+   "a": "A bounced cheque can lead to a case under **Section 138 of the Negotiable Instruments Act**:\n- The payee must send you a legal notice within 30 days of the bounce.\n- You then have **15 days** to pay before they can file a complaint.\n\nIf a moneylender is misusing a **blank/security cheque** you gave years ago for a loan you've already repaid (or for illegal interest), don't ignore notices — keep your repayment proof and contact free legal aid (**DLSA 15100**). Courts examine whether a legally enforceable debt actually exists."
+  },
+  {
+   "id": "cibil_score",
+   "topic": "Credit",
+   "q": [
+    "What is a CIBIL score?",
+    "what is credit score",
+    "how to check my credit score free"
+   ],
+   "kw": [
+    "cibil",
+    "credit score",
+    "credit report",
+    "experian",
+    "equifax",
+    "score",
+    "கிரெடிட் ஸ்கோர்"
+   ],
+   "categories": [
+    "credit_card_debt"
+   ],
+   "a": "A **credit score** (300–900; CIBIL is one bureau) shows lenders how reliably you repay. Around **750+** gets better loan offers.\n\nYou can get a **free full credit report once a year from each bureau** — CIBIL, Experian, Equifax and CRIF High Mark — on their websites. Check it for loans you never took (a sign of identity fraud) and dispute errors with the bureau.\n\nInformal loans (moneylenders, chits) don't appear in it — which is also why an SHG/MUDRA loan repaid on time helps you *build* a score."
+  },
+  {
+   "id": "improve_score",
+   "topic": "Credit",
+   "q": [
+    "How can I improve my credit score?",
+    "loan rejected low cibil"
+   ],
+   "kw": [
+    "improve",
+    "credit score",
+    "cibil",
+    "rejected",
+    "low score"
+   ],
+   "categories": [
+    "credit_card_debt"
+   ],
+   "a": "1. **Pay every EMI and card bill on time** — set auto-debit for at least the minimum.\n2. **Keep credit-card use under ~30% of the limit.**\n3. **Don't apply for many loans at once** — each application is a hard enquiry.\n4. **Avoid 'settlement'** if you can repay — 'settled' stays on your report for years; 'closed' is better.\n5. Keep old cards/accounts open if they have a good record.\n6. Dispute any wrong entry with the bureau.\n\nScores usually recover within 6–12 months of consistent on-time payments."
+  },
+  {
+   "id": "loan_settlement",
+   "topic": "Credit",
+   "q": [
+    "Should I settle my loan?",
+    "one time settlement OTS",
+    "bank offering settlement"
+   ],
+   "kw": [
+    "settlement",
+    "ots",
+    "settle",
+    "one time settlement",
+    "waiver"
+   ],
+   "categories": [
+    "credit_card_debt",
+    "education_loan",
+    "gold_loan_overdue"
+   ],
+   "a": "A **one-time settlement (OTS)** lets you pay less than you owe and close the dispute — useful when you truly can't repay in full.\n\nBefore you agree:\n- Get the offer **in writing on bank letterhead**, with the exact amount and deadline.\n- Pay only to the bank's official account — never cash to an agent.\n- Collect a **No Dues Certificate** afterwards.\n- Know that your credit report will show 'settled', which lowers your score for a few years.\n\nLok Adalats (free, via DLSA 15100) often help negotiate settlements with interest waivers."
+  },
+  {
+   "id": "prepayment",
+   "topic": "Loans",
+   "q": [
+    "Can I close my loan early?",
+    "foreclosure charges",
+    "prepay loan penalty"
+   ],
+   "kw": [
+    "prepay",
+    "foreclose",
+    "close loan early",
+    "part payment",
+    "penalty",
+    "முன்கூட்டியே"
+   ],
+   "categories": [
+    "credit_card_debt"
+   ],
+   "a": "Usually yes, and it saves interest. Under RBI rules, banks and NBFCs **can't charge foreclosure/prepayment penalties on floating-rate loans to individuals** (non-business). Fixed-rate loans may carry a small charge — check your loan agreement.\n\nPrepay the **highest-interest debt first** (moneylender → credit card → personal loan → gold/home loan). After closing, collect the No Dues Certificate and, for gold loans, your jewellery the same day."
+  },
+  {
+   "id": "flat_vs_reducing",
+   "topic": "Loans",
+   "q": [
+    "What is flat interest rate?",
+    "flat rate vs reducing rate",
+    "why is my loan interest so high"
+   ],
+   "kw": [
+    "flat rate",
+    "reducing",
+    "interest calculation",
+    "apr",
+    "hidden charges",
+    "processing fee"
+   ],
+   "categories": [
+    "microfinance_debt",
+    "blade_finance"
+   ],
+   "a": "- **Flat rate:** interest is charged on the *original* amount for the whole loan, even as you repay — so '12% flat' really costs about **22% a year**.\n- **Reducing balance:** interest only on what you still owe — the honest comparison.\n\nAlways ask for the **APR (annual percentage rate)** including processing fees. RBI requires regulated lenders to give a **Key Fact Statement** showing it. Use the **True Interest Rate** tool to convert daily/weekly/monthly rates."
+  },
+  {
+   "id": "debt_consolidation",
+   "topic": "Loans",
+   "q": [
+    "I have many loans, how do I manage?",
+    "should I take one loan to close all loans",
+    "debt consolidation"
+   ],
+   "kw": [
+    "many loans",
+    "multiple loans",
+    "consolidate",
+    "one loan",
+    "too many emi",
+    "நிறைய கடன்",
+    "niraya kadan"
+   ],
+   "categories": [
+    "microfinance_debt",
+    "credit_card_debt",
+    "blade_finance"
+   ],
+   "a": "1. **List every debt**: lender, balance, interest rate, minimum payment.\n2. **Never borrow from a new informal lender to repay an old one** — that's how traps deepen.\n3. A **consolidation loan helps only if its rate is lower** (e.g. replacing a 120%/yr moneylender loan with a 10–12% SHG/MUDRA/gold loan from a bank).\n4. Pay minimums on everything, put every extra rupee on the **highest-interest** debt (avalanche) or the **smallest** one for quick wins (snowball).\n\nThe **Debt Payoff Planner** in Tools compares both and shows your debt-free date."
+  },
+  {
+   "id": "cant_pay_emi",
+   "topic": "Loans",
+   "q": [
+    "I can't pay my EMI this month",
+    "missed EMI what will happen",
+    "EMI katta mudiyala"
+   ],
+   "kw": [
+    "emi",
+    "missed",
+    "can't pay",
+    "cannot pay",
+    "default",
+    "katta mudiyala",
+    "தவணை",
+    "கட்ட முடியவில்லை"
+   ],
+   "categories": [
+    "credit_card_debt",
+    "education_loan",
+    "microfinance_debt"
+   ],
+   "a": "**Talk to the lender *before* the due date** — silence is what escalates things.\n1. Write to the branch/grievance officer explaining the reason (job loss, illness) and ask for a **restructure, longer tenure or short moratorium**.\n2. Pay whatever partial amount you can and keep receipts.\n3. A missed EMI brings a late fee and a credit-score hit; after **90 days** the loan becomes an NPA and recovery starts.\n4. Recovery agents must follow RBI rules (calls only **8 am–7 pm**, no threats, no shaming).\n\nPrioritise rent, food and medicine first, then the highest-interest/secured loans."
+  },
+  {
+   "id": "recovery_agents",
+   "topic": "Legal",
+   "q": [
+    "Recovery agents are harassing me",
+    "bank agent came home and shouted",
+    "collection agent threatening"
+   ],
+   "kw": [
+    "recovery agent",
+    "collection",
+    "harass",
+    "threat",
+    "abuse",
+    "calling relatives",
+    "வசூல்",
+    "மிரட்டல்"
+   ],
+   "categories": [
+    "credit_card_debt",
+    "microfinance_debt",
+    "loan_app_harassment"
+   ],
+   "a": "Under RBI rules, recovery agents of banks/NBFCs:\n- may call or visit only **between 8 am and 7 pm**;\n- must show **ID and an authorisation letter**;\n- must not threaten, abuse, humiliate, or contact your relatives/friends to shame you.\n\n**What to do:** note dates/times, record calls if possible, complain in writing to the lender's grievance officer, then to the **RBI Ombudsman (cms.rbi.org.in, 14448)** if not resolved in 30 days. Physical threats are crimes — call **100/112**."
+  },
+  {
+   "id": "property_seizure",
+   "topic": "Legal",
+   "q": [
+    "Can the bank take my house?",
+    "SARFAESI notice",
+    "bank auction notice for house"
+   ],
+   "kw": [
+    "house",
+    "property",
+    "seize",
+    "sarfaesi",
+    "auction",
+    "possession",
+    "notice",
+    "வீடு",
+    "சொத்து",
+    "ஜப்தி"
+   ],
+   "categories": [
+    "credit_card_debt",
+    "agricultural_debt"
+   ],
+   "a": "For a **secured loan** (house/property mortgaged), a bank can act under the **SARFAESI Act** after the loan becomes an NPA — but it must first send a **60-day demand notice**. You can reply with objections, and the bank must respond. Agricultural land is excluded from SARFAESI.\n\nAn **unsecured** lender (card, personal loan, moneylender) **cannot take your house** without a court order. A private moneylender keeping your property documents or forcing a sale deed is illegal — complain to the police and get free legal aid (**15100**)."
+  },
+  {
+   "id": "documents_with_lender",
+   "topic": "Legal",
+   "q": [
+    "Moneylender is keeping my house papers",
+    "lender took my documents",
+    "patta with vatti kaaran"
+   ],
+   "kw": [
+    "documents",
+    "papers",
+    "patta",
+    "title deed",
+    "pathiram",
+    "ration card",
+    "pawn",
+    "பத்திரம்",
+    "ஆவணம்"
+   ],
+   "categories": [
+    "blade_finance"
+   ],
+   "a": "A private lender has no right to hold your **property documents, ration card, ATM card or passbook** as pressure, or to make you sign a sale deed/blank papers.\n\n1. Write down what was taken and when; keep any repayment proof.\n2. File a complaint at the police station (or with the SP) under the **TN Prohibition of Charging Exorbitant Interest Act, 2003**.\n3. Contact **DLSA (15100)** for a free lawyer to recover the documents.\n4. If an ATM card was taken, **block it with your bank immediately**."
+  },
+  {
+   "id": "police_refuse",
+   "topic": "Legal",
+   "q": [
+    "Police are not taking my complaint",
+    "how to file a police complaint",
+    "FIR not registered"
+   ],
+   "kw": [
+    "police",
+    "complaint",
+    "fir",
+    "csr",
+    "not registered",
+    "refuse",
+    "காவல்",
+    "புகார்"
+   ],
+   "categories": [
+    "blade_finance",
+    "loan_app_harassment"
+   ],
+   "a": "1. Give a **written complaint** and insist on a receipt (CSR number). You can also file online on the **TN Police citizen portal (eservices.tnpolice.gov.in)**.\n2. If the station refuses, send the complaint by **registered post to the Superintendent/Commissioner of Police**.\n3. If still no action, a **Judicial Magistrate** can direct the police to register a case — free legal aid (**DLSA 15100**) can help you file it.\n\nFor cyber/loan-app harassment you can file directly on **cybercrime.gov.in** or call **1930**."
+  },
+  {
+   "id": "lok_adalat_how",
+   "topic": "Legal",
+   "q": [
+    "What is Lok Adalat?",
+    "how to settle bank loan in Lok Adalat"
+   ],
+   "kw": [
+    "lok adalat",
+    "settle",
+    "court",
+    "dlsa",
+    "legal aid",
+    "லோக் அதாலத்"
+   ],
+   "categories": [
+    "credit_card_debt",
+    "education_loan",
+    "agricultural_debt",
+    "gold_loan_overdue"
+   ],
+   "a": "**Lok Adalat** is a free, quick settlement forum run by Legal Services Authorities. Banks bring overdue loans there and often agree to **reduced amounts and interest waivers**. There's no court fee, no lawyer needed, and the settlement is final.\n\nNational Lok Adalats happen several times a year; you can also ask the **District Legal Services Authority (15100)** to list your case. Bring your loan papers and ID."
+  },
+  {
+   "id": "legit_lender_check",
+   "topic": "Loan apps",
+   "q": [
+    "How do I know if a loan app is genuine?",
+    "is this lender RBI registered"
+   ],
+   "kw": [
+    "loan app",
+    "genuine",
+    "fake",
+    "rbi registered",
+    "nbfc",
+    "legit",
+    "check lender",
+    "app"
+   ],
+   "categories": [
+    "loan_app_harassment"
+   ],
+   "a": "Before borrowing from any app:\n1. Find the **lending bank/NBFC's name** in the app — it must be a regulated entity. Search it on the **RBI website's NBFC list** or **sachet.rbi.org.in**.\n2. You must get a **Key Fact Statement** with the APR before signing.\n3. Money must come **directly to your bank account** from the lender.\n4. Red flags: asks for access to **contacts/photos**, 7-day tenures, huge 'processing fees' deducted upfront, no physical address, WhatsApp-only support.\n\nIf in doubt, borrow from a bank, SHG or MUDRA instead."
+  },
+  {
+   "id": "loan_app_morph",
+   "topic": "Loan apps",
+   "q": [
+    "Loan app is sending my morphed photos",
+    "loan app messaging my contacts",
+    "app threatening to call my family"
+   ],
+   "kw": [
+    "morphed",
+    "photos",
+    "contacts",
+    "relatives",
+    "whatsapp",
+    "threat",
+    "blackmail",
+    "loan app",
+    "மிரட்டல்"
+   ],
+   "categories": [
+    "loan_app_harassment"
+   ],
+   "a": "This is **extortion — a crime**, and it's not your fault.\n1. **Don't pay** under threat; payments only lead to more demands.\n2. Take screenshots of every message, number and payment.\n3. Report on **1930 / cybercrime.gov.in** and at your district cyber crime police station.\n4. Warn family/friends in advance: 'Ignore any messages about me from loan apps.' This removes their leverage.\n5. Revoke the app's permissions, then uninstall.\n6. Report the app on **sachet.rbi.org.in** and on Google Play.\n\nIf the threats are affecting your mental health, call **Tele-MANAS 14416**."
+  },
+  {
+   "id": "kmut_apply",
+   "topic": "Schemes",
+   "q": [
+    "How do I apply for Kalaignar Magalir Urimai Thogai?",
+    "1000 rupees scheme for women",
+    "magalir urimai thogai eligibility"
+   ],
+   "kw": [
+    "kmut",
+    "magalir urimai",
+    "1000",
+    "women scheme",
+    "மகளிர் உரிமை",
+    "கலைஞர்"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "**Kalaignar Magalir Urimai Thogai** gives **₹1,000 a month** to eligible women heads of families in Tamil Nadu.\n\nBroad eligibility: woman head of family on the ration card, age 21+, family income below ₹2.5 lakh a year, with land/electricity-use limits and exclusions for government-employee and income-tax-paying families.\n\nApplications are taken through government camps / ration shops when the window is open, and status can be checked on **kmut.tn.gov.in**. If rejected, you can appeal through the RDO/e-Sevai. Helpline: **1100**."
+  },
+  {
+   "id": "common_documents",
+   "topic": "Schemes",
+   "q": [
+    "What documents do I need for government schemes?",
+    "documents for scheme apply"
+   ],
+   "kw": [
+    "documents",
+    "aadhaar",
+    "ration card",
+    "income certificate",
+    "community certificate",
+    "passbook",
+    "ஆவணங்கள்",
+    "சான்றிதழ்"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "Keep these ready (and photocopies):\n- **Aadhaar** (linked to mobile and bank account)\n- **Ration card** (smart card)\n- **Bank passbook** (account in your own name, with DBT enabled)\n- **Income certificate** and **community certificate** (from VAO/Tahsildar via e-Sevai)\n- Address proof, passport photos\n- Scheme-specific: land documents (patta/chitta) for farmers, school/college certificates for students, vending certificate for street vendors.\n\nMost certificates can be applied for at a **TN e-Sevai centre** or online at **tnesevai.tn.gov.in**."
+  },
+  {
+   "id": "esevai_certificate",
+   "topic": "Schemes",
+   "q": [
+    "How do I get an income certificate?",
+    "community certificate apply",
+    "e-Sevai centre"
+   ],
+   "kw": [
+    "income certificate",
+    "community certificate",
+    "e-sevai",
+    "esevai",
+    "vao",
+    "tahsildar",
+    "சான்றிதழ்",
+    "இ-சேவை"
+   ],
+   "categories": [],
+   "a": "Income, community, residence, first-graduate and other revenue certificates are issued by the Revenue Department via **TN e-Sevai**:\n1. Visit an **e-Sevai centre** (taluk office, post offices, many common service centres) or apply at **tnesevai.tn.gov.in**.\n2. Bring Aadhaar, ration card, and supporting proof (salary slip / self-declaration for income).\n3. The VAO and RI verify, and the Tahsildar approves; you download the e-certificate.\n\nTrack your application with the acknowledgement number. Official fees are small — don't pay middlemen."
+  },
+  {
+   "id": "join_shg",
+   "topic": "SHG",
+   "q": [
+    "How do I join a self-help group?",
+    "SHG loan how to get",
+    "magalir kuzhu join panradhu"
+   ],
+   "kw": [
+    "shg",
+    "self help group",
+    "magalir kuzhu",
+    "group",
+    "mahalir thittam",
+    "சுய உதவிக் குழு",
+    "மகளிர் குழு"
+   ],
+   "categories": [
+    "blade_finance",
+    "microfinance_debt"
+   ],
+   "a": "**Self-Help Groups** are groups of 10–20 women (also men/mixed in some areas) who save regularly and get **cheap, collateral-free bank loans**.\n1. Ask at your **panchayat / ward office, Mahalir Thittam (TNCDW) block office**, or an existing SHG leader nearby.\n2. Members save a small fixed amount monthly and keep records.\n3. After ~6 months of regular savings the group is graded and linked to a bank for loans, often with **interest subvention** for prompt repayment.\n\nSHG credit is one of the best ways out of kandhu vatti. Mahalir Thittam helpline: 044-24321311."
+  },
+  {
+   "id": "cmchis_card",
+   "topic": "Health",
+   "q": [
+    "How do I get the CM health insurance card?",
+    "free treatment scheme Tamil Nadu",
+    "CMCHIS card"
+   ],
+   "kw": [
+    "cmchis",
+    "health insurance",
+    "free treatment",
+    "hospital",
+    "insurance card",
+    "pmjay",
+    "ayushman",
+    "மருத்துவக் காப்பீடு"
+   ],
+   "categories": [
+    "medical_debt"
+   ],
+   "a": "**CMCHIS** (integrated with PM-JAY) covers **up to ₹5 lakh per family per year**, cashless, for listed treatments in empanelled government and private hospitals.\n\n- Eligibility: annual family income up to about ₹1.2 lakh (VAO certificate) and other notified groups; senior citizens 70+ are covered under PM-JAY.\n- Enrol at the **CMCHIS kiosk in the District Collectorate** or designated centres with your ration card, Aadhaar and income certificate.\n- In hospital, go to the **insurance desk first**, before paying.\n\nHelpline: **1800-425-3993** (24×7). Website: cmchistn.com."
+  },
+  {
+   "id": "medical_bill_help",
+   "topic": "Health",
+   "q": [
+    "Hospital bill is too high",
+    "how to reduce hospital bill",
+    "private hospital asking advance"
+   ],
+   "kw": [
+    "hospital bill",
+    "advance",
+    "private hospital",
+    "surgery cost",
+    "treatment cost",
+    "மருத்துவமனை கட்டணம்"
+   ],
+   "categories": [
+    "medical_debt"
+   ],
+   "a": "1. Ask whether the treatment is covered by **CMCHIS/PM-JAY** or your employer **ESI** — empanelled hospitals must treat covered procedures cashless.\n2. Government medical college hospitals provide most treatments free.\n3. Ask for an **itemised bill** and question duplicate or unexplained charges.\n4. Request an **instalment plan** instead of borrowing at high interest.\n5. Hospital/medical social workers and charitable trusts can help with large surgeries.\n6. If you have health insurance and the claim is rejected, complain to the insurer, then the **Insurance Ombudsman / Bima Bharosa (IRDAI)**."
+  },
+  {
+   "id": "insurance_claim_rejected",
+   "topic": "Insurance",
+   "q": [
+    "My insurance claim was rejected",
+    "insurance company not paying"
+   ],
+   "kw": [
+    "insurance",
+    "claim",
+    "rejected",
+    "ombudsman",
+    "bima bharosa",
+    "irdai",
+    "காப்பீடு"
+   ],
+   "categories": [
+    "medical_debt"
+   ],
+   "a": "1. Ask the insurer for the **rejection reason in writing**.\n2. File a complaint with the insurer's **grievance officer**; they must respond within 14 days.\n3. If unsatisfied, escalate on **Bima Bharosa (bimabharosa.irdai.gov.in)** or call IRDAI's toll-free number.\n4. You can approach the **Insurance Ombudsman** (free, no lawyer needed) for claims up to ₹50 lakh within a year of the final rejection.\n\nKeep the policy document, bills, discharge summary and all correspondence."
+  },
+  {
+   "id": "term_insurance",
+   "topic": "Insurance",
+   "q": [
+    "Which insurance should I buy?",
+    "is LIC policy good investment",
+    "term insurance"
+   ],
+   "kw": [
+    "life insurance",
+    "term",
+    "lic",
+    "policy",
+    "endowment",
+    "investment",
+    "பாலிசி"
+   ],
+   "categories": [],
+   "a": "Keep insurance and investment separate:\n- **Term insurance** gives a large cover (e.g. 10–15× yearly income) for a low premium — best protection for your family if you have dependants and loans.\n- Low-cost government options: **PMJJBY** (₹2 lakh life cover, ₹436/year) and **PMSBY** (₹2 lakh accident cover, ₹20/year) through your bank.\n- **Health insurance** (or CMCHIS) matters more than savings-type policies.\n- Endowment/money-back policies usually give low returns; don't stop an existing one in a panic — check its surrender value first."
+  },
+  {
+   "id": "job_loss",
+   "topic": "Employment",
+   "q": [
+    "I lost my job, what should I do?",
+    "no job how to manage",
+    "velai pochu"
+   ],
+   "kw": [
+    "lost job",
+    "job loss",
+    "unemployed",
+    "fired",
+    "layoff",
+    "velai illa",
+    "velai pochu",
+    "வேலை இழப்பு",
+    "வேலை இல்லை"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "**First 2 weeks:**\n1. Cut to essentials; write to lenders asking for a **moratorium/restructure** before you miss EMIs.\n2. If you had **EPF**, you can withdraw **75% after 1 month** of unemployment (the rest after 2 months) via the UAN portal — or keep it if you can manage.\n3. Check **ESI unemployment allowance** if you were covered.\n4. Register on the **TN Private Job Portal (tnprivatejobs.tn.gov.in)** and employment exchange.\n5. Free skilling via **Naan Mudhalvan**; self-employment loans via **UYEGP/NEEDS/PMEGP**.\n\nAvoid 'jobs' that ask you to pay a fee — that's a scam."
+  },
+  {
+   "id": "epf_withdraw",
+   "topic": "Employment",
+   "q": [
+    "How can I withdraw my PF?",
+    "EPF advance for medical",
+    "PF money withdrawal"
+   ],
+   "kw": [
+    "pf",
+    "epf",
+    "provident fund",
+    "uan",
+    "withdraw",
+    "pf advance",
+    "பிஎஃப்"
+   ],
+   "categories": [],
+   "a": "With an active **UAN** linked to Aadhaar and bank account, you can claim online at the EPFO member portal / UMANG app:\n- **Unemployment:** 75% after 1 month, balance after 2 months.\n- **Partial advances** for illness, marriage, education, house purchase/repair (rules and limits apply).\n\nWithdrawing early loses compounding for retirement, so treat it as an emergency option — but it's far better than borrowing from a moneylender. EPFO helpline: 14470."
+  },
+  {
+   "id": "fake_job",
+   "topic": "Fraud",
+   "q": [
+    "Job offer asking me to pay a fee",
+    "work from home task scam",
+    "part time job telegram"
+   ],
+   "kw": [
+    "job offer",
+    "fee",
+    "registration fee",
+    "work from home",
+    "task",
+    "telegram",
+    "part time",
+    "like and earn",
+    "வேலை மோசடி"
+   ],
+   "categories": [],
+   "a": "**Genuine employers don't charge you to get a job.** Common scams: 'like YouTube videos and earn', Telegram 'tasks' that pay small amounts first then ask you to 'invest', overseas jobs with visa fees, government jobs 'through contacts'.\n\nDon't pay, don't share Aadhaar/bank details, and report on **1930 / cybercrime.gov.in**. For overseas jobs, use only agents registered on the **eMigrate** portal."
+  },
+  {
+   "id": "ponzi",
+   "topic": "Fraud",
+   "q": [
+    "Is this double your money scheme real?",
+    "someone promising high returns",
+    "MLM business join panalama"
+   ],
+   "kw": [
+    "double",
+    "high returns",
+    "ponzi",
+    "mlm",
+    "chain",
+    "investment scheme",
+    "crypto",
+    "scheme",
+    "இரட்டிப்பு"
+   ],
+   "categories": [
+    "chit_fund_default"
+   ],
+   "a": "**If someone promises guaranteed high returns (e.g. 'double in a year', '10% a month'), it is almost certainly a Ponzi/MLM fraud.** Early members get paid from new members' money until it collapses — Tamil Nadu has seen many such collapses.\n\nCheck whether the company is registered with **SEBI/RBI** (sachet.rbi.org.in). Unregulated deposit schemes are banned under the **BUDS Act, 2019**. Report to the TN **Economic Offences Wing** or sachet.rbi.org.in."
+  },
+  {
+   "id": "online_gambling",
+   "topic": "Wellbeing",
+   "q": [
+    "I lost money in online rummy",
+    "betting addiction",
+    "online gambling debt"
+   ],
+   "kw": [
+    "rummy",
+    "panam pochu",
+    "gambling",
+    "betting",
+    "online game",
+    "addiction",
+    "lottery",
+    "cricket betting",
+    "சூதாட்டம்",
+    "ரம்மி"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "You're not alone — many families in Tamil Nadu have been hurt by online gambling, which is why TN passed the **Prohibition of Online Gambling and Regulation of Online Games Act, 2022**.\n\n1. **Tell one trusted person today** — secrecy feeds the cycle.\n2. Block gambling apps/sites, and ask your bank to block gaming merchants.\n3. Don't borrow to 'win it back' — chasing losses is the trap.\n4. List the debts and make a repayment plan (Debt Payoff Planner).\n5. Free, confidential help for urges and stress: **Tele-MANAS 14416**.\n\nReport illegal betting apps to the police / 1930."
+  },
+  {
+   "id": "stress_coping",
+   "topic": "Wellbeing",
+   "q": [
+    "I am very stressed about money",
+    "can't sleep because of debt",
+    "romba tension ah irukku"
+   ],
+   "kw": [
+    "stress",
+    "tension",
+    "anxiety",
+    "sleep",
+    "worried",
+    "depressed",
+    "mental",
+    "kashtam",
+    "மன அழுத்தம்",
+    "கவலை",
+    "தூக்கம்"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "Money stress is real and heavy — and it's a sign of the pressure you're under, not a personal failing.\n\nSmall things that help right now:\n- **Write the problem down** (who you owe, how much, by when). Facing the numbers usually feels smaller than carrying them in your head.\n- **Take one next step today** — one call, one letter, one form.\n- **Talk to someone you trust**; you don't have to solve it alone.\n- Breathe slowly (in 4 seconds, out 6) when panic rises; keep some routine and sleep.\n\nIf stress becomes unbearable or you have thoughts of harming yourself, please call **Tele-MANAS 14416** (24×7, Tamil) or **112**."
+  },
+  {
+   "id": "tell_family",
+   "topic": "Wellbeing",
+   "q": [
+    "How do I tell my family about my debt?",
+    "my husband doesn't know about the loan",
+    "family ku theriyadhu"
+   ],
+   "kw": [
+    "family",
+    "husband",
+    "wife",
+    "parents",
+    "tell",
+    "secret",
+    "hide",
+    "குடும்பம்",
+    "மனைவி",
+    "சொல்வது",
+    "மறைத்து"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "Hiding debt usually makes it grow. A gentle approach:\n1. Pick a calm time and start with how you feel: *'I've been worried and I need your help.'*\n2. Share the facts — list of loans, amounts, what led to it — not blame.\n3. Bring a plan (even a rough one from the Budget or Payoff planner) so it feels solvable.\n4. Agree on one or two changes together.\n\nIf you fear violence or abuse when you disclose, prioritise safety — the women's helpline **181** and **112** can help."
+  },
+  {
+   "id": "domestic_money_abuse",
+   "topic": "Wellbeing",
+   "q": [
+    "My husband takes all my salary",
+    "family forcing me to take loans",
+    "financial abuse",
+    "என் கணவர் என் சம்பளத்தை எடுத்துக்கொள்கிறார்"
+   ],
+   "kw": [
+    "husband",
+    "abuse",
+    "forcing",
+    "salary taken",
+    "violence",
+    "dowry",
+    "domestic",
+    "கொடுமை",
+    "வரதட்சணை",
+    "கணவர்",
+    "சம்பளம்",
+    "எடுத்துக்கொள்கிறார்",
+    "பணம் பறிக்கிறார்",
+    "அடிக்கிறார்",
+    "kanavar",
+    "salary edukkuraar"
+   ],
+   "categories": [
+    "wedding_debt"
+   ],
+   "a": "Being forced to hand over earnings, take loans in your name, or bring money from your family is **economic abuse**, recognised under the **Protection of Women from Domestic Violence Act, 2005**. Dowry demands are illegal.\n\n- Call **181** (women's helpline, 24×7) or **112** in an emergency.\n- **One Stop Centres (Sakhi)** in every district offer counselling, legal and police help.\n- Free legal aid: **DLSA 15100**.\n- Keep a bank account and ID documents that only you control."
+  },
+  {
+   "id": "kcc_apply",
+   "topic": "Agriculture",
+   "q": [
+    "How do I get a Kisan Credit Card?",
+    "crop loan from bank",
+    "KCC apply"
+   ],
+   "kw": [
+    "kcc",
+    "kisan credit card",
+    "crop loan",
+    "farmer loan",
+    "cooperative",
+    "pacs",
+    "பயிர்க் கடன்",
+    "கிசான்"
+   ],
+   "categories": [
+    "agricultural_debt"
+   ],
+   "a": "Apply at any bank branch or **Primary Agricultural Cooperative Credit Society (PACCS)** with Aadhaar, land records (patta/chitta/adangal) or a tenancy/lease declaration, and photos.\n\n- Short-term crop loans carry **interest subvention** — around 4% effective for prompt repayment on eligible limits.\n- Collateral-free up to the notified limit.\n- Also available for **fisheries and animal husbandry**.\n\nReplacing moneylender crop credit with KCC is one of the biggest savings a farmer can make. Kisan Call Centre: **1800-180-1551**."
+  },
+  {
+   "id": "crop_claim",
+   "topic": "Agriculture",
+   "q": [
+    "How do I claim crop insurance?",
+    "crop damaged by rain",
+    "PMFBY claim"
+   ],
+   "kw": [
+    "crop insurance",
+    "pmfby",
+    "claim",
+    "rain damage",
+    "flood",
+    "drought",
+    "பயிர் காப்பீடு"
+   ],
+   "categories": [
+    "agricultural_debt"
+   ],
+   "a": "Under **PM Fasal Bima Yojana**:\n- **Localised loss** (hailstorm, flood, landslide) or **post-harvest loss**: inform the insurer, bank or agriculture office **within 72 hours** (call **14447** or use the Crop Insurance app).\n- Widespread losses are assessed through crop-cutting experiments — you don't need to file separately if you were enrolled.\n- Keep your enrolment receipt, land records and photos of damage.\n\nAlso ask the bank to **restructure crop loans** when a calamity is notified."
+  },
+  {
+   "id": "pmkisan_status",
+   "topic": "Agriculture",
+   "q": [
+    "PM Kisan money not received",
+    "PM Kisan eKYC"
+   ],
+   "kw": [
+    "pm kisan",
+    "pmkisan",
+    "6000",
+    "installment",
+    "ekyc",
+    "not received",
+    "பிஎம் கிசான்"
+   ],
+   "categories": [
+    "agricultural_debt"
+   ],
+   "a": "Check **Beneficiary Status** on **pmkisan.gov.in** with your Aadhaar/registration number. Common reasons for a missed instalment:\n- **e-KYC not completed** (OTP or biometric at a CSC)\n- Aadhaar not seeded / bank account not DBT-enabled\n- Land records not verified\n\nFix these at the agriculture office or a common service centre. Helpline: **155261**."
+  },
+  {
+   "id": "gold_loan_vs_sell",
+   "topic": "Gold",
+   "q": [
+    "Should I sell gold or take a gold loan?",
+    "gold loan interest",
+    "nagai adagu vaikalama"
+   ],
+   "kw": [
+    "gold loan",
+    "sell gold",
+    "pawn",
+    "jewel",
+    "nagai",
+    "adagu",
+    "நகை",
+    "அடகு",
+    "தங்கம்"
+   ],
+   "categories": [
+    "gold_loan_overdue"
+   ],
+   "a": "- **Gold loan from a bank/cooperative** (roughly 9–12% a year) is far cheaper than moneylenders and good for a short, clear need you can repay in months.\n- **Pawnbrokers/NBFCs** may charge more — compare the APR.\n- If you **can't see how you'll repay**, rolling over the loan and paying interest forever can cost more than the gold is worth; selling part may be wiser.\n\nRBI rules require clear terms, prior notice before auction, and returning any surplus. Never pledge gold to repay another informal loan."
+  },
+  {
+   "id": "gold_auction_notice",
+   "topic": "Gold",
+   "q": [
+    "I got a gold auction notice",
+    "my jewels will be auctioned"
+   ],
+   "kw": [
+    "auction",
+    "notice",
+    "gold",
+    "jewel",
+    "ஏலம்",
+    "நகை"
+   ],
+   "categories": [
+    "gold_loan_overdue"
+   ],
+   "a": "1. Contact the lender **immediately** and ask for the exact dues and auction date in writing.\n2. Paying **just the interest** often lets you **renew** the loan and stops the auction.\n3. If you can't, ask for time or a part-release (take back some jewels by paying part).\n4. If auctioned, you're **entitled to any amount above your dues** — request the auction statement.\n5. If a bank/NBFC auctioned without proper notice, complain to the RBI Ombudsman (**cms.rbi.org.in**)."
+  },
+  {
+   "id": "education_loan_moratorium",
+   "topic": "Education",
+   "q": [
+    "When do I start repaying my education loan?",
+    "education loan moratorium",
+    "no job but education loan EMI"
+   ],
+   "kw": [
+    "education loan",
+    "moratorium",
+    "student loan",
+    "repay",
+    "kalvi kadan",
+    "கல்விக் கடன்"
+   ],
+   "categories": [
+    "education_loan"
+   ],
+   "a": "Under the IBA model scheme, repayment usually starts after a **moratorium of course period + 1 year** (or 6 months after getting a job, whichever is earlier).\n\nIf you're still job-hunting: write to the bank requesting an **extension or restructured EMIs**, and check the **Central interest subsidy** (family income below ₹4.5 lakh) for the moratorium period. Pay at least the interest if you can, to stop the balance growing. Lok Adalat (15100) can help with overdue education loans."
+  },
+  {
+   "id": "scholarships",
+   "topic": "Education",
+   "q": [
+    "What scholarships are there for my child?",
+    "college fees help",
+    "post matric scholarship"
+   ],
+   "kw": [
+    "scholarship",
+    "fees",
+    "college",
+    "student",
+    "post matric",
+    "pudhumai penn",
+    "tamil pudhalvan",
+    "உதவித்தொகை"
+   ],
+   "categories": [
+    "education_loan"
+   ],
+   "a": "Look at these before borrowing for fees:\n- **Pudhumai Penn / Tamil Pudhalvan** — ₹1,000/month for students from TN government schools in higher education.\n- **Post-Matric scholarships** for SC/ST/BC/MBC/minority students (TN Adi Dravidar & Tribal Welfare, BC/MBC departments; **National Scholarship Portal**).\n- **First Graduate** fee concession in many TN professional courses.\n- **PM-Vidyalaxmi / Vidyalakshmi portal** for education loans with interest subvention.\n\nAsk the college scholarship cell — deadlines matter."
+  },
+  {
+   "id": "naan_mudhalvan",
+   "topic": "Employment",
+   "q": [
+    "Where can I learn a skill for free?",
+    "skill training Tamil Nadu",
+    "Naan Mudhalvan"
+   ],
+   "kw": [
+    "skill",
+    "training",
+    "course",
+    "naan mudhalvan",
+    "learn",
+    "certificate",
+    "திறன்",
+    "பயிற்சி"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "- **Naan Mudhalvan** (naanmudhalvan.tn.gov.in) — TN government skilling platform with free courses and placement support for students and youth.\n- **TN Skill Development Corporation** and **PMKVY** short-term courses (electrician, tailoring, nursing assistant, driving, IT, etc.).\n- **ITIs and polytechnics** for trade certificates.\n\nPair a skill with a self-employment loan (UYEGP, PMEGP, MUDRA) if you want to start a small business."
+  },
+  {
+   "id": "start_business_loan",
+   "topic": "Employment",
+   "q": [
+    "I want to start a small business, where can I get a loan?",
+    "business loan without security"
+   ],
+   "kw": [
+    "business",
+    "start",
+    "shop",
+    "self employed",
+    "mudra",
+    "pmegp",
+    "uyegp",
+    "loan",
+    "தொழில்"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "Collateral-free and subsidised options:\n- **PM MUDRA** — Shishu (up to ₹50,000), Kishore (up to ₹5 lakh), Tarun (up to ₹10 lakh).\n- **PM SVANidhi** — street vendors.\n- **UYEGP** (TN) — 25% subsidy for unemployed youth; **NEEDS** (TN) — for educated first-generation entrepreneurs; **PMEGP** — 15–35% subsidy.\n- **Stand-Up India** — SC/ST and women entrepreneurs.\n\nApply with a simple business plan, Aadhaar, bank statements, and quotations. Start small, keep business and home money separate."
+  },
+  {
+   "id": "pmay_housing",
+   "topic": "Housing",
+   "q": [
+    "Is there a scheme to build a house?",
+    "housing scheme for poor",
+    "PMAY"
+   ],
+   "kw": [
+    "house",
+    "housing",
+    "pmay",
+    "home loan",
+    "build house",
+    "kalaignar kanavu illam",
+    "வீடு கட்ட"
+   ],
+   "categories": [],
+   "a": "- **PMAY-Urban 2.0 / PMAY-Gramin** — central support for building or buying a first house for eligible low-income families (subsidy/interest subsidy, income limits apply).\n- **Kalaignar Kanavu Illam** — TN scheme to replace huts with concrete houses in rural areas.\n- **TNUHDB (Tamil Nadu Urban Habitat Development Board)** tenements for urban poor.\n\nApply via your local body (panchayat/municipality) or the official portals; never pay 'agents' for allotments."
+  },
+  {
+   "id": "rent_eviction",
+   "topic": "Housing",
+   "q": [
+    "Landlord is evicting me",
+    "rent arrears what to do",
+    "vaadagai katta mudiyala"
+   ],
+   "kw": [
+    "rent",
+    "landlord",
+    "evict",
+    "eviction",
+    "tenant",
+    "vaadagai",
+    "வாடகை"
+   ],
+   "categories": [
+    "general_financial_stress"
+   ],
+   "a": "In Tamil Nadu, the **TN Regulation of Rights and Responsibilities of Landlords and Tenants Act, 2017** governs rentals: tenancies should be written and registered with the Rent Authority, and eviction must follow due process — a landlord **can't cut water/power or throw out belongings** to force you out.\n\nIf you're behind on rent: talk early, offer a written repayment schedule, and keep receipts. For disputes, contact the Rent Authority (RDO) or free legal aid (**15100**)."
+  },
+  {
+   "id": "ration_card",
+   "topic": "Schemes",
+   "q": [
+    "How do I get a ration card?",
+    "ration card name add",
+    "smart card apply"
+   ],
+   "kw": [
+    "ration card",
+    "smart card",
+    "pds",
+    "tnpds",
+    "ration shop",
+    "ரேஷன் கார்டு",
+    "குடும்ப அட்டை"
+   ],
+   "categories": [],
+   "a": "Apply or update (add/remove member, change address) online at **tnpds.gov.in** or via an e-Sevai centre, with Aadhaar of all members and address proof. A ration card gives subsidised rice/sugar/pulses and is needed for many schemes (KMUT, CMCHIS).\n\nComplaints about ration shops: TN PDS helpline **1967** or **1800-425-5901**."
+  },
+  {
+   "id": "old_age_pension",
+   "topic": "Schemes",
+   "q": [
+    "Pension for elderly parents",
+    "old age pension apply",
+    "widow pension"
+   ],
+   "kw": [
+    "pension",
+    "old age",
+    "elderly",
+    "widow",
+    "disabled",
+    "முதியோர் ஓய்வூதியம்",
+    "விதவை"
+   ],
+   "categories": [],
+   "a": "Tamil Nadu's **Social Security Pension schemes** (Revenue Department) provide a monthly pension to destitute elderly, widows, differently-abled persons, deserted wives and unmarried women above notified ages, combined with central NSAP funds.\n\nApply through the **Tahsildar / e-Sevai** with age proof, Aadhaar, ration card and bank details. For organised-sector retirees, check EPFO pension; for future security, consider **Atal Pension Yojana**. Benefit amounts are revised by government order — confirm at the taluk office."
+  },
+  {
+   "id": "unorganised_board",
+   "topic": "Schemes",
+   "q": [
+    "How do I register in the labour welfare board?",
+    "construction worker welfare board",
+    "auto driver welfare board"
+   ],
+   "kw": [
+    "welfare board",
+    "labour",
+    "construction worker",
+    "auto driver",
+    "domestic worker",
+    "unorganised",
+    "நல வாரியம்"
+   ],
+   "categories": [
+    "wedding_debt",
+    "education_loan",
+    "medical_debt"
+   ],
+   "a": "TN has **welfare boards for unorganised workers** — construction, domestic, auto/taxi drivers, tailors, street vendors and more. Registered members can get assistance for **children's education, marriage, maternity, accident and death**, and pensions.\n\nRegister online at **tnuwwb.tn.gov.in** (or labour office) with Aadhaar, age proof, a work certificate and photos, and **renew on time**. Helpline: 1800-425-2299."
+  },
+  {
+   "id": "itr_needed",
+   "topic": "Tax",
+   "q": [
+    "Do I need to file income tax?",
+    "ITR filing for small salary",
+    "TDS refund"
+   ],
+   "kw": [
+    "income tax",
+    "itr",
+    "tds",
+    "refund",
+    "pan",
+    "tax return",
+    "வருமான வரி"
+   ],
+   "categories": [],
+   "a": "You must file an ITR if your income is above the basic exemption limit, but **filing even below it can help** — to claim a **TDS refund** (e.g. bank interest or salary TDS), and as income proof for loans/visas.\n\nUnder the new tax regime, salaried people with modest incomes often pay **no tax** due to the rebate — check the current limits on **incometax.gov.in**. Filing is free on the official portal; link PAN with Aadhaar first."
+  },
+  {
+   "id": "bnpl",
+   "topic": "Credit",
+   "q": [
+    "Is buy now pay later safe?",
+    "pay later app bill",
+    "EMI on phone purchase"
+   ],
+   "kw": [
+    "bnpl",
+    "pay later",
+    "emi purchase",
+    "no cost emi",
+    "lazypay",
+    "simpl"
+   ],
+   "categories": [
+    "festival_credit",
+    "credit_card_debt"
+   ],
+   "a": "'Buy now pay later' and 'no-cost EMI' are **loans** — missed payments add late fees and hurt your credit score. 'No-cost' often hides processing fees or lost discounts.\n\nUse them only for planned needs you could pay in cash anyway, keep track of every due date, and avoid stacking several apps — that's how festival-season spending snowballs."
+  },
+  {
+   "id": "guarantor",
+   "topic": "Loans",
+   "q": [
+    "I signed as guarantor and now the bank is calling me",
+    "guarantor liability"
+   ],
+   "kw": [
+    "guarantor",
+    "surety",
+    "co-signer",
+    "jameen",
+    "ஜாமீன்"
+   ],
+   "categories": [
+    "credit_card_debt"
+   ],
+   "a": "As a **guarantor** you are legally liable to repay if the borrower defaults — the bank can recover from you, and it shows on your credit report.\n\n- Ask the bank for the loan statement and talk to the borrower first.\n- Negotiate a restructure or settlement jointly.\n- If you pay, you can legally recover that amount from the borrower.\n\nIn future, guarantee only loans you could afford to repay yourself."
+  },
+  {
+   "id": "joint_liability_group",
+   "topic": "Microfinance",
+   "q": [
+    "Group members are pressuring me to pay",
+    "microfinance center meeting problem",
+    "JLG loan default"
+   ],
+   "kw": [
+    "group",
+    "jlg",
+    "center meeting",
+    "microfinance",
+    "members",
+    "pressure",
+    "குழு"
+   ],
+   "categories": [
+    "microfinance_debt"
+   ],
+   "a": "In joint-liability loans, the group shares responsibility — which can turn into painful peer pressure.\n\n- RBI rules say total repayment obligations of a household **shouldn't exceed 50% of household income**; if lenders over-lent, say so in writing.\n- Lenders must not use **coercive recovery**, public shaming, or late-night visits.\n- Ask the MFI for a **moratorium or rescheduling** for genuine hardship (illness, job loss).\n- Complain to the lender's grievance officer, then **cms.rbi.org.in / 14448**.\n\nDon't take a new MFI loan to repay an old one."
+  },
+  {
+   "id": "festival_planning",
+   "topic": "Saving",
+   "q": [
+    "How do I plan for Deepavali without debt?",
+    "Pongal expenses planning"
+   ],
+   "kw": [
+    "deepavali",
+    "diwali",
+    "pongal",
+    "festival",
+    "christmas",
+    "ramzan",
+    "bonus",
+    "பண்டிகை",
+    "தீபாவளி",
+    "பொங்கல்"
+   ],
+   "categories": [
+    "festival_credit"
+   ],
+   "a": "Divide your expected festival spend by the months left and save that amount monthly in an **RD or a separate account** (a 'festival jar'). Decide a fixed budget for clothes, sweets and gifts **before** shopping, pay in cash/UPI rather than credit, and avoid 'festival offers' on BNPL. If you get a bonus, set part aside for the next festival first."
+  },
+  {
+   "id": "wedding_planning",
+   "topic": "Saving",
+   "q": [
+    "How do I plan a wedding without big loans?",
+    "marriage expenses too high"
+   ],
+   "kw": [
+    "wedding",
+    "marriage",
+    "kalyanam",
+    "expense",
+    "dowry",
+    "திருமணம்",
+    "கல்யாணம்"
+   ],
+   "categories": [
+    "wedding_debt"
+   ],
+   "a": "- Agree on a **total budget as a family** before booking anything; social pressure is the biggest cost driver.\n- Simple temple or registered marriages and shared community halls cut costs hugely.\n- **Dowry is illegal** (Dowry Prohibition Act, 1961) — you can refuse and report demands (181).\n- Check **TN marriage assistance schemes** (Social Welfare dept) and welfare-board benefits if you're a registered worker.\n- If borrowing, use one formal loan instead of many moneylenders."
+  },
+  {
+   "id": "moneylender_legal_rate",
+   "topic": "Legal",
+   "q": [
+    "What interest can a moneylender legally charge?",
+    "is 10 rupees vatti legal",
+    "vatti evlo legal"
+   ],
+   "kw": [
+    "legal interest",
+    "moneylender",
+    "rate",
+    "vatti",
+    "kandhu vatti",
+    "how much interest",
+    "வட்டி விகிதம்"
+   ],
+   "categories": [
+    "blade_finance"
+   ],
+   "a": "Private money lending in Tamil Nadu must be **licensed** (TN Money-Lenders Act, 1957), and charging interest above the government-notified rates — or collecting by force — is a **crime under the TN Prohibition of Charging Exorbitant Interest Act, 2003**.\n\nDaily/weekly 'kandhu', 'meter' or 'hourly' vatti (often 120%–3,000%+ a year) falls squarely in that category. Keep payment records and complain to the police; free legal help: **15100**. Use the **True Interest Rate** tool to see the yearly rate you're paying."
+  },
+  {
+   "id": "complain_bank",
+   "topic": "Banking",
+   "q": [
+    "How do I complain against a bank?",
+    "bank wrongly charged me",
+    "bank not responding"
+   ],
+   "kw": [
+    "complain",
+    "bank",
+    "charges",
+    "grievance",
+    "ombudsman",
+    "rbi complaint",
+    "வங்கி புகார்"
+   ],
+   "categories": [
+    "credit_card_debt"
+   ],
+   "a": "1. Complain to the bank in writing / via its official portal and note the complaint number.\n2. If there's no reply in **30 days** or you're unhappy, file with the **RBI Integrated Ombudsman** at **cms.rbi.org.in** (or call **14448**) — free, online, no lawyer needed.\n3. Attach statements, letters and screenshots.\n\nThe same route covers NBFCs, payment apps and RBI-regulated digital lenders."
+  },
+  {
+   "id": "minimum_balance",
+   "topic": "Banking",
+   "q": [
+    "Bank cut money for minimum balance",
+    "account in negative balance"
+   ],
+   "kw": [
+    "minimum balance",
+    "charges",
+    "penalty",
+    "negative balance",
+    "deducted"
+   ],
+   "categories": [],
+   "a": "RBI rules say banks **must not push a savings account into negative balance** due to minimum-balance penalties, and must notify you before levying them. If your income is irregular, ask the bank to convert to a **Basic Savings Bank Deposit (zero-balance) account**. Wrong charges can be disputed with the bank, then the RBI Ombudsman (cms.rbi.org.in)."
+  },
+  {
+   "id": "interest_compounding",
+   "topic": "Loans",
+   "q": [
+    "How does compound interest work?",
+    "why does my loan keep growing"
+   ],
+   "kw": [
+    "compound",
+    "interest on interest",
+    "growing",
+    "principal",
+    "asal",
+    "vatti mela vatti",
+    "அசல்"
+   ],
+   "categories": [
+    "blade_finance",
+    "credit_card_debt"
+   ],
+   "a": "**Compound interest** means unpaid interest is added to the balance, and next time you pay interest on that bigger amount. With high rates the balance can grow faster than you repay — which is why '10% a week' loans explode.\n\nExample: ₹10,000 at 10% a week, if nothing is paid, becomes about **₹26,000 in 10 weeks**. Paying only interest never reduces the principal. Prioritise paying down high-interest principal, or replace the loan with cheaper credit."
+  },
+  {
+   "id": "what_is_vazhi",
+   "topic": "About",
+   "q": [
+    "What can you do?",
+    "who are you",
+    "what is VazhiAPI",
+    "help"
+   ],
+   "kw": [
+    "what can you do",
+    "who are you",
+    "vazhi",
+    "help me",
+    "features",
+    "நீங்கள் யார்"
+   ],
+   "categories": [],
+   "a": "I'm **Vazhi**, a financial-wellness companion for Tamil Nadu. You can ask me about:\n- **Debt traps:** kandhu vatti, chit funds, gold loans, microfinance, loan apps, cards, medical, education, farm and wedding debt\n- **Your rights:** moneylender law, recovery-agent rules, police complaints, Lok Adalat\n- **Schemes & documents:** KMUT, CMCHIS, SHGs, MUDRA, PM-KISAN, scholarships, certificates\n- **Money basics:** budgeting, saving, credit scores, insurance, fraud and scams\n- **Wellbeing:** stress, talking to family, gambling, safety\n\nWrite in Tamil, English or Tanglish. I'm not a lawyer or doctor, and for emergencies call **112**."
+  }
+ ]
+}

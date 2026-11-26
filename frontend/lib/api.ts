@@ -8,6 +8,7 @@ import type {
 } from "@/types";
 import { clearSession, getToken } from "@/lib/auth";
 import * as offline from "@/lib/offline";
+import * as guest from "@/lib/guest";
 
 export const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
 
@@ -39,19 +40,27 @@ export function errorMessage(e: unknown, fallback = "Something went wrong. Pleas
   const d = err.response?.data?.detail;
   if (typeof d === "string") return d;
   if (Array.isArray(d) && d[0]?.msg) return `${d[0].loc?.slice(-1)[0] ?? "field"}: ${d[0].msg}`;
-  if (err.code === "ERR_NETWORK") return "Can't reach the VazhiAPI server. Check your connection or try again shortly.";
+  if (err.code === "ERR_NETWORK") return "The VazhiAPI server isn't reachable right now. You can still continue without an account; the chat works on this device.";
   return fallback;
 }
+
+const resolve = <T,>(fn: () => T): Promise<T> => new Promise((ok, fail) => { try { ok(fn()); } catch (e) { fail(e); } });
+
+/** True when an error means "the server could not be reached" (vs a real 4xx answer). */
+export const isNetworkError = (e: unknown) => {
+  const err = e as { response?: unknown; code?: string; message?: string };
+  return !err.response && (err.code === "ERR_NETWORK" || err.code === "ECONNABORTED" || /network|timeout/i.test(err.message ?? ""));
+};
 
 // ── Auth ──────────────────────────────────────────────────────────
 export const apiRegister = (data: { email: string; password: string; full_name: string; district: string; preferred_language?: string }) =>
   api.post<TokenResponse>("/auth/register", data).then((r) => r.data);
 export const apiLogin = (data: { email: string; password: string }) =>
   api.post<TokenResponse>("/auth/login", data).then((r) => r.data);
-export const apiMe = () => api.get<AuthUser>("/auth/me").then((r) => r.data);
+export const apiMe = () => (guest.isGuest() ? Promise.resolve(guest.guestMe()) : api.get<AuthUser>("/auth/me").then((r) => r.data));
 export const apiUpdateMe = (data: Partial<{ full_name: string; district: string; preferred_language: string; current_password: string; new_password: string }>) =>
-  api.patch<AuthUser>("/auth/me", data).then((r) => r.data);
-export const apiDeleteMe = () => api.delete("/auth/me");
+  guest.isGuest() ? Promise.resolve(guest.guestUpdateMe(data as Partial<AuthUser>)) : api.patch<AuthUser>("/auth/me", data).then((r) => r.data);
+export const apiDeleteMe = () => (guest.isGuest() ? Promise.resolve(guest.guestDeleteAll()) : api.delete("/auth/me"));
 
 // ── Pipeline + chat ───────────────────────────────────────────────
 export const apiAnalyse = (data: AnalyseRequest) => api.post<PipelineResult>("/analyse", data).then((r) => r.data);
@@ -66,12 +75,12 @@ export async function apiDemoAnalyse(text: string): Promise<AnalysisSummary & { 
   }
 }
 
-export const apiConversations = () =>
+export const apiConversations = () => guest.isGuest() ? Promise.resolve(guest.guestConversations()) :
   api.get<{ engine: string; conversations: ConversationSummary[] }>("/chat/conversations").then((r) => r.data);
-export const apiConversation = (id: string) =>
+export const apiConversation = (id: string) => guest.isGuest() ? resolve(() => guest.guestConversation(id)) :
   api.get<{ id: string; title: string; messages: ChatMessage[] }>(`/chat/conversations/${id}`).then((r) => r.data);
-export const apiRenameConversation = (id: string, title: string) => api.patch(`/chat/conversations/${id}`, { title });
-export const apiDeleteConversation = (id: string) => api.delete(`/chat/conversations/${id}`);
+export const apiRenameConversation = (id: string, title: string) => (guest.isGuest() ? resolve(() => guest.guestRename(id, title)) : api.patch(`/chat/conversations/${id}`, { title }));
+export const apiDeleteConversation = (id: string) => (guest.isGuest() ? resolve(() => guest.guestDeleteConversation(id)) : api.delete(`/chat/conversations/${id}`));
 
 export interface StreamHandlers {
   onMeta?: (d: { conversation_id: string; title: string; user_message: ChatMessage }) => void;
@@ -87,6 +96,7 @@ export async function streamChat(
   h: StreamHandlers,
   signal?: AbortSignal,
 ): Promise<void> {
+  if (guest.isGuest()) return guest.guestStreamChat(body, h, signal);
   const res = await fetch(`${API_BASE}/chat/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${getToken() ?? ""}` },
@@ -131,17 +141,15 @@ export async function streamChat(
 }
 
 // ── User data ─────────────────────────────────────────────────────
-export const apiHistory = (userId: string) => api.get(`/history/${userId}`).then((r) => r.data);
+export const apiHistory = (userId: string) => (guest.isGuest() ? Promise.resolve(guest.guestHistory()) : api.get(`/history/${userId}`).then((r) => r.data));
 export const apiRisk = (userId: string) => api.get(`/risk/${userId}`).then((r) => r.data);
-export const apiDashboard = (userId: string) => api.get<DashboardSummary>(`/dashboard/summary/${userId}`).then((r) => r.data);
+export const apiDashboard = (userId: string) => (guest.isGuest() ? Promise.resolve(guest.guestDashboard()) : api.get<DashboardSummary>(`/dashboard/summary/${userId}`).then((r) => r.data));
 export const apiSummary = (userId: string) => api.get(`/summary/${userId}`).then((r) => r.data);
 
 // ── Knowledge (public) ────────────────────────────────────────────
 // The public knowledge base ships with the frontend (lib/kb.json, exported from the backend by
 // `python -m training.export_kb`), so these pages render instantly and work with no backend.
 // The same data is served by the API at /schemes and /knowledge/* for other clients.
-const resolve = <T,>(fn: () => T): Promise<T> => new Promise((ok, fail) => { try { ok(fn()); } catch (e) { fail(e); } });
-
 export const apiSchemes = (params?: { category?: string; q?: string; level?: string }) =>
   resolve(() => offline.filterSchemes(params) as { schemes: GovernmentScheme[]; count: number; total: number });
 export const apiMatchSchemes = (profile: Record<string, unknown>) => resolve(() => offline.matchSchemes(profile));
@@ -166,9 +174,9 @@ export const apiBudgetPlan = (d: { monthly_income: number; debt_emi: number; deb
 
 // ── RL + crisis ───────────────────────────────────────────────────
 export const apiFeedback = (d: { session_id: string; rating: 1 | -1; message_id?: string; comment?: string }) =>
-  api.post("/feedback", d).then((r) => r.data);
+  guest.isGuest() ? Promise.resolve({ rating: d.rating }) : api.post("/feedback", d).then((r) => r.data);
 export const apiEscalate = (userId: string, d?: { reason?: string; session_id?: string }) =>
-  api.post(`/escalate/${userId}`, d || {}).then((r) => r.data);
+  guest.isGuest() ? Promise.resolve(guest.guestEscalate()) : api.post(`/escalate/${userId}`, d || {}).then((r) => r.data);
 
 // ── Admin + debug ─────────────────────────────────────────────────
 export const apiAdminAnalytics = () => api.get("/admin/analytics").then((r) => r.data);
