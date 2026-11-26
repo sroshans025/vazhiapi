@@ -86,6 +86,8 @@ def train(verbose: bool = True) -> dict:
     if verbose:
         print("Lite models trained:", metrics)
         print("Saved to", out_dir / WEIGHTS_FILE)
+    from training.export_portable import export
+    export({"classifier": clf, "stress": reg, "metrics": metrics}, texts, verbose=verbose)
     return metrics
 
 

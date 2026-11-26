@@ -66,7 +66,7 @@ class FFNNStressScorer:
             except Exception:
                 self.model = None
         if lite.get_bundle():
-            self.backend = "sklearn-ridge"
+            self.backend = "tfidf-ridge"
 
     def predict(self, features: np.ndarray, preprocessed: dict) -> dict:
         urgency = float(preprocessed.get("urgency_score", 0.0))

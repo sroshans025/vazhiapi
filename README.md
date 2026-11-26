@@ -20,10 +20,10 @@ An AI-powered Tamil Nadu financial wellness platform. It reads a user's financia
 # Backend
 cd backend
 python -m venv .venv && .venv/Scripts/activate      # macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt                   # runtime + scikit-learn (training) + pytest
 cp .env.example .env                                  # set SECRET_KEY; optional ANTHROPIC_API_KEY, ADMIN_EMAIL/PASSWORD
-uvicorn api.main:app --reload --port 8000             # trains the lite models on first boot (~1 s)
-pytest                                                # 12 API tests on an isolated temp DB
+uvicorn api.main:app --reload --port 8000
+pytest                                                # 13 API tests on an isolated temp DB
 
 # Frontend
 cd frontend
@@ -33,6 +33,20 @@ npm run dev                                           # http://localhost:3000
 ```
 
 Or run everything with `docker compose up --build` (Postgres + backend + frontend).
+
+## Deploying on Vercel (frontend + backend)
+
+The frontend and backend are two Vercel projects from this one repository.
+
+**Backend** (FastAPI, zero-config):
+1. Vercel → *Add New → Project* → import this repo → set **Root Directory** to `backend`. Vercel detects FastAPI; `backend/pyproject.toml` points it at `api.main:app`.
+2. *Storage* → create a **Neon Postgres** database and connect it to the backend project (this sets `DATABASE_URL` / `POSTGRES_URL`; Neon's `sslmode` / pooler URLs are handled automatically). Without a database the API still runs, but accounts live in a temporary SQLite file that resets.
+3. Environment variables: `SECRET_KEY` (long random string). Optional: `ANTHROPIC_API_KEY`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`.
+4. Deploy, then open `https://<backend-project>.vercel.app/health`.
+
+**Frontend**: in the existing frontend project set `NEXT_PUBLIC_API_URL=https://<backend-project>.vercel.app` and redeploy.
+
+The API needs no scikit-learn at runtime: the trained models ship as `backend/models/lite_portable.npz` (NumPy only). After retraining (`python -m training.train_lite`, which re-exports and verifies it), commit that file.
 
 ## Frontend routes
 

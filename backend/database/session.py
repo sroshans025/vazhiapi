@@ -3,22 +3,57 @@ Database Session Factory — async SQLAlchemy
 """
 import logging
 
-from sqlalchemy import inspect, text
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+import uuid
 
-from core.config import get_settings
+from sqlalchemy import inspect, text
+from sqlalchemy.engine import make_url
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.pool import NullPool
+
+from core.config import IS_SERVERLESS, get_settings
 
 settings = get_settings()
 log = logging.getLogger("vazhi")
 
-_is_sqlite = settings.DATABASE_URL.startswith("sqlite")
 
-engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,
-    connect_args={"check_same_thread": False} if _is_sqlite else {},
-    pool_pre_ping=not _is_sqlite,
-)
+def engine_options(database_url: str, serverless: bool = IS_SERVERLESS) -> tuple[str, dict]:
+    """
+    Build (url, create_async_engine kwargs).
+    Postgres: libpq-style query params (sslmode, channel_binding — present in Neon / Vercel
+    Postgres URLs) are not understood by asyncpg, so translate them into connect_args.
+    PgBouncer / Neon pooled endpoints can't use prepared-statement caches.
+    Serverless: no connection pool kept across invocations (NullPool).
+    """
+    url = make_url(database_url)
+    kwargs: dict = {"echo": settings.DEBUG}
+    if url.get_backend_name() == "sqlite":
+        kwargs["connect_args"] = {"check_same_thread": False}
+        return url.render_as_string(hide_password=False), kwargs
+
+    query = dict(url.query)
+    sslmode = str(query.pop("sslmode", "") or "")
+    query.pop("channel_binding", None)
+    pgbouncer = str(query.pop("pgbouncer", "")).lower() == "true" or "pooler" in (url.host or "")
+    if pgbouncer:
+        query["prepared_statement_cache_size"] = "0"      # SQLAlchemy asyncpg dialect option
+    url = url.set(query=query)
+
+    connect_args: dict = {}
+    if sslmode in ("require", "verify-ca", "verify-full") or (url.host and url.host not in ("localhost", "127.0.0.1", "postgres")):
+        connect_args["ssl"] = "require" if sslmode in ("", "require") else sslmode
+    if pgbouncer:
+        connect_args["statement_cache_size"] = 0          # asyncpg's own cache
+        connect_args["prepared_statement_name_func"] = lambda: f"__asyncpg_{uuid.uuid4()}__"
+    kwargs["connect_args"] = connect_args
+    if serverless:
+        kwargs["poolclass"] = NullPool
+    else:
+        kwargs["pool_pre_ping"] = True
+    return url.render_as_string(hide_password=False), kwargs
+
+
+_url, _engine_kwargs = engine_options(settings.DATABASE_URL)
+engine = create_async_engine(_url, **_engine_kwargs)
 
 async_session_maker = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 

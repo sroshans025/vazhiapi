@@ -71,7 +71,7 @@ class TextCNNClassifier:
 
     def load(self, weights_path: str | None = None):
         if lite.get_bundle():
-            self.backend = "sklearn-logreg+indicators"
+            self.backend = "tfidf-logreg+indicators"
 
     def predict(self, token_sequence: list, preprocessed: dict) -> dict:
         text = preprocessed.get("original") or preprocessed.get("normalized", "")
